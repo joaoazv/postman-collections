@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "bbc7482c-12f6-453c-a81a-a35ad91c10ed",
+		"name": "[SISSEG] BolaSeg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Authorization (contractId)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "API-Request-Path",
+						"value": "/accounts",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"contractId\":\"001800035455421702013\"\r\n}"
+				},
+				"url": {
+					"raw": "{{dmzUrl}}/bolaseg/authorization",
+					"host": [
+						"{{dmzUrl}}"
+					],
+					"path": [
+						"bolaseg",
+						"authorization"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authorization Cards (cardNumber)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "API-Request-Path",
+						"value": "/accounts",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"cardNumber\":\"aXHlQwUQMcR05fnUbUc4OA\"\r\n}"
+				},
+				"url": {
+					"raw": "{{dmzUrl}}/bolaseg/authorization/cards",
+					"host": [
+						"{{dmzUrl}}"
+					],
+					"path": [
+						"bolaseg",
+						"authorization",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Contracts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "API-Request-Path",
+						"value": "/accounts",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"contractId\":\"001800010020001801658,001800035437073902044\"\r\n}"
+				},
+				"url": {
+					"raw": "{{dmzUrl}}/bolaseg/customers/:customerId/contracts?customerId=1000606178",
+					"host": [
+						"{{dmzUrl}}"
+					],
+					"path": [
+						"bolaseg",
+						"customers",
+						":customerId",
+						"contracts"
+					],
+					"query": [
+						{
+							"key": "customerId",
+							"value": "1000606178"
+						}
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1000606178"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if (pm.variables.get(\"env\") === \"pre\") {",
+					"    //PRE",
+					"    pm.collectionVariables.set(\"dmzUrl\", \"https://ms-bolaseg.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"} else if(pm.variables.get(\"env\") === \"dev\") {",
+					"    //DEV",
+					"    pm.collectionVariables.set(\"dmzUrl\", \"https://ms-bolaseg.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\");",
+					"} else if(pm.variables.get(\"env\") === \"local\") {",
+					"    //LOCAL",
+					"    pm.collectionVariables.set(\"dmzUrl\", \"https://localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://localhost:8080\");",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "dmzUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		}
+	]
+}

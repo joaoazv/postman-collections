@@ -1,0 +1,652 @@
+{
+	"info": {
+		"_postman_id": "bf72a398-7010-4f4c-8ce5-4643c37de533",
+		"name": "[PT-SISSEG-IDP] Local IDP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "User/Pass",
+			"item": [
+				{
+					"name": "1. SCA 1000585557",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"} else {\r",
+									"    console.info(\"Set collection variable - session_id\");\r",
+									"    pm.collectionVariables.set(\"session_id\", jsonData.additional_info.session_id);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{intraClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Santander-Channel",
+								"value": "OFX",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "1000585557",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "9639639",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "APP",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Mobile",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "captcha",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{intraUrl}}/oauth/token",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1. SCA 20 (phone)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"} else {\r",
+									"    console.info(\"Set collection variable - session_id\");\r",
+									"    pm.collectionVariables.set(\"session_id\", jsonData.additional_info.session_id);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{intraClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Santander-Channel",
+								"value": "Mobile",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "9639639",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "APP",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Mobile",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "captcha",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{intraUrl}}/oauth/token",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Resend OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "{{tokenClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Santander-Channel",
+								"type": "text",
+								"value": "Mobile"
+							},
+							{
+								"key": "Santander-Session-Id",
+								"value": "{{session_id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{intraUrl}}/oauth/otp/resend",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"otp",
+								"resend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Validate OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"access_token\", response.access_token);",
+									"pm.environment.set(\"refresh_token\", response.refresh_token);",
+									"pm.environment.set(\"customer_id\", response.customer_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Santander-Session-Id",
+								"type": "text",
+								"value": "{{session_id}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "sca_code",
+									"value": "654321",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{intraUrl}}/oauth/token",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PIN",
+			"item": [
+				{
+					"name": "1 - Challenge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"access_token\", response.access_token);",
+									"pm.environment.set(\"refresh_token\", response.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "sessionId",
+								"value": "9b2dc3b7-b003-4182-9c8a-2b7caf8ed297",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Santander-Channel",
+								"value": "MBP",
+								"type": "text"
+							},
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{intraClientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "APP",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Mobile",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "pin",
+									"type": "text"
+								},
+								{
+									"key": "device_id",
+									"value": "000227266100034",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{intraUrl}}/oauth/challenge",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"challenge"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"",
+									"pm.environment.set(\"access_token\", response.access_token);",
+									"pm.environment.set(\"refresh_token\", response.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept-encoding": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "sessionId",
+								"value": "9b2dc3b7-b003-4182-9c8a-2b7caf8ed297",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Santander-Channel",
+								"value": "MBP",
+								"type": "text"
+							},
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{intraClientId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "APP",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Mobile",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "pin",
+									"type": "text"
+								},
+								{
+									"key": "device_id",
+									"value": "000227266100032",
+									"type": "text"
+								},
+								{
+									"key": "challenge",
+									"value": "6BjUdT9fF1HwvstK0xaMGDRPWpEyzYrI",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{intraUrl}}/oauth/token",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8180\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8180\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://security-idp.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz/idp-channel\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://security-idp.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/idp-channel\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		},
+		{
+			"key": "session_id",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}

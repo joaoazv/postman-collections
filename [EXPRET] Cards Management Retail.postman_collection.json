@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "44297925-24d9-410b-8b24-ada002fd5c41",
+		"name": "[EXPRET] Cards Management Retail",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Replace Card",
+					"item": [
+						{
+							"name": "1. replace_card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "client-id",
+										"type": "text",
+										"value": "{{tokenClientId}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"replaceType\": \"stolen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_cards_management/{{cardId}}/replace_card?isTest=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_cards_management",
+										"{{cardId}}",
+										"replace_card"
+									],
+									"query": [
+										{
+											"key": "isTest",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Activate Card",
+					"item": [
+						{
+							"name": "1. activate_card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "{{tokenClientId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_cards_management/{{cardId}}/activate_card?isTest=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_cards_management",
+										"{{cardId}}",
+										"activate_card"
+									],
+									"query": [
+										{
+											"key": "isTest",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Card Pin",
+					"item": [
+						{
+							"name": "1. get_pin",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/* const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\"))); */"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "{{tokenClientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/retail_cards_management/{{cardId}}/pin?contact_id=02ffc47d-69e7-47c2-8e76-9d0dda722c80",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_cards_management",
+										"{{cardId}}",
+										"pin"
+									],
+									"query": [
+										{
+											"key": "contact_id",
+											"value": "02ffc47d-69e7-47c2-8e76-9d0dda722c80"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. get_pin",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/* const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\"))); */"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "{{tokenClientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/retail_cards_management/{{cardId}}/pin?session_id=0e785fe8-ba43-4e65-85fc-6ff21afd5c9c&otp_code=1349961",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_cards_management",
+										"{{cardId}}",
+										"pin"
+									],
+									"query": [
+										{
+											"key": "session_id",
+											"value": "0e785fe8-ba43-4e65-85fc-6ff21afd5c9c"
+										},
+										{
+											"key": "otp_code",
+											"value": "1349961"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Modify Card",
+					"item": [
+						{
+							"name": "Modify Limit",
+							"item": [
+								{
+									"name": "1. modify_card_properties Limit",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+													"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+													"\r",
+													"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+													"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+													"\r",
+													"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+													"\r",
+													"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "client-id",
+												"value": "{{tokenClientId}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"alias\":\"Card for travels\",\r\n   \"signCtrlCode\":\"2324323454343\",\r\n   \"urlAppRedirect\":\"https://google.es\",\r\n   \"cardConfiguration\":{\r\n      \"cardUsabilityIndicatorsList\":[\r\n         \r\n      ],\r\n      \"cardUsabilityLimitsList\":[\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at ATM\",\r\n            \"usabilityLimitId\":\"DA\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":600,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         },\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at POS\",\r\n            \"usabilityLimitId\":\"DP\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":633,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         }\r\n      ]\r\n   }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/retail_cards_management/{{cardId}}?isTest=true",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"retail_cards_management",
+												"{{cardId}}"
+											],
+											"query": [
+												{
+													"key": "isTest",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Modify Indicator",
+							"item": [
+								{
+									"name": "1. modify_card_properties Indicator",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+													"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+													"\r",
+													"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+													"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+													"\r",
+													"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+													"\r",
+													"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "client-id",
+												"value": "{{tokenClientId}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"alias\":\"Card for travels\",\r\n   \"cardConfiguration\":{\r\n      \"cardUsabilityIndicatorsList\":[\r\n         {\r\n            \"indicatorDescription\":\"Contactless Enabled\",\r\n            \"usabilityIndicator\":true,\r\n            \"usabilityIndicatorId\":\"GENERAL\"\r\n         }\r\n      ],\r\n      \"cardUsabilityLimitsList\":[\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at ATM\",\r\n            \"usabilityLimitId\":\"DA\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":600,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         },\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at POS\",\r\n            \"usabilityLimitId\":\"DP\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":633,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         }\r\n      ]\r\n   },\r\n   \"signCtrlCode\":\"2324323454343\",\r\n   \"urlAppRedirect\":\"https://google.es\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/retail_cards_management/{{cardId}}?isTest=true",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"retail_cards_management",
+												"{{cardId}}"
+											],
+											"query": [
+												{
+													"key": "isTest",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "{{accessToken}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.sendRequest(\"https://confluence.alm.europe.cloudcenter.corp/download/attachments/177504065/Authorization-Handler.js?version=2&modificationDate=1637581631554&api=v2\", function (error, response) {",
+					"",
+					"    var environment = pm.variables.get(\"environment\");",
+					"    var customerId = pm.variables.get(\"customerId\");",
+					"",
+					"    pm.environment.set(\"env\", environment);",
+					"",
+					"    if (environment == \"localhost\") {",
+					"        pm.environment.set(\"env\", \"dev\");",
+					"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"url\", \"localhost:8082\");",
+					"    };",
+					"",
+					"    if (environment == \"dev\") {",
+					"        pm.environment.set(\"env\", \"dev\");",
+					"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"url\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    }",
+					"",
+					"    if (environment == \"pre\") {",
+					"        pm.environment.set(\"env\", \"pre\");",
+					"        pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"        pm.environment.set(\"url\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"    };",
+					"",
+					"    if (environment == \"pre_external\") {",
+					"        pm.environment.set(\"env\", \"pre\");",
+					"        pm.environment.set(\"tokenClientId\", \"3d32073c-6317-4b54-a4c6-6ca3b766758e\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"\");",
+					"        pm.environment.set(\"url\", \"https://apigw.extexpintcons.totta.pre.corp/sanpt/external-intcons\");",
+					"    };",
+					"",
+					"    const config = {",
+					"        channelType: \"mobile\"",
+					"    }",
+					"",
+					"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+					"",
+					"    createToken(customerId, customerId, \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\", config);",
+					"});",
+					"",
+					"pm.sendRequest(\"https://confluence.alm.europe.cloudcenter.corp/download/attachments/177504065/Authorization-Handler.js?version=2&modificationDate=1637581631554&api=v2\", function (err, response) {",
+					"",
+					"    var arr = new Uint8Array(response.stream);",
+					"    var str = String.fromCharCode.apply(String, arr);",
+					"",
+					"    pm.globals.set('loadUtilsValidation', str);",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "environment",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "customerId",
+			"value": "1000585644",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "cardId",
+			"value": "fNunoItLphdZ_gPnv6CO5g",
+			"type": "string"
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "commonLayer",
+			"value": ""
+		},
+		{
+			"key": "localLayer",
+			"value": ""
+		},
+		{
+			"key": "channelLayer",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "env",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "customerId",
+			"value": "1000606182",
+			"type": "string"
+		}
+	]
+}

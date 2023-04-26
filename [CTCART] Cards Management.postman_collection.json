@@ -1,0 +1,977 @@
+{
+	"info": {
+		"_postman_id": "c10c4b62-ee4a-4b7a-86fd-28b8dac7e275",
+		"name": "[CTCART] Cards Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Replace Card",
+					"item": [
+						{
+							"name": "1. replace_card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "client-id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"replaceType\": \"stolen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/r4mZ7GJVrhFV8LhqTugTTw/replace_card",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"me",
+										"cards",
+										"r4mZ7GJVrhFV8LhqTugTTw",
+										"replace_card"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Activate Card",
+					"item": [
+						{
+							"name": "1. activate_card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/SxZekrS1vtKZzlWKiqMHaQ/activate_card?isTest=true",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"me",
+										"cards",
+										"SxZekrS1vtKZzlWKiqMHaQ",
+										"activate_card"
+									],
+									"query": [
+										{
+											"key": "isTest",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get CVV (DEPRECATED)",
+					"item": [
+						{
+							"name": "1. cvv",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#{}\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/SxZekrS1vtKZzlWKiqMHaQ/cvv?sign_ctrl_code=code&url_app_redirect=http",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"me",
+										"cards",
+										"SxZekrS1vtKZzlWKiqMHaQ",
+										"cvv"
+									],
+									"query": [
+										{
+											"key": "sign_ctrl_code",
+											"value": "code"
+										},
+										{
+											"key": "url_app_redirect",
+											"value": "http"
+										},
+										{
+											"key": "isTest",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Modify Card",
+					"item": [
+						{
+							"name": "Modify Limit",
+							"item": [
+								{
+									"name": "1. modify_card_properties Limit",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+													"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+													"\r",
+													"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+													"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+													"\r",
+													"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+													"\r",
+													"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const responseJson = pm.response.json();\r",
+													"pm.globals.set(\"cardsManagementRequestToken\", pm.response.headers.get(\"Token-Request\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "client-id",
+												"value": "{{clientId}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"alias\":\"Card for travels\",\r\n   \"cardConfiguration\":{\r\n      \"cardUsabilityIndicatorsList\":[\r\n         \r\n      ],\r\n      \"cardUsabilityLimitsList\":[\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at ATM\",\r\n            \"usabilityLimitId\":\"DA\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":600,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         },\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at POS\",\r\n            \"usabilityLimitId\":\"DP\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":633,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         }\r\n      ]\r\n   },\r\n   \"signCtrlCode\":\"2324323454343\",\r\n   \"urlAppRedirect\":\"https://google.es\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/SxZekrS1vtKZzlWKiqMHaQ?isTest=true",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"me",
+												"cards",
+												"SxZekrS1vtKZzlWKiqMHaQ"
+											],
+											"query": [
+												{
+													"key": "isTest",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Modify Indicator",
+							"item": [
+								{
+									"name": "1. modify_card_properties Indicator",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+													"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+													"\r",
+													"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+													"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+													"\r",
+													"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+													"\r",
+													"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "client-id",
+												"value": "{{clientId}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n   \"alias\":\"Card for travels\",\r\n   \"cardConfiguration\":{\r\n      \"cardUsabilityIndicatorsList\":[\r\n         {\r\n            \"indicatorDescription\":\"Contactless Enabled\",\r\n            \"usabilityIndicator\":true,\r\n            \"usabilityIndicatorId\":\"GENERAL\"\r\n         }\r\n      ],\r\n      \"cardUsabilityLimitsList\":[\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at ATM\",\r\n            \"usabilityLimitId\":\"DA\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":600,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         },\r\n         {\r\n            \"usabilityLimit\":\"Daily Limit at POS\",\r\n            \"usabilityLimitId\":\"DP\",\r\n            \"usabilityMoneyLimit\":{\r\n               \"amount\":633,\r\n               \"currency\":\"EUR\"\r\n            }\r\n         }\r\n      ]\r\n   },\r\n   \"signCtrlCode\":\"2324323454343\",\r\n   \"urlAppRedirect\":\"https://google.es\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080{{commonLayer}}/me/cards/q1r1NmLhKh6HDIKZpOnEPQ?isTest=true",
+											"host": [
+												"localhost"
+											],
+											"port": "8080{{commonLayer}}",
+											"path": [
+												"me",
+												"cards",
+												"q1r1NmLhKh6HDIKZpOnEPQ"
+											],
+											"query": [
+												{
+													"key": "isTest",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Cancel Card",
+					"item": [
+						{
+							"name": "1. cancel_card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"//warning! the request body should be structured in alphabetic order for SCA validation\r",
+											"const requestBody = JSON.stringify(JSON.parse(pm.request.body));\r",
+											"\r",
+											"pm.globals.set('cardsManagementRequestBody', requestBody);\r",
+											"\r",
+											"pm.globals.set('cardsManagementScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#\" + requestBody + \"\")));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "b5f69d0d-b1a4-4a22-81d8-fda6d98708f2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cancelType\": \"cancelled\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/j5n8vTKaVEmXHoATJtJorg/cancel_card?isTest=true",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"me",
+										"cards",
+										"j5n8vTKaVEmXHoATJtJorg",
+										"cancel_card"
+									],
+									"query": [
+										{
+											"key": "isTest",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Change Limits",
+					"item": [
+						{
+							"name": "card_limits",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "client-id",
+										"value": "b5f69d0d-b1a4-4a22-81d8-fda6d98708f2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"creditLimit\": 17000.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/VDQGZSLVbH6hBcAjna25AQ/card_limits",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"me",
+										"cards",
+										"VDQGZSLVbH6hBcAjna25AQ",
+										"card_limits"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Customers Pin",
+					"item": [
+						{
+							"name": "Success",
+							"item": [
+								{
+									"name": "1. customers pin firstcall",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "client-id",
+												"value": "{{clientId}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/JV25ounEFnPts6YgceRQsA/pin?contact_id=7f8d4fc4-9696-4e3b-92df-62b1023f8a43",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"me",
+												"cards",
+												"JV25ounEFnPts6YgceRQsA",
+												"pin"
+											],
+											"query": [
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												},
+												{
+													"key": "contact_id",
+													"value": "7f8d4fc4-9696-4e3b-92df-62b1023f8a43"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "2. customers pin secondcall",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "client-id",
+												"value": "{{clientId}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/JV25ounEFnPts6YgceRQsA/pin?session_id=59c71c3e-005c-4bb6-b233-57bcd0a63b94&otp_code=3490111",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"me",
+												"cards",
+												"JV25ounEFnPts6YgceRQsA",
+												"pin"
+											],
+											"query": [
+												{
+													"key": "session_id",
+													"value": "59c71c3e-005c-4bb6-b233-57bcd0a63b94"
+												},
+												{
+													"key": "otp_code",
+													"value": "3490111"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "List CardId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dmzUrl}}{{commonLayer}}/me/cards/SxZekrS1vtKZzlWKiqMHaQ",
+							"host": [
+								"{{dmzUrl}}{{commonLayer}}"
+							],
+							"path": [
+								"me",
+								"cards",
+								"SxZekrS1vtKZzlWKiqMHaQ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List ClientId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{dmzUrl}}{{commonLayer}}/me/cards",
+							"host": [
+								"{{dmzUrl}}{{commonLayer}}"
+							],
+							"path": [
+								"me",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Linked Holder",
+					"item": [
+						{
+							"name": "Valid card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"INDIC\": {\r",
+											"      \"type\": \"string\",\r",
+											"      \"pattern\": \"^S$\"\r",
+											"    },\r",
+											"    \"ZCLIENTE\": {\r",
+											"      \"type\": \"string\",\r",
+											"      \"pattern\": \"^8029772565$\"\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"INDIC\",\r",
+											"    \"ZCLIENTE\"\r",
+											"  ]\r",
+											"};\r",
+											"\r",
+											"eval(globals.loadUtilsValidation);\r",
+											"validateSuccessRequest(schema);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cardsUrl}}{{currentLayer}}/cards/4293430452860866/linked_holder",
+									"host": [
+										"{{cardsUrl}}{{currentLayer}}"
+									],
+									"path": [
+										"cards",
+										"4293430452860866",
+										"linked_holder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Inexistent card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var messages = [{\r",
+											"        message: \"^Card does not exist.$\",\r",
+											"        description: \"^Card does not exist.$\",\r",
+											"        code: \"404\"\r",
+											"    }\r",
+											"]\r",
+											"  \r",
+											"eval(globals.loadUtilsValidation);\r",
+											"validateArray(messages, 404);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cardsUrl}}{{currentLayer}}/cards/4293430452860865/linked_holder",
+									"host": [
+										"{{cardsUrl}}{{currentLayer}}"
+									],
+									"path": [
+										"cards",
+										"4293430452860865",
+										"linked_holder"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Too Short",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var messages = [{\r",
+											"        message: \"^javax.validation.ConstraintViolationException: getByCardIdForLinkedHolder.cardId: The card ID must be a numeric value of 16 digits.$\",\r",
+											"        description: \"^getByCardIdForLinkedHolder.cardId: The card ID must be a numeric value of 16 digits.$\",\r",
+											"        code: \"400\"\r",
+											"    }\r",
+											"]\r",
+											"  \r",
+											"eval(globals.loadUtilsValidation);\r",
+											"validateArray(messages, 400);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{cardsUrl}}{{currentLayer}}/cards/429343045286086/linked_holder",
+									"host": [
+										"{{cardsUrl}}{{currentLayer}}"
+									],
+									"path": [
+										"cards",
+										"429343045286086",
+										"linked_holder"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"currentLayer\", \"\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "{{accessToken}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"   var environment = pm.variables.get(\"env1\");",
+					"   console.log(environment);",
+					"    pm.environment.set(\"env\", \"dev\");",
+					"    ",
+					"",
+					"    if(environment==\"dev\"){",
+					"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"        pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\"); ",
+					"        pm.globals.set(\"clientIdInternal\", \"edc91ff5-7975-413e-9040-4bb31cb6637b\");",
+					"    };",
+					"",
+					"    if(environment==\"pre\"){",
+					"        pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"        pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"        pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"        pm.globals.set(\"clientIdInternal\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    };",
+					"",
+					"    if(environment==\"localhost\"){",
+					"       pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"env\", \"dev\");",
+					"        pm.environment.set(\"dmzUrl\", \"localhost:8080\");",
+					"        pm.environment.set(\"intraUrl\", \"localhost:8080\");",
+					"    };  ",
+					"",
+					"    pm.globals.set(\"clientId\", pm.environment.get(\"tokenClientId\"));",
+					"    ",
+					"    eval(pm.variables.get(\"authLib.js\"));",
+					"",
+					"createToken(\"1000585449\", \"1000585449\",",
+					"\"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\");",
+					"",
+					"// createToken(\"1000606182\", \"1000606182\", ",
+					"//  \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\");",
+					"",
+					"// createToken(\"1000585644\", \"1000585644\", ",
+					"// \"21fe94ae8b91eae38b15dfa331ed5950f1df736cb7b19e6736fdf6a7a2a959b921fc7bb07f6a2eb80fdd21d40908625a61d2f48e2a2869a49f9cfe92cbea78b1116fba81834de3e1a32b76c32f43bc2c53dd29301f56764e7b556d67f66121bfed61a402c83587b3c4abc7d564df735a6fa79ab0788227fe9dacc718a732fc8b5eda9f96e5a8bde2c538fd02eb1e54260485aa45d8d71265d41bc6b172b64a03f88ff2c7b314ea72d06d40233ce2fc278ec9d82ada8a9bb44665d57d2d3a56f02ad439b865979c7703935b05d66f9463a0dbd2c4357d667f485e2e266218f2cb0fd52746911711ad3ebb35f067f319517f3c34fd81beb49f970018ce663ccee9\");",
+					"",
+					" eval(pm.variables.get(\"index.js\"));",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env1",
+			"value": "pre"
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "channelLayer",
+			"value": ""
+		},
+		{
+			"key": "env",
+			"value": "pre"
+		},
+		{
+			"key": "localLayer",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "dmzUrl",
+			"value": "localhost:8080"
+		},
+		{
+			"key": "authLib.js",
+			"value": "var\n//==================//\n//  PHYSICAL USERS  //\n//==================//\n/*\n * All purpose user for testing\n * Has a plethora of different products\n */\nauthV000105 = function (config) {\n    let customerNumber = \"V000105\";\n    let customerPassword = \"Processos2016\";\n    createTokenEstruturais(customerNumber, customerPassword, config);\n},\nauthV000052 = function (config) {\n    let customerNumber = \"V000052\";\n    let customerPassword = \"Passw500\";\n    createTokenEstruturais(customerNumber, customerPassword, config);\n},\nauth1000585557 = function (config) {\n    let customerNumber = \"1000585557\";\n    let customerUsername = \"1000585557\";\n    let customerPassword = \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauth1000596831 = function (config) {\n    let customerNumber = \"1000596831\";\n    let customerUsername = \"1000596831\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\n/*\n * User without contacts\n */\nauth1000623230 = function (config) {\n    let customerNumber = \"1000623230\";\n    let customerUsername = \"dCZJ7UVE\";\n    let customerPassword = \"K3EoJYOr\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\n/*\n * User with only 1 account\n */\nauth2321006585 = function (config) {\n    let customerNumber = \"2321006585\";\n    let customerUsername = \"2321006585\";\n    let customerPassword = \"4bac44e306347a6d42a4efc4e229584ecae152ba896c1f6113f1bf3d53e0b5f4aad2d12850069986483d310bf07db50923aed4f7df47885c99ddeefeb532d02c743c20b3a91dc4bf710bde14d7e7883f0e183c3206cb9eee9c74ea5cb1f37dd49d6e48df4574bc229b49cf64a93a4197f2d4df749f7536a2ed5629a1098b3365f42fbdb6ddfc113c8f08cf0d14b4ed9dcb5f2f09bc6462c136713f6d8b283fc94060626039c964fdf5006384c32f90e9cd73fbaebc8a178bbffaab4794cff46744ef182d71e783b4fd7beb3821137809fc81b65ea983219d5b196d1dc226d81299922139dc8fd65a1c8d6a99fe4df80928987aecb2e632a6a112d5a5c93718cb\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\n/*\n * User without deposits, pensions, cards\n */\nauth9002565390 = function (config) {\n    let customerNumber = \"9002565390\";\n    let customerUsername = \"9002565390\";\n    let customerPassword = \"7aee03310d32538c168952868bd60e0dc40fa2541a18cd6edb2d4b6d564d52a27889459e32b114d79a9798acd20c42773f7aac48ce6322a86817373600af0cb2e86aca33f1091b2a5fe041ad282d09efcbe88347f4f0de797593f246c9ef4c66bc7676eba104d91e29158eb3fa5b8854c2755b64aa5650077f9dc03510dcd1aafd16c1dba15778564e3ee5093afc1ef265e3a60f92942c07ee01c967c64b0346d314e3ccee2eced111e32134ae196a1c324d6a62483d5611ba0dd90b95752b306392cea58d06e70c6acc4ca61695451bac86cb8bc945f9c43a906581b235dec8832ee56d33bb34f6ff50c02e6590bb875731968fc59b18509068eaa94aedef01\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\n/*\n * User whose accounts are all in EUR.\n * Recommended for testing Global Position\n */\nauthUser157789 = function (config) {\n    let customerNumber = \"157789\";\n    let customerUsername = \"User157789\";\n    let customerPassword = \"12ce4647945644cc739c3dbdc70693f5e03ecea5a332c8f018d1cdd815887be718aeb30b2af2fbd80767db80dc48d666cac6d4781f483db3addc38c0d9af3e896c393207c719b4aa9ba596bd6fafd0b22379b0ceaf7e310a032f02d1d2f7aa53a350638e791100896d835696f3d50b5fd7d99b9089ec333b339e98be334bec58764afb5a7c79a685c46078edeb6a641ec59a176013a914c705ad47b795a0b2bfc254aea635df9c040506b98dab67de0fe28c55948b958f08afc2409c3aa161832cfc19300673b28ef93e54219b33ae62be3fca04e9936c9c10c93887b1b5be1875b291317b27c7e6ae505518691f8329c269ba61e6ab9e4b1d4fafc23ef29734\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauthGlobile5100011467 = function (config) {\n    let customerNumber = \"5100011467\";\n    let customerUsername = \"Globile5100011467\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nautGlobile9000796656 = function (config) {\n    let customerNumber = \"9000796656\";\n    let customerUsername = \"Globile9000796656\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauthGlobile9001905564 = function (config) {\n    let customerNumber = \"9001905564\";\n    let customerUsername = \"Globile9001905564\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauth1000596392_client_with_mbway_service = function (config) {\n    let customerNumber = \"1000596392\";\n    let customerUsername = \"1000596392\";\n    let customerPassword = \"95af4ca7733662ce0edcfb9bbcba0607b1920a187aac8ba7ef2b4d569062528e4bd0710560cda961b9ea2a8cf10c4173c9e65d971617b513d5761f82a82c58424a92f60e0e24d5a2606669ee3326f0dbd0e349c798a3d1b399bbe5ff805cfbbba2a3185add25f834af6721891f6f61902daf34eb32083a221ca260b6d983cfb9075a4d2bfa18a194db3d4e81bfb80cc169dc69f9e40f9b35c8bd251e39b8052fb7aaa1dbf7ca9e37f29ebaf131c385247c068231027e9e9f041d4f0233765b129abc509ae9fa1f16f63032c5d7df7c977c86bff28b808a6d4f156aeb3ac95adab20f0ee280bb1539afb5be4fac05f943864d9ede0c4d0d29a829aebe7dbae0d0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauth1000606178 = function (config) {\n    let customerNumber = \"1000606178\";\n    let customerUsername = \"1000606178\";\n    let customerPassword = \"95af4ca7733662ce0edcfb9bbcba0607b1920a187aac8ba7ef2b4d569062528e4bd0710560cda961b9ea2a8cf10c4173c9e65d971617b513d5761f82a82c58424a92f60e0e24d5a2606669ee3326f0dbd0e349c798a3d1b399bbe5ff805cfbbba2a3185add25f834af6721891f6f61902daf34eb32083a221ca260b6d983cfb9075a4d2bfa18a194db3d4e81bfb80cc169dc69f9e40f9b35c8bd251e39b8052fb7aaa1dbf7ca9e37f29ebaf131c385247c068231027e9e9f041d4f0233765b129abc509ae9fa1f16f63032c5d7df7c977c86bff28b808a6d4f156aeb3ac95adab20f0ee280bb1539afb5be4fac05f943864d9ede0c4d0d29a829aebe7dbae0d0\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauth1000596831_client_with_mbway_service = function (config) {\n    let customerNumber = \"1000596831\";\n    let customerUsername = \"1000596831\";\n    let customerPassword = \"a9977e30d0efcc706c8d1be8dd5d988f74e2ce4f0e2534c54b8081212fd0476c5665db2e973fa35ae4618006df749416eeacc5f579bf72e74506901b709250bb725d53e8389c76b4cecee7ec7233ca9b36d6a3081e3ad3d21c0b37192e6072d932b64e0fed10f2924c65cbc2a7344d10a27d04bda502ea310235e1b719d12e860e3c70b42471948236752c6b1d27807c9c04c014175625ac8118c3eea74cf21f7cd842eb11e9a51109423aa3ab13d9a9d0f344376b979690390fb82c21b9fe245843aed43410d7035a3d362f247f685a178a4ca64ed9669e45c792f1816120e4ada9ffe307651ba18fad51ec76c4edad49f710f87b83b6739c58e9d1cf6111a7\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\nauth8000022653_client_with_mbway_service = function (config) {\n    let customerNumber = \"8000022653\";\n    let customerUsername = \"8000022653\";\n    let customerPassword = \"87e3a8c723cf4210f94611a8cf13f8da5664fb22c966aab0221ad5013ecd9fe2844fadab54f3a82f39b2fba7a06ced4b15e1328939df56599251d5f4c562ecb2ccd49fa77eda63884d25ec925e42a6a8c98b7923088047413857dbdb12858fa85ddb47d2f178d01937b88058ed2725900dae72f4d9cfecce2c0462afbd39e23a5b3b15111a0098c3c2421eaf1c008d6488244285998f801b037b49847701e5eeaee2515b3d4b628dbcc976b76108b18568a82d44632d1514571a3fdc7763cef1e67cef103680ed440da3fbf123d2d5e98087982cadd965aa2d3ffb3e4cf03cf7b701e688f64ab2f22b70bf03f1a5a9d38e0624b863f56bbca64614f2d763ead5\";\n    createToken(customerNumber, customerUsername, customerPassword, config);\n},\n//===================//\n//  CORPORATE USERS  //\n//===================//\nauthMagneto = function () {\n    let username = \"magneto\";\n    let password = \"Santander1\";\n    createCorpToken(username, password);\n},\n//==========================//\n// PHYSICAL TOKEN CREATION  //\n//==========================//\ncreateToken = function (customerNumber, customerUsername, customerPassword, config) {\n    let role = \"Web\";\n    let channel = \"WEB\";\n\tlet tokenClientId = getVariable(\"tokenClientId\");\n\tlet tokenClientSecret = getVariable(\"tokenClientSecret\");\n\t\n    if (config) {\n        if (config.channelType == \"mobile\") {\n            channel = \"APP\",\n            role = \"Mobile\";\n        }\n\t\t\n\t\t// loading another clientId and secret\n\t\tif(config.setup){\n\t\t\tconsole.log(\"Loading setup \" + config.setup);\n\t\t\ttokenClientId = getVariable(\"tokenClientId\" + config.setup);\n\t\t\ttokenClientSecret = getVariable(\"tokenClientSecret\" + config.setup);\n\t\t}\n\t\t\n    }\n\t\n    let environment = getVariable(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    console.log(\"CREATING NEW TOKEN\");\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: tokenClientId,\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: tokenClientSecret,\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"password\",\n                    disabled: false\n                }, {\n                    key: \"username\",\n                    value: customerUsername,\n                    disabled: false\n                }, {\n                    key: \"password\",\n                    value: customerPassword,\n                    disabled: false\n                }, {\n                    key: \"role\",\n                    value: role,\n                    disabled: false\n                }, {\n                    key: \"captcha\",\n                    value: true,\n                    disabled: false\n                }, {\n                    key: \"channel\",\n                    value: channel,\n                    disabled: false\n                }, {\n                    key: \"fraudData\",\n                    value: getFraudData(false, customerNumber),\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        if (res.json().error == \"fraud_sca\") {\n            console.log(\"SECOND FACTOR AUTHENTICATION\");\n            pm.sendRequest({\n                url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                method: \"POST\",\n                header: {\n                    \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                    \"Content-Type\": \"application/x-www-form-urlencoded\"\n                },\n                body: {\n                    mode: 'urlencoded',\n                    urlencoded: [{\n                            key: \"client_id\",\n                            value: getVariable(\"tokenClientId\"),\n                            disabled: false\n                        }, {\n                            key: \"client_secret\",\n                            value: getVariable(\"tokenClientSecret\"),\n                            disabled: false\n                        }, {\n                            key: \"grant_type\",\n                            value: \"multi_factor\",\n                            disabled: false\n                        }, {\n                            key: \"mfa_code\",\n                            value: res.json().additional_info.mfa_code,\n                            disabled: false\n                        }, {\n                            key: \"fraudData\",\n                            value: getFraudData(true, customerNumber),\n                            disabled: false\n                        }\n                    ]\n                }\n            },\n                function (err, response) {\n                setVariable(\"accessToken\", response.json().access_token);\n            });\n        } else {\n            setVariable(\"accessToken\", res.json().access_token);\n        }\n    });\n},\ngetFraudData = function (isSCA, customerNumber) {\n    if (isSCA) {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"OP01\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"ACCP\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"1\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    } else {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"0\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    }\n},\n//===========================//\n// CORPORATE TOKEN CREATION  //\n//===========================//\ncreateCorpToken = function (username, password, config) {\n    let environment = getVariable(\"env\");\n\tlet tokenClientId = getVariable(\"tokenClientId\");\n\tlet tokenClientSecret = getVariable(\"tokenClientSecret\");\n\t\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n\tif (config) {\n    \t\n\t\t// loading another clientId and secret\n\t\tif(config.setup){\n\t\t\tconsole.log(\"Loading setup \" + config.setup);\n\t\t\ttokenClientId = getVariable(\"tokenClientId\" + config.setup);\n\t\t\ttokenClientSecret = getVariable(\"tokenClientSecret\" + config.setup);\n\t\t}\n\t\t\n    }\n\t\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: tokenClientId,\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: tokenClientSecret,\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"password\",\n                    disabled: false\n                }, {\n                    key: \"username\",\n                    value: username,\n                    disabled: false\n                }, {\n                    key: \"password\",\n                    value: password,\n                    disabled: false\n                }, {\n                    key: \"role\",\n                    value: \"CorporateWeb\",\n                    disabled: false\n                }, {\n                    key: \"userLanguage\",\n                    value: \"pt\",\n                    disabled: false\n                }, {\n                    key: \"ip\",\n                    value: \"192.100.0.1\",\n                    disabled: false\n                }, {\n                    key: \"userAgent\",\n                    value: \"Nokia 3310 android\",\n                    disabled: false\n                }, {\n                    key: \"isRooted\",\n                    value: false,\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        setVariable(\"accessToken\", res.json().access_token);\n    });\n},\ncreateTokenEstruturais = function (user, password, config) {\n\tlet tokenClientId = getVariable(\"tokenClientId\");\n\tlet tokenClientSecret = getVariable(\"tokenClientSecret\");\n\tlet environment = getVariable(\"env\");\n\t\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n\t\n\tlet requestArray = [];\n\t\n\tif (config) {\n    \t\n\t\t// loading another clientId and secret\n\t\tif(config.setup){\n\t\t\tconsole.log(\"Loading setup \" + config.setup);\n\t\t\ttokenClientSecret = getVariable(\"tokenClientSecret\" + config.setup);\n\t\t\ttokenClientId = getVariable(\"tokenClientId\" + config.setup);\n\t\t\t\n\t\t}\n\t\t\n\t\tif(config.estructuraisClientSecret || config.secret){\n\t\t\trequestArray.push({\n\t\t\t\tkey: \"client_secret\",\n\t\t\t\tvalue: tokenClientSecret,\n\t\t\t\tdisabled: false\n\t\t\t});\n\t\t}\n\t\t\n    }\n\t\t\n\trequestArray.push({\n\t\t\t\t\tkey: \"client_id\",\n\t\t\t\t\tvalue: tokenClientId,\n\t\t\t\t\tdisabled: false\n\t\t\t\t});\n\t\n\trequestArray.push({\n\t\t\t\t\tkey: \"grant_type\",\n\t\t\t\t\tvalue: \"bks_token\",\n\t\t\t\t\tdisabled: false\n\t\t\t\t});\n    pm.sendRequest({\n        url: \"http://estructurais.totta.pre.corp/SSOTottaTokenAS/ws/SECMR_Def_Listener/ws/SECMR_Def_Listener\",\n        method: \"POST\",\n        header: {\n            'Content-Type': 'text/xml',\n            'SOAPAction': '\"\"'\n        },\n        body: {\n            mode: 'raw',\n            raw: \"<soapenv:Envelope xmlns:soapenv=\\\"http://schemas.xmlsoap.org/soap/envelope/\\\" xmlns:v1=\\\"http://www.isban.es/webservices/TECHNICAL_FACADES/Security/F_facseg_security/intranet/ACFACSEGSecurity/v1\\\"><soapenv:Header> <wsse:Security soapenv:mustUnderstand=\\\"1\\\" xmlns:wsse=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\\\"><wsse:UsernameToken><wsse:Username>\" + user + \"</wsse:Username><wsse:Password Type=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\\\">\" + password + \"</wsse:Password></wsse:UsernameToken></wsse:Security></soapenv:Header><soapenv:Body><v1:authenticateCredential facade=\\\"ACFACSEGSecurity\\\"><CB_AuthenticationData><!--Optional:--><user>\" + user + \"</user><!--Optional:--><password>\" + password + \"</password></CB_AuthenticationData><userAddress>127.0.0.1</userAddress></v1:authenticateCredential></soapenv:Body></soapenv:Envelope>\"\n        }\n    },\n        function (err, res) {\n        function arrayBufferToString(buffer) {\n            var arr = new Uint8Array(buffer);\n            var str = String.fromCharCode.apply(String, arr);\n            return str;\n        }\n        var jsonResponse = xml2Json(arrayBufferToString(res.stream));\n        var token = jsonResponse['soap-env:Envelope']['soap-env:Body']['prefixRigel0:authenticateCredentialResponse'].methodResult.tokenCredential;\n        setVariable(\"accessToken\", token);\n\t\t\n\t\t\n\t\trequestArray.push({\n\t\t\t\tkey: \"token\",\n\t\t\t\tvalue: getVariable(\"accessToken\"),\n\t\t\t\tdisabled: false\n\t\t\t});\n        pm.sendRequest({\n            url: \"https://security-service.totta.\" + environment + \".corp/oauth/token\",\n            method: \"POST\",\n            header: {\n                \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                \"Content-Type\": \"application/x-www-form-urlencoded\"\n            },\n            body: {\n                mode: 'urlencoded',\n                urlencoded: requestArray\n            }\n        },\n            function (err, res) {\n            setVariable(\"accessToken\", res.json().access_token);\n        });\n    });\n},\ncreateTokenClientCredentials = function (clientId, secret) {\n    let environment = getVariable(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    let secondRequest = 'https://security-internet.totta.' + environment + '.corp/oauth/token';\n    let secondCall = {\n        method: 'POST',\n        url: secondRequest,\n        header: {\n            'content-type': 'application/json',\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: clientId,\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: secret,\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"client_credentials\",\n                    disabled: false\n                }\n            ]\n        }\n    };\n    pm.sendRequest(secondCall, (err, response) => {\n        console.log(response.json());\n        setVariable('accessToken', response.json().access_token);\n    });\n},\ngetVariable = function (variableName) {\n    let variableValue = pm.environment.has(variableName) ? pm.environment.get(variableName) : pm.globals.get(variableName);\n\tif(!variableValue && pm.collectionVariables.has(variableName)){\n\t\tvariableValue = pm.collectionVariables.get(variableName);\n\t}\n    pm.collectionVariables.set(variableName, variableValue);\n\tpm.collectionVariables.set(\"commonLayer\", \"/common\");\n\tpm.collectionVariables.set(\"localLayer\", \"/\");\n    pm.collectionVariables.set(\"channelLayer\", \"/channel\");\n    \n    let xIbmClientId = pm.environment.get(\"xIbmClientId\");\n    if (xIbmClientId) {\n        pm.collectionVariables.set(\"xIbmClientId\", xIbmClientId);\n    }\n    if (variableName == \"tokenClientSecret\" && pm.environment.get(\"tokenClientId\") == \"security-service\") {\n        pm.collectionVariables.unset(\"tokenClientSecret\");\n        variableValue = null\n    }\n    return variableValue;\n},\nsetVariable = function (variableName, variableValue) {\n    pm.collectionVariables.set(variableName, variableValue);\n},\nsetupXIbmClientId = function (config) {\n\tlet ibmClientId = ''\n\tif(config && config.setup){\n\t\tibmClientId = getVariable('xIbmClientId' + config.setup);\n\t}else{\n\t\tibmClientId = getVariable('xIbmClientId');\n\t}\n\tpm.request.headers.add({key: 'X-IBM-Client-Id', value: ibmClientId })\n    \n}",
+			"type": "string"
+		},
+		{
+			"key": "index.js",
+			"value": "var sendRequestByEnvironment = function (urlOpenShift, config) {\n\tlet defaultUrl;\n    let urlLocal = \"http://localhost:8080\";\n    let env = getVariable(\"env\");\n    let currentEnv = \"\";\n    if (env == \"pre\") {\n        currentEnv = \"pre\";\n    } else if (env == \"pro\") {\n        currentEnv = \"gs\";\n    } else {\n        currentEnv = \"dev\";\n    }\n    if (env === \"local\") {\n        urlLocal = config && config.urlLocal ? config.urlLocal : \"http://localhost:8080\";\n        setVariable(\"dmzUrl\", urlLocal);\n        return;\n    }\n    \n    if (config && config.apiGatewayEnabled) {\n        defaultUrl = \"https://apigw.dmzbackclient.totta.{{env}}.corp/sanpt/internal-dmz\"\n            defaultUrl = defaultUrl.replace(\"{{env}}\", currentEnv);\n        setVariable(\"dmzUrl\", defaultUrl);\n        return;\n    }\n    if (config && config.apiGwCatalog) {\n        let catalog = config.apiGwCatalog;\n        switch (catalog) {\n        case \"dmz\":\n            defaultUrl = \"https://apigw.dmzbackclient.totta.{{env}}.corp/sanpt/internal-dmz\";\n            break;\n        case \"internal\":\n            defaultUrl = \"https://apigw.intraclient.totta.{{env}}.corp/sanpt/internal\";\n            break;\n        case \"internalPartner\":\n            defaultUrl = \"https://apigw.partnerclient.totta.{{env}}.corp/sanpt/internal-partner\";\n            break;\n        case \"internalPortal\":\n            defaultUrl = \"https://apiportal.totta.{{env}}.corp/sanpt/internal\";\n            break;\n        case \"external\":\n            defaultUrl = \"https://apigw.extexpintcons.totta.{{env}}.corp/sanpt/external-intcons\";\n            break;\n        case \"intracore\":\n            defaultUrl = \"https://apigw.intracore.totta.{{env}}.corp/sanpt/internal\";\n            break;\n        case \"dmzTraining\":\n            defaultUrl = \"https://apigw.dmzbacksb.totta.{{env}}.corp/training/sb\";\n            break;\n        case \"external-intcons\":\n            defaultUrl = \"https://apigw.extexpintcons.totta.{{env}}.corp/sanpt/external-intcons\";\n            break;\n        }\n        if (defaultUrl) {\n            defaultUrl = defaultUrl.replace(\"{{env}}\", currentEnv);\n        }\n        setVariable(\"dmzUrl\", defaultUrl);\n        return;\n    }\n\t\n    if (!defaultUrl) {\n\t\tlet toReplace = urlOpenShift.split(\".\")[2];\n\t\tlet indexOfCans = urlOpenShift.indexOf(\".appls.cans.paas.cloudcenter.corp\");\n\t\tlet finalEnv = currentEnv;\n\t\tif(indexOfCans > 0){\n\t\t  let indexOfEnv = urlOpenShift.indexOf(\"-dev.\");\n\t\t  if(indexOfEnv == -1){\n\t\t\tindexOfEnv = urlOpenShift.indexOf(\"-pre.\");\n\t\t  }\n\t\t  toReplace = urlOpenShift.substring(indexOfEnv, indexOfCans + 1);\n\t\t  finalEnv = \"-\" + currentEnv + \".\";\n\t\t}\n\t\turlOpenShift = urlOpenShift.replace(toReplace, finalEnv);\n\t\tdefaultUrl = urlOpenShift;\n    }\n    setVariable(\"dmzUrl\", defaultUrl);\n},\ngetVariable = function (variableName) {\n    let variableValue = pm.environment.has(variableName) ? pm.environment.get(variableName) : pm.globals.get(variableName);\n    if (!variableValue && pm.collectionVariables.has(variableName)) {\n        variableValue = pm.collectionVariables.get(variableName);\n    }\n    pm.collectionVariables.set(variableName, variableValue);\n    pm.collectionVariables.set(\"commonLayer\", \"/common\");\n    pm.collectionVariables.set(\"localLayer\", \"/\");\n    pm.collectionVariables.set(\"channelLayer\", \"/channel\");\n    let xIbmClientId = pm.environment.get(\"xIbmClientId\");\n    if (xIbmClientId) {\n        pm.collectionVariables.set(\"xIbmClientId\", xIbmClientId);\n    }\n    return variableValue;\n},\nsetVariable = function (variableName, variableValue) {\n    pm.collectionVariables.set(variableName, variableValue);\n}",
+			"type": "string"
+		},
+		{
+			"key": "commonLayer",
+			"value": ""
+		}
+	]
+}

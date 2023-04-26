@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "760d1512-22a7-4b00-b612-ec9012efd375",
+		"name": "[VIRPT] Virginia Accounts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "token",
+			"item": [
+				{
+					"name": "Token (RETAIL)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic  dXNlcjpwYXNzd29yZA==",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "50012638-SAONPF-50064530-001",
+									"description": "50012638-SAONPF-50064530-001",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "onepayfx123",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "9001396563",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "9639639",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Netbanco",
+									"type": "text"
+								},
+								{
+									"key": "captcha",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://security-service.totta.dev.corp/oauth/token",
+							"protocol": "https",
+							"host": [
+								"security-service",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1 - Token GTW (RETAIL) - Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+									"description": "dev",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "1000614216",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "95af4ca7733662ce0edcfb9bbcba0607b1920a187aac8ba7ef2b4d569062528e4bd0710560cda961b9ea2a8cf10c4173c9e65d971617b513d5761f82a82c58424a92f60e0e24d5a2606669ee3326f0dbd0e349c798a3d1b399bbe5ff805cfbbba2a3185add25f834af6721891f6f61902daf34eb32083a221ca260b6d983cfb9075a4d2bfa18a194db3d4e81bfb80cc169dc69f9e40f9b35c8bd251e39b8052fb7aaa1dbf7ca9e37f29ebaf131c385247c068231027e9e9f041d4f0233765b129abc509ae9fa1f16f63032c5d7df7c977c86bff28b808a6d4f156aeb3ac95adab20f0ee280bb1539afb5be4fac05f943864d9ede0c4d0d29a829aebe7dbae0d0",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Web",
+									"type": "text"
+								},
+								{
+									"key": "captcha",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "WEB",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://security-internet.totta.dev.corp/oauth/token",
+							"protocol": "https",
+							"host": [
+								"security-internet",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Token GTW (RETAIL) - 2FA",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://security-internet.totta.dev.corp/oauth/token",
+							"protocol": "https",
+							"host": [
+								"security-internet",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "GET virginia_accounts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFQSW1TYW5QdEludHJhbmV0X1JTMjU2In0.eyJzdWIiOiJ1aWQ6TkVUOTkiLCJuYmYiOjE2NDUxMDU3MDgsImlzc3VlZF90b2tlbl90eXBlIjoidXJuOmlldGY6cGFyYW1zOm9hdXRoOnRva2VuLXR5cGU6YWNjZXNzLXRva2VuIiwidXNlcl9uYW1lIjoiODcxNmFlNTc1ZmRkNjAwYjgwNGQxNDE5ODVjYjc5YTNkODA1OGUwZjMzNmZkY2YwYTQwM2I0NzBjNjFmYjg1ZSIsInNjb3BlIjoiY3VzYWRkY29udGFjdC53cml0ZSBkb2NyZWMucmVhZCBzZ2VuZGNvbXBvc2l0aW9uLnJlYWQgbG9hbnNsaXN0LnJlYWQgdjJfY3VzdF9hcHBfcHJpY2luZy5nZXQgY2FyZGxpc3QucmVhZCBjb252LndyaXRlIGluc3VyLmdkcHIuZ2V0IGN1c21hbmFnZXJzLnJlYWQgaW5zdGFudF9wYXltZW50LmRldGFpbHMgY3VzY2xzX3Jpc2tfc2VnbS5yZWFkIG9tZG0ud3JpdGUgY3VzdF9ncm91cGVkX2N1c3QuZ2V0IGxvYW5zYWNjb3VudHMucmVhZCBnYmxwb3MudmlldyBpbnN1ci5jdXN0LmdldCBpbnN0YW50X3BheW1lbnQuc3RhdHVzIGxvYW5zZGV0LnJlYWQgZXhhdXRoLnRva2VuIG5vdGVzLnJlYWQgaW5zdXIuc2ltLnBvc3QgY3VzYmFzaWMucmVhZCBnYmxwb3MucmVhZCBjcmVhdGVjYXJkLndyaXRlIGNvcnBvcmF0ZWluZm9ybWF0aW9uLnJlYWQgZG9jcmVjLndyaXRlIGluc3RhbnRfcGF5bWVudC5kZWxldGUgaW5zdGFudF9wYXltZW50Lmxpc3Qgc2ltdWxhdG9yLndyaXRlIGludmVzdG1lbnRmdW5kLnJlYWQgbm90ZXMud3JpdGUgbW9ydHNpbS5hZHYgdjJfY3VzdF9hcHBfZGV0YWlsLmdldCBzaW11bGF0b3IucmVhZCBsb2Fuc2luc3RhbGxtZW50LnJlYWQgc2dlbmRjb21wb3NpdGlvbi53cml0ZSB2aXJwdF9taWZpZC5yZWFkIHYyX2N1c3RfYXBwX2xpc3QuZ2V0IGRhdGFnYXRoZXJpbmcud3JpdGUgc2VsbGludC53cml0ZSB2Ml9jdXN0X2FwcF9ndWFyYW50ZWVzLmdldCBjYXJkZGV0LnJlYWQgY3VzdGVjb25vbS5yZWFkIGN1c2NvbnRhY3QucmVhZCBpbnN0YW50X3BheW1lbnQuY3JlYXRlIGluc3RhbnRfcGF5bWVudC5zaW11bGF0aW9uIGNvcnByaXNraW5mby5yZWFkIGFjY2xpc3QucmVhZCBsb2Fuc3BheW1lbnRzLnJlYWQiLCJpc3MiOiIwMDE4U2VjdXJpdHlNaWNyb3NlcnZpY2UiLCJhY3RpdmUiOnRydWUsImV4cCI6MTY0NTEwOTMwOCwic2VjQ3R4Ijp7InNlc3Npb25EZXRhaWxzIjp7InNlc3Npb25Vc2VySWQiOiIwMDAyMjcxMzMxIiwiaXNTYWZFbmFibGVkIjpmYWxzZSwiY3VzdG9tZXJQYXJ0ZW5vbiI6eyJjdXN0b21lclR5cGUiOm51bGwsImN1c3RvbWVySWQiOm51bGx9LCJzZXNzaW9uVXNlcm5hbWUiOiI4NzE2YWU1NzVmZGQ2MDBiODA0ZDE0MTk4NWNiNzlhM2Q4MDU4ZTBmMzM2ZmRjZjBhNDAzYjQ3MGM2MWZiODVlIiwiY29udGV4dCI6IldlYiIsImNoYW5uZWwiOiJPQkEiLCJkZXZpY2VEYXRhIjp7ImRldmljZUlkIjpudWxsLCJjZXJ0aWZpZWQiOmZhbHNlfSwidXNlclR5cGUiOm51bGwsImNsaWVudE51bWJlciI6Ijg3MTZhZTU3NWZkZDYwMGI4MDRkMTQxOTg1Y2I3OWEzZDgwNThlMGYzMzZmZGNmMGE0MDNiNDcwYzYxZmI4NWUifSwiaGVhZGVyU2ludHJhIjp7ImVtcFV0aWwiOiIzMSIsImNvZEJhbGNhb09yaWdlbSI6IjY5MjIiLCJuaXZlbEF1dG9yaXpDZW50cmFsIjoiMCIsImNvZEJhbGNhb09wZXJhbnRlIjoiNjkyMiIsImdlc3RvckNvbnRhIjoiTiIsIm51bUVtcHJlZ2FkbyI6IjExMTExMTExMSIsInRlcm1pbmFsIjoiMDAxNyIsImVtcHJlc2FPcGVyYW50ZSI6IiAgIiwidGVybWluYWxzIjpbIjAwMTciXSwiY29kQmFsY2FvIjoiNjkyMiIsImNvZEFtYmllbnRlIjoiTkIiLCJwZXJmaWwiOiJORVQwMDEiLCJpbmRTdGFmZiI6IlMiLCJnZXN0b3JDbGllbnRlIjoiTiJ9fSwiaWF0IjoxNjQ1MTA1NzA4LCJjbGllbnRfaWQiOiJzZWN1cml0eS1zZXJ2aWNlIiwiYXVkIjoiIiwianRpIjoiNWZkY2E1YTItYTNmOS00ODlhLWIyZDQtNTBjZWNhMmU4MDY5In0.CZHU_PEFySVfALmeEp4tLXYD5aCq2LiJt0Mlxw40Q50Dgx-mCbDUbGUORF83N3lSzlv-0dPPhZUrXHncKrIdkpMq4zea0jS9Z81IJTafqZp9L99c5WcZ6f8kQTgIghSUTOeKuJY1UKd1ObJC2wAxgq0n_XJWMWCQOFXFGZVZSj3iiTDIojzvoCuZ78gdWKJR4ZSSz-_j5WYfAdefCjXDXOhBsVwLWaANtPyeep1qy6840ZS_l8SNvAUtxR1RDv4dZfSno_1xhk1IYCRc5LgvhVawTZ3csWtuAAvrGofg9ksvccdVU71fb7_5LT8lAcpCP-TfJrNPemKR54T3ZaOQSg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/virginia_accounts",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"virginia_accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dev",
+			"item": [
+				{
+					"name": "GET virginia_accounts MCS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token-security}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_dev_dns}}/virginia_accounts",
+							"host": [
+								"{{host_dev_dns}}"
+							],
+							"path": [
+								"virginia_accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET virginia_accounts GTW",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "7c14fb64-698c-471f-bfc2-cb1016040937",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host_dev_gtw}}/virginia_accounts",
+							"host": [
+								"{{host_dev_gtw}}"
+							],
+							"path": [
+								"virginia_accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host_local",
+			"value": "http://localhost:8085",
+			"type": "string"
+		},
+		{
+			"key": "host_dev_dns",
+			"value": "https://virginia-mifid.totta.dev.corp",
+			"type": "string"
+		},
+		{
+			"key": "host_dev_gtw",
+			"value": "https://apigw.partnerclient.totta.dev.corp/sanpt/internal-partner",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1aWQ6T1BYUTk5IiwibmJmIjoxNjQzMzY2NTUxLCJpc3N1ZWRfdG9rZW5fdHlwZSI6InVybjppZXRmOnBhcmFtczpvYXV0aDp0b2tlbi10eXBlOmp3dC1pbnRlcm5hbCIsInVzZXJfbmFtZSI6IjkwMDEzOTY1NjMiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiaXNzIjoiMDAxOFNlY3VyaXR5TWljcm9zZXJ2aWNlIiwiZXhwIjoxNjQzMzczNzUxLCJzZWNDdHgiOnsic2Vzc2lvbkRldGFpbHMiOnsic2Vzc2lvblVzZXJJZCI6IjkwMDEzOTY1NjMiLCJpc1NhZkVuYWJsZWQiOmZhbHNlLCJjdXN0b21lclBhcnRlbm9uIjp7ImN1c3RvbWVyVHlwZSI6bnVsbCwiY3VzdG9tZXJJZCI6bnVsbH0sInNlc3Npb25Vc2VybmFtZSI6IjkwMDEzOTY1NjMiLCJjb250ZXh0IjoiTmV0YmFuY28iLCJjaGFubmVsIjoiT1BYIiwiZGV2aWNlRGF0YSI6eyJkZXZpY2VJZCI6bnVsbCwiY2VydGlmaWVkIjpmYWxzZX0sInVzZXJUeXBlIjpudWxsLCJjbGllbnROdW1iZXIiOiI5MDAxMzk2NTYzIn0sImhlYWRlclNpbnRyYSI6eyJlbXBVdGlsIjoiMzEiLCJjb2RCYWxjYW9PcmlnZW0iOiI3MDA4Iiwibml2ZWxBdXRvcml6Q2VudHJhbCI6IjkiLCJjb2RCYWxjYW9PcGVyYW50ZSI6IjcwMDgiLCJnZXN0b3JDb250YSI6Ik4iLCJudW1FbXByZWdhZG8iOiIxMTExMTExIiwidGVybWluYWwiOiIwMDFEIiwiZW1wcmVzYU9wZXJhbnRlIjoiICAiLCJ0ZXJtaW5hbHMiOlsiMDAxRCJdLCJjb2RCYWxjYW8iOiI3MDA4IiwiY29kQW1iaWVudGUiOm51bGwsInBlcmZpbCI6Ik5FVDAwMSIsImluZFN0YWZmIjoiTiIsImdlc3RvckNsaWVudGUiOiJOIn19LCJpYXQiOjE2NDMzNjY1NTEsImp0aSI6IjI5N2Y1MjNmLTNhYTktNDJhZS05ODAzLWI3MTUwYjg3NDQ3MCIsImNsaWVudF9pZCI6IjUwMDEyNjM4LVNBT05QRi01MDA2NDUzMC0wMDEifQ.KlxNTbJHl-ciTpdWq1P_-W4X0Mfees68kwOGrK4xd41CtGqH5-kCIMuas7Op3xUGY85YnBpQrwBFugob4nrqkjrnj2LInxEigevJBgh5fhjzuqPE4rbTFipNul6OyipdnMl0rtx06xMxnm601SWvJyMRpuegfK6-rud5V4h_j0P3V5fCJfHNiXgR8HpO-QZfFhbmR10e0AZzqfn6Hsp0rWplxSjDwa9ADWcBoOEmwW_X7xgRQ9RhETNqfAcfMMTXSUUnCvgEIpGd-dq9tNKH_rC1qEWQczvZ9K9zeDr0G_boHJhGodUd6NDX7NSY5BHtYaiQ7MVrtDG8CHPP-sTaRQ",
+			"type": "string"
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		}
+	]
+}

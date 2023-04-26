@@ -1,0 +1,1307 @@
+{
+	"info": {
+		"_postman_id": "81b802ea-f470-4648-839f-6230c006c574",
+		"name": "Omni Standing Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Only for DEV - Token Step 2",
+			"item": [
+				{
+					"name": "MFA - AccessToken (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccessToken (1) - 1000586988",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.access_token != null) {\r",
+							"    console.info(\"Set collection variable - accessToken\");\r",
+							"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+							"} else {\r",
+							"    console.info(\"Set collection variable - mfaCode\");\r",
+							"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "1000586988",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Web",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "WEB",
+							"type": "text"
+						},
+						{
+							"key": "fraudData",
+							"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders?offset=0&limit=50&standingOrderStatus=ACTIVE",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "standingOrderAlias",
+							"value": null,
+							"description": "// UNUSED PARAMETER",
+							"disabled": true
+						},
+						{
+							"key": "standingCreditorName",
+							"value": "Conta Espanha",
+							"disabled": true
+						},
+						{
+							"key": "fromLastStandingOrderRunDate",
+							"value": "2022-10-29",
+							"description": "// UNUSED PARAMETER",
+							"disabled": true
+						},
+						{
+							"key": "toLastStandingOrderRunDate",
+							"value": "2022-10-31",
+							"description": "// UNUSED PARAMETER",
+							"disabled": true
+						},
+						{
+							"key": "fromPaymentAmount",
+							"value": "4",
+							"disabled": true
+						},
+						{
+							"key": "toPaymentAmount",
+							"value": "6",
+							"disabled": true
+						},
+						{
+							"key": "currency",
+							"value": "EUR",
+							"disabled": true
+						},
+						{
+							"key": "standingOrderStatus",
+							"value": "ACTIVE"
+						},
+						{
+							"key": "_sort",
+							"value": "-executionNumber",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.scaId != null) {\r",
+							"    console.info(\"Set collection variable - scaId\");\r",
+							"    pm.collectionVariables.set(\"scaId\", jsonData.scaId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					},
+					{
+						"key": "device-info-token",
+						"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"schedule\": {\r\n        \"periodType\": \"FIXED\",\r\n        \"bankHolidayRule\": \"PREV_DAY\",\r\n        \"fixedDates\": [\r\n            \"2022-11-28\"\r\n        ],\r\n        \"validityPeriod\": {\r\n            \"startDate\": \"2022-11-28\",\r\n            \"endDate\": \"2023-11-28\"\r\n        }\r\n    },\r\n    \"scheduledPayment\": {\r\n        \"payee\": {\r\n            \"name\": \"Caixa\",\r\n            \"account\": {\r\n                \"accountId\": \"PT50003500410000748690034\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"countryDestinationFunds\": {\r\n            \"code\": \"PT\"\r\n        },\r\n        \"payer\": {\r\n            \"account\": {\r\n                \"accountId\": \"PT50001800035437246102070\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"paymentPath\": [],\r\n        \"paymentAmountInfo\": {\r\n            \"direct\": {\r\n                \"amount\": {\r\n                    \"amount\": 0.02,\r\n                    \"currency\": \"EUR\"\r\n                }\r\n            }\r\n        },\r\n        \"urgencyIndicator\": \"STANDARD\",\r\n        \"chargeBearer\": \"OUR\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders SCA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData != null && jsonData.standingOrderId != null) {\r",
+							"    console.info(\"Set collection variable - standingOrderId\");\r",
+							"    pm.collectionVariables.set(\"standingOrderId\", jsonData.standingOrderId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					},
+					{
+						"key": "sca-id",
+						"value": "{{scaId}}",
+						"type": "text"
+					},
+					{
+						"key": "otp-code",
+						"value": "654321",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"schedule\": {\r\n        \"periodType\": \"FIXED\",\r\n        \"bankHolidayRule\": \"PREV_DAY\",\r\n        \"fixedDates\": [\r\n            \"2022-11-28\"\r\n        ],\r\n        \"validityPeriod\": {\r\n            \"startDate\": \"2022-11-28\",\r\n            \"endDate\": \"2023-11-28\"\r\n        }\r\n    },\r\n    \"scheduledPayment\": {\r\n        \"payee\": {\r\n            \"name\": \"Caixa\",\r\n            \"account\": {\r\n                \"accountId\": \"PT50003500410000748690034\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"countryDestinationFunds\": {\r\n            \"code\": \"PT\"\r\n        },\r\n        \"payer\": {\r\n            \"account\": {\r\n                \"accountId\": \"PT50001800035437246102070\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"paymentPath\": [],\r\n        \"paymentAmountInfo\": {\r\n            \"direct\": {\r\n                \"amount\": {\r\n                    \"amount\": 0.02,\r\n                    \"currency\": \"EUR\"\r\n                }\r\n            }\r\n        },\r\n        \"urgencyIndicator\": \"STANDARD\",\r\n        \"chargeBearer\": \"OUR\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Details - BAAS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "cc2ea9af-814a-467a-a028-68c49a254728",
+						"type": "text"
+					},
+					{
+						"key": "Account-Type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "Account-Id",
+						"value": "PT50001800032109169102841",
+						"type": "text"
+					},
+					{
+						"key": "Access-Channel",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/standing_orders_account/:standing_order_id",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"dmzbackclient",
+						"totta",
+						"pre",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal-dmz",
+						"standing_orders_account",
+						":standing_order_id"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "10844684"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Scheduled",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id/scheduled",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id",
+						"scheduled"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "50",
+							"disabled": true
+						},
+						{
+							"key": "fromScheduledDate",
+							"value": "20161228T105858000-0100",
+							"disabled": true
+						},
+						{
+							"key": "toScheduledDate",
+							"value": "99991231T105858000-0100",
+							"disabled": true
+						},
+						{
+							"key": "_sort",
+							"value": "-scheduledDate",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Scheduled - BAAS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "cc2ea9af-814a-467a-a028-68c49a254728",
+						"type": "text"
+					},
+					{
+						"key": "Account-Type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "Account-Id",
+						"value": "PT50001800032109169102841",
+						"type": "text"
+					},
+					{
+						"key": "Access-Channel",
+						"value": "web",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/standing_orders_account/:standing_order_id/scheduled",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"dmzbackclient",
+						"totta",
+						"pre",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal-dmz",
+						"standing_orders_account",
+						":standing_order_id",
+						"scheduled"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "10844684"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.scaId != null) {\r",
+							"    console.info(\"Set collection variable - scaId\");\r",
+							"    pm.collectionVariables.set(\"scaId\", jsonData.scaId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					},
+					{
+						"key": "device-info-token",
+						"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"schedule\": {\r\n        \"periodType\": \"FIXED\",\r\n        \"bankHolidayRule\": \"FOLLOWING_DAY\",\r\n        \"fixedDates\": [\r\n            \"2022-11-28\"\r\n        ],\r\n        \"validityPeriod\": {\r\n            \"startDate\": \"2022-11-28\",\r\n            \"endDate\": \"2023-11-28\"\r\n        }\r\n    },\r\n    \"scheduledPayment\": {\r\n        \"payee\": {\r\n            \"account\": {\r\n                \"accountId\": \"PT50003500410000748690034\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"countryDestinationFunds\": {\r\n            \"code\": \"PT\"\r\n        },\r\n        \"paymentPath\": [],\r\n        \"paymentAmountInfo\": {\r\n            \"direct\": {\r\n                \"amount\": {\r\n                    \"amount\": 3.52,\r\n                    \"currency\": \"EUR\"\r\n                }\r\n            }\r\n        },\r\n        \"urgencyIndicator\": \"STANDARD\",\r\n        \"chargeBearer\": \"OUR\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders SCA",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "sca-id",
+						"value": "{{scaId}}",
+						"type": "text"
+					},
+					{
+						"key": "otp-code",
+						"value": "654321",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"schedule\": {\r\n        \"periodType\": \"FIXED\",\r\n        \"bankHolidayRule\": \"FOLLOWING_DAY\",\r\n        \"fixedDates\": [\r\n            \"2022-11-28\"\r\n        ],\r\n        \"validityPeriod\": {\r\n            \"startDate\": \"2022-11-28\",\r\n            \"endDate\": \"2023-11-28\"\r\n        }\r\n    },\r\n    \"scheduledPayment\": {\r\n        \"payee\": {\r\n            \"account\": {\r\n                \"accountId\": \"PT50003500410000748690034\",\r\n                \"accountIdType\": \"IBA\"\r\n            }\r\n        },\r\n        \"countryDestinationFunds\": {\r\n            \"code\": \"PT\"\r\n        },\r\n        \"paymentPath\": [],\r\n        \"paymentAmountInfo\": {\r\n            \"direct\": {\r\n                \"amount\": {\r\n                    \"amount\": 3.52,\r\n                    \"currency\": \"EUR\"\r\n                }\r\n            }\r\n        },\r\n        \"urgencyIndicator\": \"STANDARD\",\r\n        \"chargeBearer\": \"OUR\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "access-channel",
+						"value": "web",
+						"type": "text"
+					},
+					{
+						"key": "isTest",
+						"value": "true",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Executed",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id/executed",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id",
+						"executed"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromExecutedDate",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "toExecutedDate",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "_sort",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Freeze",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id/freeze",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id",
+						"freeze"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromFreezeDate",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "toFreezeDate",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "_sort",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Standing Orders Freeze",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "account-id",
+						"value": "PT50001800035437246102070",
+						"type": "text"
+					},
+					{
+						"key": "account-id-type",
+						"value": "IBAN",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startDate\": \"2022-10-04\",\r\n  \"endDate\": \"2022-10-04\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/standing_orders/:standing_order_id/freeze",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"standing_orders",
+						":standing_order_id",
+						"freeze"
+					],
+					"variable": [
+						{
+							"key": "standing_order_id",
+							"value": "{{standingOrderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-standing-orders.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.dev.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    ",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-standing-orders.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.pre.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\"); // Testes API's Locais Internal",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "eeicUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		},
+		{
+			"key": "scaId",
+			"value": ""
+		},
+		{
+			"key": "standingOrderId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

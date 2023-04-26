@@ -1,0 +1,1470 @@
+{
+	"info": {
+		"_postman_id": "a79dfcb1-68f8-429e-9979-2931aa44cd0f",
+		"name": "[EXPRET] Payments Retail (Experience API)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Payments Scenarios",
+			"item": [
+				{
+					"name": "Instant Payments With SCA",
+					"item": [
+						{
+							"name": "1 - Simulation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//local variables - David\r",
+											"\r",
+											"let creditorAccountId = \"PT50003300000308097854194\";\r",
+											"\r",
+											"//let creditorAccountId =\"PT50001800035438848302092\";\r",
+											"\r",
+											"//let creditorAccountId = \"PT50001800035445319602093\";\r",
+											"\r",
+											"//let creditorAccountId = \"PT50001800035433056802050\";\r",
+											"//let debtorAccountId = \"PT50001800033648682702084\";// for customerId 45441\r",
+											"let debtorAccountId = \"PT50001800035439803702040\";// for customerId 1000586391\r",
+											"let amount = 0.02; //not use \".00\" because of the postman string conversion (not a service error)\r",
+											"\r",
+											"// #######################\r",
+											"\r",
+											"//local variables\r",
+											"//let creditorAccountId = \"PT50003300000019333254405\";\r",
+											"//let debtorAccountId = \"PT50001800035433056802050\";\r",
+											"//let amount = 70.01; //not use \".00\" because of the postman string conversion (not a service error)\r",
+											"\r",
+											"console.log(\"creditorAccountId\", creditorAccountId);\r",
+											"console.log(\"debtorAccountId\", debtorAccountId);\r",
+											"console.log(\"amount\", amount);\r",
+											"\r",
+											"\r",
+											"\r",
+											"let instantPaymentRequestBody =\r",
+											"{\r",
+											"   \"chargeBearer\":\"OUR\",\r",
+											"   \"countryDestinationFunds\":\"PT\",\r",
+											"   \"creditorCreditAccount\":{\r",
+											"      \"accountId\":creditorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"creditorName\":\"Amanda\",\r",
+											"   \"debtorAccount\":{\r",
+											"      \"accountId\":debtorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"idempotentReference\":\"anyReference\",\r",
+											"   \"institutionalPaymentIndicator\":false,\r",
+											"   \"paymentAmount\":{\r",
+											"      \"amount\":amount,\r",
+											"      \"currency\":\"EUR\"\r",
+											"   },\r",
+											"   \"requestExecutionDate\":\"2022-12-31\",\r",
+											"   \"senderReference\":\"whatever\",\r",
+											"   \"urgencyIndicator\":\"STANDARD\"\r",
+											"}\r",
+											"\r",
+											"//global variables\r",
+											"pm.globals.set(\"instantPaymentRequestBody\", JSON.stringify(instantPaymentRequestBody));\r",
+											"pm.globals.set(\"instantPaymentDebtorAccountId\", debtorAccountId);\r",
+											"pm.globals.set(\"instantPaymentCreditorAccountId\", creditorAccountId);\r",
+											"pm.globals.set(\"instantPaymentAmount\", amount);\r",
+											"pm.globals.set('instantPaymentScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{/instant_payments}#{}#\" + JSON.stringify(instantPaymentRequestBody))));\r",
+											"\r",
+											"console.log(\"instantPaymentRequestBody: \" + JSON.stringify(instantPaymentRequestBody));\r",
+											"console.log(pm.globals.get('instantPaymentScaEncryptedPayload'));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"instantPaymentRequestToken\", pm.response.headers.get(\"Payment-Request\"));\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									},
+									{
+										"key": "Access-Channel",
+										"value": "mobile",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{instantPaymentRequestBody}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments/simulate_payment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments",
+										"simulate_payment"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "1 - Simulation",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Client-Id",
+												"value": "{{clientId}}",
+												"type": "text"
+											},
+											{
+												"key": "Access-Channel",
+												"value": "mobile",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{{instantPaymentRequestBody}}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/retail_instant_payments/simulate_payment",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"retail_instant_payments",
+												"simulate_payment"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Backside-Transport",
+											"value": "OK OK"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 04 Aug 2022 15:40:58 GMT"
+										},
+										{
+											"key": "X-Global-Transaction-ID",
+											"value": "196c556562ebe88aa026f071"
+										},
+										{
+											"key": "x-b3-traceid",
+											"value": "e0cb6da736fb8de5"
+										},
+										{
+											"key": "x-b3-spanid",
+											"value": "e0cb6da736fb8de5"
+										},
+										{
+											"key": "payment-request",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjcmVkaXRvckFjY291bnRJZCI6IlBUNTAwMDMzMDAwMDAzMDgwOTc4NTQxOTQiLCJjcmVkaXRvck5hbWUiOiJBbWFuZGEiLCJkZWJ0b3JBY2NvdW50SWQiOiJQVDUwMDAxODAwMDM1NDM5Njc2NzAyMDc0IiwiaXNzIjoiUGF5bWVudC1SZXF1ZXN0IiwicmVxdWVzdEV4ZWN1dGlvbkRhdGUiOiIyMDIxLTAyLTE4IiwiZXhwIjoxNjU5NjI3OTU4LCJwYXltZW50QW1vdW50IjoiMy4wMCIsImlhdCI6MTY1OTYyNzY1OCwianRpIjoiODk1ZGY3ZTctZWRjNi00Y2Q0LWFkZDEtYTE1MTc0YzIyNTEzIn0.2hwunyzYa8eEg2N3vUeh6adiexDkbYyNeQqBJg6oxLyWSn12ya7N1DNGmFGpu1h5hcTTA1tJRDSrs-774b8fPSpeObkrdT0956dg9TIgV6HaGnLmkdkbqcNK0c0kNnxfCyy3_r9Dody_SSClI9E9FNgK2J2NV3jSXNNlAQOrarqO6Kk7qgUA8F5bK09k9FbJ9CyVgPgfO9naXkZ88wB2ikgkbG1wQbpTxrlh2QaPQ_t0leZJZZg7EQVO4IKsou3-WOAXiEqYpYnxD30i_0xMVnzkjhHG0n19FG2KmpvLNiT9Q09yAIus0fhHRm65e2zROeXQsDuM04sMJPU9iMt_Tw"
+										},
+										{
+											"key": "x-content-type-options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-xss-protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "expires",
+											"value": "0"
+										},
+										{
+											"key": "strict-transport-security",
+											"value": "max-age=31536000 ; includeSubDomains"
+										},
+										{
+											"key": "x-frame-options",
+											"value": "DENY"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "APIm-Debug-Trans-Id, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-Global-Transaction-ID"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"requestOriginalData\": {\n        \"senderReference\": \"whatever\",\n        \"requestExecutionDate\": \"2021-02-18\",\n        \"chargeBearer\": \"OUR\",\n        \"creditorName\": \"Amanda\",\n        \"payeeId\": \"0000\",\n        \"creditorCreditAccount\": {\n            \"accountId\": \"PT50003300000308097854194\",\n            \"accountIdType\": \"IBAN\"\n        },\n        \"beneficiaryAgent\": {\n            \"agent\": \"BCOMPTP0\",\n            \"agentName\": \"MILLENNIUM BCP -LISBOA\"\n        },\n        \"countryDestinationFunds\": \"PRT\",\n        \"payerName\": \"VERONICA FIGUEIRA\",\n        \"debtorAccount\": {\n            \"accountId\": \"PT50001800035439676702074\",\n            \"accountIdType\": \"IBAN\"\n        },\n        \"urgencyIndicator\": \"standard\",\n        \"purposeCode\": \"OTHR\",\n        \"institutionalPaymentIndicator\": false,\n        \"paymentAmount\": {\n            \"amount\": 3,\n            \"currency\": \"EUR\"\n        }\n    },\n    \"debitAmount\": {\n        \"amount\": 3,\n        \"currency\": \"EUR\"\n    },\n    \"debtorChargeFee\": {\n        \"amount\": 1.25,\n        \"currency\": \"EUR\"\n    },\n    \"totalValue\": {\n        \"amount\": 4.3,\n        \"currency\": \"EUR\"\n    },\n    \"paymentSystemName\": \"SEPA\",\n    \"taxesInformation\": {\n        \"mainTax\": {\n            \"name\": \"IMPOSTO SELO\",\n            \"taxAmount\": {\n                \"amount\": 0.05,\n                \"currency\": \"EUR\"\n            }\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "2 - Execute (expecting SCA)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.globals.set(\"scaId\", response.scaId);\r",
+											"\r",
+											"pm.test(\"Status code is 202\", function () {\r",
+											"    pm.response.to.have.status(202);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "device-info-token",
+										"type": "text",
+										"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}"
+									},
+									{
+										"key": "Access-Channel",
+										"type": "text",
+										"value": "mobile"
+									},
+									{
+										"key": "Payment-Request",
+										"type": "text",
+										"value": "{{instantPaymentRequestToken}}"
+									},
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "X-B3-TraceId",
+										"value": "463ac35c9f6413ad48485a3953bb6124",
+										"type": "text"
+									},
+									{
+										"key": "X-B3-ParentSpanId",
+										"value": "123456789",
+										"type": "text"
+									},
+									{
+										"key": "X-B3-SpanId",
+										"value": "123456789",
+										"type": "text"
+									},
+									{
+										"key": "X-B3-Sampled",
+										"value": "123456789",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"instantPaymentExecutionRequest\": {{instantPaymentRequestBody}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "2 - Execute (expecting SCA)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "device-info-token",
+												"type": "text",
+												"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}"
+											},
+											{
+												"key": "Access-Channel",
+												"type": "text",
+												"value": "mobile"
+											},
+											{
+												"key": "Payment-Request",
+												"type": "text",
+												"value": "{{instantPaymentRequestToken}}"
+											},
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											},
+											{
+												"key": "X-B3-TraceId",
+												"value": "463ac35c9f6413ad48485a3953bb6124",
+												"type": "text"
+											},
+											{
+												"key": "X-B3-ParentSpanId",
+												"value": "123456789",
+												"type": "text"
+											},
+											{
+												"key": "X-B3-SpanId",
+												"value": "123456789",
+												"type": "text"
+											},
+											{
+												"key": "X-B3-Sampled",
+												"value": "123456789",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"instantPaymentExecutionRequest\": {{instantPaymentRequestBody}}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/retail_instant_payments",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"retail_instant_payments"
+											]
+										}
+									},
+									"status": "Accepted",
+									"code": 202,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Backside-Transport",
+											"value": "OK OK"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 04 Aug 2022 15:41:55 GMT"
+										},
+										{
+											"key": "X-Global-Transaction-ID",
+											"value": "196c556562ebe8c1a026f141"
+										},
+										{
+											"key": "x-b3-traceid",
+											"value": "6a7912bc18e67938"
+										},
+										{
+											"key": "x-b3-spanid",
+											"value": "6a7912bc18e67938"
+										},
+										{
+											"key": "x-content-type-options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-xss-protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "expires",
+											"value": "0"
+										},
+										{
+											"key": "strict-transport-security",
+											"value": "max-age=31536000 ; includeSubDomains"
+										},
+										{
+											"key": "x-frame-options",
+											"value": "DENY"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "APIm-Debug-Trans-Id, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-Global-Transaction-ID"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"scaId\": \"a68879f3-c2be-4333-8e32-325a381437c3\"\n}"
+								}
+							]
+						},
+						{
+							"name": "3 - Execute",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "device-info-token",
+										"type": "text",
+										"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}"
+									},
+									{
+										"key": "Access-Channel",
+										"type": "text",
+										"value": "mobile"
+									},
+									{
+										"key": "Payment-Request",
+										"type": "text",
+										"value": "{{instantPaymentRequestToken}}"
+									},
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"instantPaymentExecutionRequest\": {{instantPaymentRequestBody}},\r\n    \"scaRequest\": {\r\n        \"otpCode\": \"654321\",\r\n        \"scaId\": \"{{scaId}}\"\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "3 - Execute",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "device-info-token",
+												"type": "text",
+												"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}"
+											},
+											{
+												"key": "Access-Channel",
+												"type": "text",
+												"value": "mobile"
+											},
+											{
+												"key": "Payment-Request",
+												"type": "text",
+												"value": "{{instantPaymentRequestToken}}"
+											},
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{ \r\n    \"instantPaymentExecutionRequest\": {{instantPaymentRequestBody}},\r\n    \"scaRequest\": {\r\n        \"otpCode\": \"654321\",\r\n        \"scaId\": \"{{scaId}}\"\r\n    }\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/retail_instant_payments",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"retail_instant_payments"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Backside-Transport",
+											"value": "OK OK"
+										},
+										{
+											"key": "Connection",
+											"value": "Keep-Alive"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 04 Aug 2022 15:42:39 GMT"
+										},
+										{
+											"key": "X-Global-Transaction-ID",
+											"value": "196c556562ebe8e99d807e80"
+										},
+										{
+											"key": "x-b3-traceid",
+											"value": "2df1b20da18bd24e"
+										},
+										{
+											"key": "x-b3-spanid",
+											"value": "2df1b20da18bd24e"
+										},
+										{
+											"key": "x-content-type-options",
+											"value": "nosniff"
+										},
+										{
+											"key": "x-xss-protection",
+											"value": "1; mode=block"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache, no-store, max-age=0, must-revalidate"
+										},
+										{
+											"key": "pragma",
+											"value": "no-cache"
+										},
+										{
+											"key": "expires",
+											"value": "0"
+										},
+										{
+											"key": "strict-transport-security",
+											"value": "max-age=31536000 ; includeSubDomains"
+										},
+										{
+											"key": "x-frame-options",
+											"value": "DENY"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "APIm-Debug-Trans-Id, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-Global-Transaction-ID"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "gzip"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"requestOriginalData\": {\n        \"idempotentReference\": \"anyReference\",\n        \"senderReference\": \"whatever\",\n        \"requestExecutionDate\": \"2021-02-18\",\n        \"chargeBearer\": \"OUR\",\n        \"creditorName\": \"Amanda\",\n        \"payeeId\": \"0000\",\n        \"creditorCreditAccount\": {\n            \"accountId\": \"PT50003300000308097854194\",\n            \"accountIdType\": \"IBAN\"\n        },\n        \"beneficiaryAgent\": {\n            \"agent\": \"BCOMPTP0\",\n            \"agentName\": \"MILLENNIUM BCP -LISBOA\"\n        },\n        \"countryDestinationFunds\": \"PRT\",\n        \"payerName\": \"VERONICA FIGUEIRA\",\n        \"debtorAccount\": {\n            \"accountId\": \"PT50001800035439676702074\",\n            \"accountIdType\": \"IBAN\"\n        },\n        \"urgencyIndicator\": \"standard\",\n        \"institutionalPaymentIndicator\": false,\n        \"paymentAmount\": {\n            \"amount\": 3,\n            \"currency\": \"EUR\"\n        },\n        \"taxesInformation\": {\n            \"mainTax\": {\n                \"name\": \"IMPOSTO SELO\",\n                \"taxAmount\": {\n                    \"amount\": 0.05,\n                    \"currency\": \"EUR\"\n                }\n            }\n        }\n    },\n    \"instantPaymentId\": \"6936NE01618814\",\n    \"debitAmount\": {\n        \"amount\": 3,\n        \"currency\": \"EUR\"\n    },\n    \"debtorChargeFee\": {\n        \"amount\": 1.25,\n        \"currency\": \"EUR\"\n    },\n    \"totalValue\": {\n        \"amount\": 4.3,\n        \"currency\": \"EUR\"\n    },\n    \"paymentStatus\": \"ACCC\",\n    \"paymentSystemName\": \"SEPA\",\n    \"valueDate\": \"20220805\"\n}"
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Same Account Holder",
+					"item": [
+						{
+							"name": "1 - Simulation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//local variables\r",
+											"let creditorAccountId = \"PT50001800035433056802050\";\r",
+											"let debtorAccountId = \"PT50001800035438777402050\";\r",
+											"let amount = 5.01; //not use \".00\" because of the postman string conversion (not a service error)\r",
+											"\r",
+											"console.log(\"creditorAccountId\", creditorAccountId);\r",
+											"console.log(\"debtorAccountId\", debtorAccountId);\r",
+											"console.log(\"amount\", amount);\r",
+											"\r",
+											"let instantPaymentRequestBody =\r",
+											"{\r",
+											"   \"chargeBearer\":\"OUR\",\r",
+											"   \"countryDestinationFunds\":\"PT\",\r",
+											"   \"creditorCreditAccount\":{\r",
+											"      \"accountId\":creditorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"creditorName\":\"Fl�vio\",\r",
+											"   \"debtorAccount\":{\r",
+											"      \"accountId\":debtorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"idempotentReference\":\"anyReference\",\r",
+											"   \"institutionalPaymentIndicator\":false,\r",
+											"   \"paymentAmount\":{\r",
+											"      \"amount\":amount,\r",
+											"      \"currency\":\"EUR\"\r",
+											"   },\r",
+											"   \"requestExecutionDate\":\"2020-01-12\",\r",
+											"   \"senderReference\":\"whatever\",\r",
+											"   \"urgencyIndicator\":\"STANDARD\"\r",
+											"}\r",
+											"\r",
+											"//global variables\r",
+											"pm.globals.set(\"instantPaymentRequestBody\", JSON.stringify(instantPaymentRequestBody));\r",
+											"pm.globals.set(\"instantPaymentDebtorAccountId\", debtorAccountId);\r",
+											"pm.globals.set(\"instantPaymentCreditorAccountId\", creditorAccountId);\r",
+											"pm.globals.set(\"instantPaymentAmount\", amount);\r",
+											"pm.globals.set('instantPaymentScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{/instant_payments}#{}#\" + JSON.stringify(instantPaymentRequestBody))));\r",
+											"\r",
+											"console.log(\"instantPaymentRequestBody: \" + JSON.stringify(instantPaymentRequestBody));\r",
+											"console.log(pm.globals.get('instantPaymentScaEncryptedPayload'));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"instantPaymentRequestToken\", pm.response.headers.get(\"Payment-Request\"));\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									},
+									{
+										"key": "Access-Channel",
+										"value": "mobile",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{instantPaymentRequestBody}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments/simulate_payment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments",
+										"simulate_payment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Execute",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "device-info-token",
+										"type": "text",
+										"value": "{\"device-id\": \"1234567\", \"device-ip-address\": \"127.0.0.1\", \"device-language\": \"en-US\", \"device-user-agent\": \"Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36\", \"device-timezone\": \"UTC\", \"device-browser\": \"Chrome\", \"device-charge-indicator\": \"0\", \"device-fingerprint\": \"dfjsfliasufleiufbearuiggefiuwaebi324234kjbsadfuw3\", \"device-inclination\": \"90\", \"device-latitude\": \"38.735501\", \"device-longitude\": \"-9.160288\", \"device-malware-indicator\": \"0\", \"device-operating-system\": \"ChromeOS\", \"device-rooted-indicator\": \"0\", \"device-universal-id\": \"12345-98765-22-45556766\", \"finger-print-elements\": \"fingerPrintElements\", \"application-language\": \"en-US\", \"channel\": \"MBP\"}"
+									},
+									{
+										"key": "Access-Channel",
+										"type": "text",
+										"value": "mobile"
+									},
+									{
+										"key": "Payment-Request",
+										"type": "text",
+										"value": "{{instantPaymentRequestToken}}"
+									},
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"instantPaymentExecutionRequest\": {{instantPaymentRequestBody}},\r\n    \"scaRequest\": {\r\n        \"otpCode\": \"654321\"\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Insufficient Funds",
+					"item": [
+						{
+							"name": "1 - Simulation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//local variables\r",
+											"let creditorAccountId = \"PT50003300000019333254405\";\r",
+											"let debtorAccountId = \"PT50001800035438777402050\";\r",
+											"\r",
+											"let amount = 500.01; //not use \".00\" because of the postman string conversion (not a service error)\r",
+											"\r",
+											"console.log(\"creditorAccountId\", creditorAccountId);\r",
+											"console.log(\"debtorAccountId\", debtorAccountId);\r",
+											"console.log(\"amount\", amount);\r",
+											"\r",
+											"let instantPaymentRequestBody =\r",
+											"{\r",
+											"   \"chargeBearer\":\"OUR\",\r",
+											"   \"countryDestinationFunds\":\"PT\",\r",
+											"   \"creditorCreditAccount\":{\r",
+											"      \"accountId\":creditorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"creditorName\":\"Amanda\",\r",
+											"   \"debtorAccount\":{\r",
+											"      \"accountId\":debtorAccountId,\r",
+											"      \"accountIdType\":\"IBAN\"\r",
+											"   },\r",
+											"   \"idempotentReference\":\"anyReference\",\r",
+											"   \"institutionalPaymentIndicator\":false,\r",
+											"   \"paymentAmount\":{\r",
+											"      \"amount\":amount,\r",
+											"      \"currency\":\"EUR\"\r",
+											"   },\r",
+											"   \"requestExecutionDate\":\"2020-01-12\",\r",
+											"   \"senderReference\":\"whatever\",\r",
+											"   \"urgencyIndicator\":\"STANDARD\"\r",
+											"}\r",
+											"\r",
+											"//global variables\r",
+											"pm.globals.set(\"instantPaymentRequestBody\", JSON.stringify(instantPaymentRequestBody));\r",
+											"pm.globals.set(\"instantPaymentDebtorAccountId\", debtorAccountId);\r",
+											"pm.globals.set(\"instantPaymentCreditorAccountId\", creditorAccountId);\r",
+											"pm.globals.set(\"instantPaymentAmount\", amount);\r",
+											"pm.globals.set('instantPaymentScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{/instant_payments}#{}#\" + JSON.stringify(instantPaymentRequestBody))));\r",
+											"\r",
+											"console.log(\"instantPaymentRequestBody: \" + JSON.stringify(instantPaymentRequestBody));\r",
+											"console.log(pm.globals.get('instantPaymentScaEncryptedPayload'));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"instantPaymentRequestToken\", pm.response.headers.get(\"Payment-Request\"));\r",
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									},
+									{
+										"key": "Access-Channel",
+										"value": "mobile",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{instantPaymentRequestBody}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/retail_instant_payments/simulate_payment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"retail_instant_payments",
+										"simulate_payment"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "GET InstantPayment List",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Client-Id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "X-B3-TraceId",
+								"value": "1234567899",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/retail_instant_payments?from_request_execution_date=2021-01-01&to_request_execution_date=2023-10-18&debtor_account_id=PT50001800035439803702040&is_experience_retail=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"retail_instant_payments"
+							],
+							"query": [
+								{
+									"key": "from_request_execution_date",
+									"value": "2021-01-01"
+								},
+								{
+									"key": "to_request_execution_date",
+									"value": "2023-10-18"
+								},
+								{
+									"key": "from_payment_amount",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "to_payment_amount",
+									"value": "1000.00000",
+									"disabled": true
+								},
+								{
+									"key": "debtor_account_id",
+									"value": "PT50001800035439803702040"
+								},
+								{
+									"key": "payment_status",
+									"value": "PEND",
+									"disabled": true
+								},
+								{
+									"key": "_limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "is_experience_retail",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE InstantPayment",
+			"item": [
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Client-Id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/retail_instant_payments/6936NE01619437",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"retail_instant_payments",
+								"6936NE01619437"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET InstantPayment Details",
+			"item": [
+				{
+					"name": "Detail ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "X-B3-TraceId",
+								"value": "463ac35c9f6413ad48485a3953bb6127",
+								"type": "text"
+							},
+							{
+								"key": "X-B3-ParentSpanId",
+								"value": "123456789",
+								"type": "text"
+							},
+							{
+								"key": "X-B3-SpanId",
+								"value": "123456789",
+								"type": "text"
+							},
+							{
+								"key": "X-B3-Sampled",
+								"value": "123456789",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/retail_instant_payments/6936NE01619437",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"retail_instant_payments",
+								"6936NE01619437"
+							],
+							"query": [
+								{
+									"key": "X-B3-TraceId",
+									"value": "1234567897",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET InstantPayment Status",
+			"item": [
+				{
+					"name": "Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Channel",
+								"value": "back office",
+								"type": "text"
+							},
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/retail_instant_payments/6936NE01619437/status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"retail_instant_payments",
+								"6936NE01619437",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "{{accessToken}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let authorizationHandlerUrl = \"https://confluence.alm.europe.cloudcenter.corp/download/attachments/177504065/Authorization-Handler.js?version=2&modificationDate=1637581631554&api=v2\";",
+					"",
+					"let customerPassword = \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\";",
+					"",
+					"pm.sendRequest(authorizationHandlerUrl, function (error, response) {",
+					"    var environment = pm.variables.get(\"env\");",
+					"    var catalog = pm.variables.get(\"catalog\");",
+					"    pm.environment.set(\"env\", environment);",
+					"",
+					"    if (environment == \"dev\") {",
+					"        //pm.environment.set(\"tokenClientId\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"        //pm.environment.set(\"tokenClientSecret\", \"N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6\");",
+					"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"url\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"        pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\"); ",
+					"    };",
+					"",
+					"    if (environment == \"pre\") {",
+					"        if (catalog === \"external\") {",
+					"            pm.environment.set(\"tokenClientId\", \"3d32073c-6317-4b54-a4c6-6ca3b766758e\");",
+					"            pm.environment.set(\"url\", \"https://eeic9.apis.santander.pt/sanpt/external-intcons\");",
+					"        } else {",
+					"            pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"            pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"            pm.environment.set(\"url\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"            pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"        }",
+					"    };",
+					"",
+					"    if (environment == \"localhost\") {",
+					"        pm.environment.set(\"env\", \"dev\");",
+					"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"        pm.environment.set(\"dmzUrl\", \"localhost:8080\");",
+					"        pm.environment.set(\"intraUrl\", \"localhost:8080\");",
+					"    };",
+					"    ",
+					"    pm.globals.set(\"clientId\", pm.environment.get(\"tokenClientId\"));",
+					"    //pm.globals.set(\"clientIdInternal\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.globals.set(\"clientIdInternal\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+					"",
+					"    const config = {",
+					"        channelType: \"mobile\"",
+					"    }",
+					"",
+					"    //let customerId = '1000596741';",
+					"    //let customerId = '8015518633';",
+					"    //let customerId = '2321006585';",
+					"    //let customerId = '157789';",
+					"    //let customerId = '1000586988';",
+					"    //let customerId = '1000585557';",
+					"    //let customerId = '9002565390';",
+					"     //let customerId = '1000596741';",
+					"    //let customerId = 1000585449; - OK",
+					"    //let customerId = 1000596392;",
+					"    //let customerId = \"1000586173\";",
+					"    let customerId = \"1000586391\";",
+					"    //let customerId = \"79136\";",
+					"",
+					"    createToken(customerId, customerId, customerPassword, config);",
+					"});",
+					"pm.sendRequest(authorizationHandlerUrl, function (err, response) {",
+					"    var arr = new Uint8Array(response.stream);",
+					"    var str = String.fromCharCode.apply(String, arr);",
+					"    pm.globals.set('loadUtilsValidation', str);",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre"
+		},
+		{
+			"key": "catalog",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "commonLayer",
+			"value": ""
+		},
+		{
+			"key": "localLayer",
+			"value": ""
+		},
+		{
+			"key": "channelLayer",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}

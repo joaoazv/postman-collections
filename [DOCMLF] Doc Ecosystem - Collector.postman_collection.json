@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "11906133-7e73-4e05-91a8-f713f43e019d",
+		"name": "[DOCMLF] Doc Ecosystem - Collector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"description": "dev",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"description": "dev",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notification - CGI",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{xIbmClientIdpre}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"notifications\": [\r\n    {\r\n      \"fileId\": \"9020809\",\r\n      \"documentType\": \"EXCP\",\r\n      \"numberPage\": \"20\",\r\n      \"fileSize\": \"300\"\r\n    }\r\n  ] \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/providers/Cgi/document/notification",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"providers",
+						"Cgi",
+						"document",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://doc-ecosystem-rest-collector.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://doc-ecosystem-rest-collector.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"fR1fS3rY0gB0bX7oM4qJ8hK5wS3jB2yA1cE5gU8kS6yX6fC0vQ\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://doc-ecosystem-rest-collector.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://doc-ecosystem-rest-collector.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"};",
+					"",
+					"/*pm.sendRequest(\"https://github.alm.europe.cloudcenter.corp/tot-pt-apis/postman-lib/raw/master/modules/utils/index.js\", function (err, response) {",
+					" ",
+					"    var arr = new Uint8Array(response.stream);",
+					"    var str = String.fromCharCode.apply(String, arr);",
+					"    eval(str);",
+					"    let config = { apiGwCatalog: \"internalPartner\" }",
+					"    sendRequestByEnvironment(\"https://doc-ecosystem-rest-collector.totta.dev.corp\", config);",
+					"});*/"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}

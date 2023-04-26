@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "af68d398-ab85-4856-a29d-bc0cec81b25b",
+		"name": "[EURFAC] Factoring Reports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"description": "dev",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"description": "dev",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET debtors history",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"uuid\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdInternal}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/factoring_reports/:customer_id/debtors_history",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"factoring_reports",
+						":customer_id",
+						"debtors_history"
+					],
+					"variable": [
+						{
+							"key": "customer_id",
+							"value": "5100020213"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET debtors responsibilities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"uuid\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdInternal}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/factoring_reports/:customer_id/debtors_responsibilities",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"factoring_reports",
+						":customer_id",
+						"debtors_responsibilities"
+					],
+					"variable": [
+						{
+							"key": "customer_id",
+							"value": "8020422995",
+							"description": "8006340508, 8008297205"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET advance details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"uuid\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdInternal}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/factoring_reports/:customer_id/advance_detail",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"factoring_reports",
+						":customer_id",
+						"advance_detail"
+					],
+					"variable": [
+						{
+							"key": "customer_id",
+							"value": "2071005712"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET adherent history",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"uuid\", jsonData.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdInternal}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/factoring_reports/:customer_id/adherent_history",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"factoring_reports",
+						":customer_id",
+						"adherent_history"
+					],
+					"variable": [
+						{
+							"key": "customer_id",
+							"value": "5100008966",
+							"description": "8006340508, 8008297205"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Composition Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"description": "(Required) Client Id Header",
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdIntraCore}}"
+					}
+				],
+				"url": {
+					"raw": "{{intraCoreUrl}}/sgendcomposition/templates/compositions/:uuid",
+					"host": [
+						"{{intraCoreUrl}}"
+					],
+					"path": [
+						"sgendcomposition",
+						"templates",
+						"compositions",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "{{uuid}}"
+						}
+					]
+				},
+				"description": "This operation obtain the status of the document composition process "
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.variables.get(\"env\");",
+					"pm.collectionVariables.set(\"env\", environment);",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"https://apigw.intracore.totta.dev.corp/sanpt/internal-core\");",
+					"    pm.collectionVariables.set(\"clientIdIntraCore\", \"7c14fb64-698c-471f-bfc2-cb1016040937\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://webfactoring-ms.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"https://apigw.intracore.totta.dev.corp/sanpt/internal-core\");",
+					"    pm.collectionVariables.set(\"clientIdIntraCore\", \"7c14fb64-698c-471f-bfc2-cb1016040937\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"fR1fS3rY0gB0bX7oM4qJ8hK5wS3jB2yA1cE5gU8kS6yX6fC0vQ\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://webfactoring-ms.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"https://apigw.intracore.totta.pre.corp/sanpt/internal-core\");",
+					"    pm.collectionVariables.set(\"clientIdIntraCore\", \"0d3164f4-ee3a-4995-962a-edbe2c820c74\");",
+					"};",
+					"",
+					"pm.collectionVariables.set(\"clientId\", pm.collectionVariables.get(\"tokenClientId\"));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "lib",
+			"value": "var\n//==================//\n//  PHYSICAL USERS  //\n//==================//\n/*\n * All purpose user for testing\n * Has a plethora of different products\n */\nauth1000585557 = function () {\n    let customerNumber = \"1000585557\";\n    let customerUsername = \"1000585557\";\n    let customerPassword = \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauth1000596831 = function () {\n    let customerNumber = \"1000596831\";\n    let customerUsername = \"1000596831\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User with only 1 account\n */\nauth2321006585 = function () {\n    let customerNumber = \"2321006585\";\n    let customerUsername = \"2321006585\";\n    let customerPassword = \"4bac44e306347a6d42a4efc4e229584ecae152ba896c1f6113f1bf3d53e0b5f4aad2d12850069986483d310bf07db50923aed4f7df47885c99ddeefeb532d02c743c20b3a91dc4bf710bde14d7e7883f0e183c3206cb9eee9c74ea5cb1f37dd49d6e48df4574bc229b49cf64a93a4197f2d4df749f7536a2ed5629a1098b3365f42fbdb6ddfc113c8f08cf0d14b4ed9dcb5f2f09bc6462c136713f6d8b283fc94060626039c964fdf5006384c32f90e9cd73fbaebc8a178bbffaab4794cff46744ef182d71e783b4fd7beb3821137809fc81b65ea983219d5b196d1dc226d81299922139dc8fd65a1c8d6a99fe4df80928987aecb2e632a6a112d5a5c93718cb\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User without deposits, pensions, cards\n */\nauth9002565390 = function () {\n    let customerNumber = \"9002565390\";\n    let customerUsername = \"9002565390\";\n    let customerPassword = \"7aee03310d32538c168952868bd60e0dc40fa2541a18cd6edb2d4b6d564d52a27889459e32b114d79a9798acd20c42773f7aac48ce6322a86817373600af0cb2e86aca33f1091b2a5fe041ad282d09efcbe88347f4f0de797593f246c9ef4c66bc7676eba104d91e29158eb3fa5b8854c2755b64aa5650077f9dc03510dcd1aafd16c1dba15778564e3ee5093afc1ef265e3a60f92942c07ee01c967c64b0346d314e3ccee2eced111e32134ae196a1c324d6a62483d5611ba0dd90b95752b306392cea58d06e70c6acc4ca61695451bac86cb8bc945f9c43a906581b235dec8832ee56d33bb34f6ff50c02e6590bb875731968fc59b18509068eaa94aedef01\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User whose accounts are all in EUR.\n * Recommended for testing Global Position\n */\nauthUser157789 = function () {\n    let customerNumber = \"157789\";\n    let customerUsername = \"User157789\";\n    let customerPassword = \"12ce4647945644cc739c3dbdc70693f5e03ecea5a332c8f018d1cdd815887be718aeb30b2af2fbd80767db80dc48d666cac6d4781f483db3addc38c0d9af3e896c393207c719b4aa9ba596bd6fafd0b22379b0ceaf7e310a032f02d1d2f7aa53a350638e791100896d835696f3d50b5fd7d99b9089ec333b339e98be334bec58764afb5a7c79a685c46078edeb6a641ec59a176013a914c705ad47b795a0b2bfc254aea635df9c040506b98dab67de0fe28c55948b958f08afc2409c3aa161832cfc19300673b28ef93e54219b33ae62be3fca04e9936c9c10c93887b1b5be1875b291317b27c7e6ae505518691f8329c269ba61e6ab9e4b1d4fafc23ef29734\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile5100011467 = function () {\n    let customerNumber = \"5100011467\";\n    let customerUsername = \"Globile5100011467\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nautGlobile9000796656 = function () {\n    let customerNumber = \"9000796656\";\n    let customerUsername = \"Globile9000796656\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile9001905564 = function () {\n    let customerNumber = \"9001905564\";\n    let customerUsername = \"Globile9001905564\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n//===================//\n//  CORPORATE USERS  //\n//===================//\nauthMagneto = function () {\n    let username = \"magneto\";\n    let password = \"Santander1\";\n    createCorpToken(username, password);\n},\n//==========================//\n// PHYSICAL TOKEN CREATION  //\n//==========================//\ncreateToken = function (customerNumber, customerUsername, customerPassword) {\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    console.log(\"CHECKING TOKEN\");\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/check_token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"token\",\n                    value: pm.globals.get(\"accessToken\"),\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        if (res.json().user_name == customerUsername) {\n            console.log(\"TOKEN ALREADY CREATED\");\n        } else {\n            console.log(\"CREATING NEW TOKEN\");\n            pm.sendRequest({\n                url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                method: \"POST\",\n                header: {\n                    \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                    \"Content-Type\": \"application/x-www-form-urlencoded\"\n                },\n                body: {\n                    mode: 'urlencoded',\n                    urlencoded: [{\n                            key: \"client_id\",\n                            value: pm.environment.get(\"tokenClientId\"),\n                            disabled: false\n                        }, {\n                            key: \"client_secret\",\n                            value: pm.environment.get(\"tokenClientSecret\"),\n                            disabled: false\n                        }, {\n                            key: \"grant_type\",\n                            value: \"password\",\n                            disabled: false\n                        }, {\n                            key: \"username\",\n                            value: customerUsername,\n                            disabled: false\n                        }, {\n                            key: \"password\",\n                            value: customerPassword,\n                            disabled: false\n                        }, {\n                            key: \"role\",\n                            value: \"Web\",\n                            disabled: false\n                        }, {\n                            key: \"captcha\",\n                            value: true,\n                            disabled: false\n                        }, {\n                            key: \"channel\",\n                            value: \"WEB\",\n                            disabled: false\n                        }, {\n                            key: \"fraudData\",\n                            value: getFraudData(false, customerNumber),\n                            disabled: false\n                        }\n                    ]\n                }\n            },\n                function (err, res) {\n                if (res.json().error == \"fraud_sca\") {\n                    console.log(\"SECOND FACTOR AUTHENTICATION\");\n                    pm.sendRequest({\n                        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                        method: \"POST\",\n                        header: {\n                            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                            \"Content-Type\": \"application/x-www-form-urlencoded\"\n                        },\n                        body: {\n                            mode: 'urlencoded',\n                            urlencoded: [{\n                                    key: \"client_id\",\n                                    value: pm.environment.get(\"tokenClientId\"),\n                                    disabled: false\n                                }, {\n                                    key: \"client_secret\",\n                                    value: pm.environment.get(\"tokenClientSecret\"),\n                                    disabled: false\n                                }, {\n                                    key: \"grant_type\",\n                                    value: \"multi_factor\",\n                                    disabled: false\n                                }, {\n                                    key: \"mfa_code\",\n                                    value: res.json().additional_info.mfa_code,\n                                    disabled: false\n                                }, {\n                                    key: \"fraudData\",\n                                    value: getFraudData(true, customerNumber),\n                                    disabled: false\n                                }\n                            ]\n                        }\n                    },\n                        function (err, response) {\n                        pm.globals.set(\"accessToken\", response.json().access_token);\n                    });\n                } else {\n                    pm.globals.set(\"accessToken\", res.json().access_token);\n                }\n            });\n        }\n    });\n},\ngetFraudData = function (isSCA, customerNumber) {\n    if (isSCA) {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"OP01\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"ACCP\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"1\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    } else {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"0\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    }\n},\n//===========================//\n// CORPORATE TOKEN CREATION  //\n//===========================//\ncreateCorpToken = function (username, password) {\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + pm.environment.get(\"env\") + \".corp/oauth/token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: pm.environment.get(\"tokenClientId\"),\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: pm.environment.get(\"tokenClientSecret\"),\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"password\",\n                    disabled: false\n                }, {\n                    key: \"username\",\n                    value: username,\n                    disabled: false\n                }, {\n                    key: \"password\",\n                    value: password,\n                    disabled: false\n                }, {\n                    key: \"role\",\n                    value: \"CorporateWeb\",\n                    disabled: false\n                }, {\n                    key: \"userLanguage\",\n                    value: \"pt\",\n                    disabled: false\n                }, {\n                    key: \"ip\",\n                    value: \"192.100.0.1\",\n                    disabled: false\n                }, {\n                    key: \"userAgent\",\n                    value: \"Nokia 3310 android\",\n                    disabled: false\n                }, {\n                    key: \"isRooted\",\n                    value: false,\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n\t\tconsole.log(pm.environment.get(\"tokenClientId\"));\n\t\tconsole.log(pm.environment.get(\"tokenClientSecret\"));\n        pm.globals.set(\"accessToken\", res.json().access_token);\n    });\n},\ncreateTokenEstruturais = function (user, password, clientId) {\n    if (!clientId) {\n        clientId = pm.environment.get(\"tokenClientId\");\n    }\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    pm.sendRequest({\n        url: \"http://estructurais.totta.pre.corp/SSOTottaTokenAS/ws/SECMR_Def_Listener/ws/SECMR_Def_Listener\",\n        method: \"POST\",\n        header: {\n            'Content-Type': 'text/xml',\n            'SOAPAction': '\"\"'\n        },\n        body: {\n            mode: 'raw',\n            raw: \"<soapenv:Envelope xmlns:soapenv=\\\"http://schemas.xmlsoap.org/soap/envelope/\\\" xmlns:v1=\\\"http://www.isban.es/webservices/TECHNICAL_FACADES/Security/F_facseg_security/intranet/ACFACSEGSecurity/v1\\\"><soapenv:Header> <wsse:Security soapenv:mustUnderstand=\\\"1\\\" xmlns:wsse=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\\\"><wsse:UsernameToken><wsse:Username>\" + user + \"</wsse:Username><wsse:Password Type=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\\\">\" + password + \"</wsse:Password></wsse:UsernameToken></wsse:Security></soapenv:Header><soapenv:Body><v1:authenticateCredential facade=\\\"ACFACSEGSecurity\\\"><CB_AuthenticationData><!--Optional:--><user>\" + user + \"</user><!--Optional:--><password>\" + password + \"</password></CB_AuthenticationData><userAddress>127.0.0.1</userAddress></v1:authenticateCredential></soapenv:Body></soapenv:Envelope>\"\n        }\n    },\n        function (err, res) {\n        function arrayBufferToString(buffer) {\n            var arr = new Uint8Array(buffer);\n            var str = String.fromCharCode.apply(String, arr);\n            return str;\n        }\n        var jsonResponse = xml2Json(arrayBufferToString(res.stream));\n        var token = jsonResponse['soap-env:Envelope']['soap-env:Body']['prefixRigel0:authenticateCredentialResponse'].methodResult.tokenCredential;\n        pm.globals.set(\"accessToken\", token);\n        pm.sendRequest({\n            url: \"https://security-service.totta.\" + environment + \".corp/oauth/token\",\n            method: \"POST\",\n            header: {\n                \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                \"Content-Type\": \"application/x-www-form-urlencoded\"\n            },\n            body: {\n                mode: 'urlencoded',\n                urlencoded: [{\n                        key: \"client_id\",\n                        value: clientId,\n                        disabled: false\n                    }, {\n                        key: \"grant_type\",\n                        value: \"bks_token\",\n                        disabled: false\n                    }, {\n                        key: \"token\",\n                        value: pm.globals.get(\"accessToken\"),\n                        disabled: false\n                    }\n                ]\n            }\n        },\n            function (err, res) {\n            pm.globals.set(\"accessToken\", res.json().access_token);\n        });\n    });\n}"
+		},
+		{
+			"key": "env",
+			"value": "dev"
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "clientIdInternal",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "uuid",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "intraCoreUrl",
+			"value": ""
+		},
+		{
+			"key": "clientIdIntraCore",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "6dd83bd7-46eb-4e80-af80-f73702dceb33",
+		"name": "[SISSEG] zcliente service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Token (RETAIL)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic  dXNlcjpwYXNzd29yZA==",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "50012638-SAONPF-50064530-001",
+							"description": "50012638-SAONPF-50064530-001",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "onepayfx123",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "9001396563",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "9639639",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Netbanco",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://security-service.totta.dev.corp/oauth/token",
+					"protocol": "https",
+					"host": [
+						"security-service",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV GW ZCLIENTE - token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/oauth_customer/token?token={{token}}",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"intraclient",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal",
+						"oauth_customer",
+						"token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV MCS ZCLIENTE - token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://zclient-service.totta.dev.corp/oauth_customer/token?token={{token}}",
+					"protocol": "https",
+					"host": [
+						"zclient-service",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"oauth_customer",
+						"token"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV GW ZCLIENTE - obfuscate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/oauth_customer/:customerId",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"intraclient",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal",
+						"oauth_customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1000614216"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV MCS ZCLIENTE - obfuscate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://zclient-service.totta.dev.corp/oauth_customer/:customerId",
+					"protocol": "https",
+					"host": [
+						"zclient-service",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"oauth_customer",
+						":customerId"
+					],
+					"variable": [
+						{
+							"key": "customerId",
+							"value": "1000614216"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,716 @@
+{
+	"info": {
+		"_postman_id": "dc40d6a7-6f52-471d-86a1-88e60151b697",
+		"name": "[EXPRET]  Payments Special Prices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "SUCCESS",
+			"item": [
+				{
+					"name": "AccessToken (1) - 1000585557 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"} else {\r",
+									"    console.info(\"Set collection variable - mfaCode\");\r",
+									"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "1000585557",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "Web",
+									"type": "text"
+								},
+								{
+									"key": "captcha",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "channel",
+									"value": "WEB",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MFA - AccessToken (2) Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Only Mandatory Fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "client-id",
+								"value": "b5f69d0d-b1a4-4a22-81d8-fda6d98708f2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{dmzUrl}}/payments_special_prices?dest_iban=PT50003300000308097854194&agreement_id=000354331145020&product_id=SEPA_Query&payment_amount=5000",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payments_special_prices"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "customer_indicator",
+									"value": "equal",
+									"disabled": true
+								},
+								{
+									"key": "entity_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "country_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "operation_type",
+									"value": "order",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "EUR",
+									"disabled": true
+								},
+								{
+									"key": "dest_iban",
+									"value": "PT50003300000308097854194"
+								},
+								{
+									"key": "agreement_id",
+									"value": "000354331145020"
+								},
+								{
+									"key": "customer_id",
+									"value": "1000585557",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "SEPA_Query"
+								},
+								{
+									"key": "payment_amount",
+									"value": "5000"
+								},
+								{
+									"key": "urgency_indicator",
+									"value": "Immediate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "With filters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "client-id",
+								"value": "b5f69d0d-b1a4-4a22-81d8-fda6d98708f2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{dmzUrl}}/payments_special_prices?dest_iban=PT50003300000308097854194&limit=1&offset=0&agreement_id=000354331145020&product_id=SEPA_Pontuais&payment_amount=10&urgency_indicator=Immediate",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payments_special_prices"
+							],
+							"query": [
+								{
+									"key": "dest_iban",
+									"value": "PT50003300000308097854194"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "agreement_id",
+									"value": "000354331145020"
+								},
+								{
+									"key": "customer_indicator",
+									"value": "equal",
+									"disabled": true
+								},
+								{
+									"key": "entity_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "country_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "operation_type",
+									"value": "order",
+									"disabled": true
+								},
+								{
+									"key": "customer_id",
+									"value": "1000585710",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "EUR",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "SEPA_Pontuais"
+								},
+								{
+									"key": "payment_amount",
+									"value": "10"
+								},
+								{
+									"key": "urgency_indicator",
+									"value": "Immediate"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ERROR",
+			"item": [
+				{
+					"name": "Invalid Fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "client-id",
+								"value": "4853771c-70b4-4c9e-a575-1ab701678311",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dest_iban\": \"PT50003300000308097854194\",\r\n    \"product_id\": \"Book to Book\"\r\n    \"idempotentReference\": \"levelUp!\",\r\n    \"creditorCreditAccount\": {\r\n        \"accountIdType\": \"IBAN\",\r\n        \"accountId\": \"PT50003300000019333254405\"\r\n    },\r\n    \"debtorAccount\": {\r\n        \"accountIdType\": \"IBAN\",\r\n        \"accountId\": \"PT50001800035432930502036\"\r\n    },\r\n    \"paymentAmount\": {\r\n        \"currency\": \"EUR\",\r\n        \"amount\": 10.00\r\n    },\r\n    \"urgencyIndicator\": \"standard\",\r\n    \"chargeBearer\": \"OUR\",\r\n    \"senderReference\": \"whatever!\",\r\n    \"countryDestinationFunds\": \"PT\",\r\n    \"creditorName\": \"Amazon Poland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/paymentsSpecialPrices",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"paymentsSpecialPrices"
+							],
+							"query": [
+								{
+									"key": "dest_iban",
+									"value": "PT50003300000308097854194",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "agreement_id",
+									"value": "000354331145020",
+									"disabled": true
+								},
+								{
+									"key": "customer_indicator",
+									"value": "equal",
+									"disabled": true
+								},
+								{
+									"key": "entity_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "country_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "operation_type",
+									"value": "order",
+									"disabled": true
+								},
+								{
+									"key": "customer_id",
+									"value": "1000585710",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "EUR",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "SEPA Pontuais",
+									"disabled": true
+								},
+								{
+									"key": "payment_amount",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "urgency_indicator",
+									"value": "Immediate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Urgency Indicator",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							},
+							{
+								"key": "clientId",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "client-id",
+								"value": "4853771c-70b4-4c9e-a575-1ab701678311",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dest_iban\": \"PT50003300000308097854194\",\r\n    \"product_id\": \"Book to Book\"\r\n    \"idempotentReference\": \"levelUp!\",\r\n    \"creditorCreditAccount\": {\r\n        \"accountIdType\": \"IBAN\",\r\n        \"accountId\": \"PT50003300000019333254405\"\r\n    },\r\n    \"debtorAccount\": {\r\n        \"accountIdType\": \"IBAN\",\r\n        \"accountId\": \"PT50001800035432930502036\"\r\n    },\r\n    \"paymentAmount\": {\r\n        \"currency\": \"EUR\",\r\n        \"amount\": 10.00\r\n    },\r\n    \"urgencyIndicator\": \"standard\",\r\n    \"chargeBearer\": \"OUR\",\r\n    \"senderReference\": \"whatever!\",\r\n    \"countryDestinationFunds\": \"PT\",\r\n    \"creditorName\": \"Amazon Poland\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/paymentsSpecialPrices?dest_iban=PT50003300000308097854194&agreement_id=000354331145020&product_id=SEPA Pontuais&payment_amount=10",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"paymentsSpecialPrices"
+							],
+							"query": [
+								{
+									"key": "dest_iban",
+									"value": "PT50003300000308097854194"
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "agreement_id",
+									"value": "000354331145020"
+								},
+								{
+									"key": "customer_indicator",
+									"value": "equal",
+									"disabled": true
+								},
+								{
+									"key": "entity_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "country_indicator",
+									"value": "different",
+									"disabled": true
+								},
+								{
+									"key": "operation_type",
+									"value": "order",
+									"disabled": true
+								},
+								{
+									"key": "customer_id",
+									"value": "1000585710",
+									"disabled": true
+								},
+								{
+									"key": "currency",
+									"value": "EUR",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "SEPA Pontuais"
+								},
+								{
+									"key": "payment_amount",
+									"value": "10"
+								},
+								{
+									"key": "urgency_indicator",
+									"value": "Immediate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "{{accessToken}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.variables.get(\"env1\");",
+					"pm.environment.set(\"env\", environment);",
+					"",
+					"",
+					"if(environment==\"dev\"){",
+					"pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\");",
+					"    pm.globals.set(\"clientIdInternal\", \"edc91ff5-7975-413e-9040-4bb31cb6637b\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"",
+					"    pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"    pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"    pm.globals.set(\"clientIdInternal\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"};",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.environment.set(\"env\", \"dev\");",
+					"    pm.environment.set(\"tokenClientId\", \"e061b6de-eda8-4b5a-a03c-e7496319b1af\");",
+					"    pm.environment.set(\"tokenClientSecret\", \"N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6\");",
+					"    pm.environment.set(\"dmzUrl\", \"localhost:8080\");",
+					"    pm.environment.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.globals.set(\"clientIdInternal\", \"edc91ff5-7975-413e-9040-4bb31cb6637b\");",
+					"};",
+					"pm.globals.set(\"clientId\", pm.environment.get(\"tokenClientId\"));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env1",
+			"value": "dev"
+		},
+		{
+			"key": "env",
+			"value": "dev"
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "commonLayer",
+			"value": ""
+		},
+		{
+			"key": "localLayer",
+			"value": ""
+		},
+		{
+			"key": "channelLayer",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		}
+	]
+}

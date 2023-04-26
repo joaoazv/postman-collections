@@ -1,0 +1,770 @@
+{
+	"info": {
+		"_postman_id": "fdb0151d-923e-4cad-a44f-190fd6f33f0e",
+		"name": "[EXPRET] Payees 1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "LOCAL",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client-id",
+								"type": "text",
+								"value": "{{clientIdInternal}}"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{intraUrl}}/local/payees?alias=Som&service_type=transfer&customerId=1000585557",
+							"host": [
+								"{{intraUrl}}"
+							],
+							"path": [
+								"local",
+								"payees"
+							],
+							"query": [
+								{
+									"key": "_offset",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "alias",
+									"value": "Som"
+								},
+								{
+									"key": "payee_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "mobile_number",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "card_id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "from_payee_creation_date",
+									"value": "20160229T105858000-0100",
+									"disabled": true
+								},
+								{
+									"key": "to_payee_creation_date",
+									"value": "20160229T105858000%2B0100",
+									"disabled": true
+								},
+								{
+									"key": "payee_Status",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "service_type",
+									"value": "transfer"
+								},
+								{
+									"key": "contract_type",
+									"value": "account",
+									"disabled": true
+								},
+								{
+									"key": "channelAccessAgreementId",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "_sort",
+									"value": "-payeeCreationDate",
+									"disabled": true
+								},
+								{
+									"key": "_limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "customerId",
+									"value": "1000585557"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1aWQ6UERBMDEiLCJuYmYiOjE1OTkxMzE3ODAsImlzc3VlZF90b2tlbl90eXBlIjoidXJuOmlldGY6cGFyYW1zOm9hdXRoOnRva2VuLXR5cGU6and0LWludGVybmFsIiwidXNlcl9uYW1lIjoiMTAwMDU4NTU1NyIsInNjb3BlIjpbInBheWVlLmRldGFpbCIsInN0YW5kaW5nb3JkZXJzYWNjb3VudC5mcmVlenBhdGNoIiwiYWNjdHJhbi5yZWFkIiwibG9hbnNsaXN0LnJlYWQiLCJjYXJkbGlzdC5yZWFkIiwiYWNjZGV0LnJlYWQiLCJzdGFuZGluZ29yZGVyc2FjY291bnQuZXhlY3V0ZWQiLCJjYXJkdHJhbi5yZWFkIiwic3RhbmRpbmdvcmRlcnNhY2NvdW50Lmxpc3QiLCJpbnN0YW50X3BheW1lbnQuZGV0YWlscyIsInBheWVlLmRlbGV0ZSIsImxvYW5zYWNjb3VudHMucmVhZCIsImdibHBvcy52aWV3IiwiYWNjZGV0Y2lkLnJlYWQiLCJpbnN0YW50X3BheW1lbnQuc3RhdHVzIiwiYWNjdmFsIiwibG9hbnNkZXQucmVhZCIsInN0YW5kaW5nb3JkZXJzYWNjb3VudC5mcmVleiIsImNhcmRhY3RpdmUiLCJnYmxwb3MucmVhZCIsInNlcnZpY2VzLnJlYWQiLCJleGVjdXRlc2NhLndyaXRlIiwiY2FyZGN2di5yZWFkIiwiaW5zdGFudF9wYXltZW50LmRlbGV0ZSIsImluc3RhbnRfcGF5bWVudC5saXN0Iiwic3RhbmRpbmdvcmRlcnNhY2NvdW50LmRldGFpbHMiLCJhY2NsaXN0Y2lkLnJlYWQiLCJjYXJkcmVwbGFjZSIsImxvYW5zaW5zdGFsbG1lbnQucmVhZCIsImNhcmRzdGF0LnJlYWQiLCJzdGFuZGluZ29yZGVyc2FjY291bnQuY3JlYXRlIiwidHBwY29uc2VudHMuZWRpdCIsInNjYWdlbmVyYXRlaW50ZXJuYWwucmVhZCIsImNhcmR1c2FiIiwiZnJhdWQudmFsaWRhdGlvbiIsImNhcmQzZHNlYyIsImNhcmRkZXQucmVhZCIsInBheWVlLnVwZGF0ZSIsInN0YW5kaW5nb3JkZXJzYWNjb3VudC5kZWxldGUiLCJwYXllZS5wb3N0Iiwic2NhdmFsaWRhdGUud3JpdGUiLCJjYXJkcGluLnJlYWQiLCJzdGFuZGluZ29yZGVyc2FjY291bnQubW9kaWZ5IiwiaW5zdGFudF9wYXltZW50LnNpbXVsYXRpb24iLCJpbnN0YW50X3BheW1lbnQuY3JlYXRlIiwicGF5ZWUuZ2V0bGlzdCIsInRwcGNvbnNlbnRzLnJlYWQiLCJhY2N0cmFuY2lkLnJlYWQiLCJhY2NsaXN0LnJlYWQiLCJsb2Fuc3BheW1lbnRzLnJlYWQiLCJzdGFuZGluZ29yZGVyc2FjY291bnQuc2NoZWR1bGVkIiwic2NhdmFsaWRhdGVpbnRlcm5hbC53cml0ZSJdLCJpc3MiOiIwMDE4U2VjdXJpdHlNaWNyb3NlcnZpY2UiLCJleHAiOjE1OTkxNjA1ODAsInNlY0N0eCI6eyJzZXNzaW9uRGV0YWlscyI6eyJzZXNzaW9uVXNlcklkIjoiMDAwMjI3OTQ4NCIsInNlc3Npb25Vc2VybmFtZSI6IjEwMDA1ODU1NTciLCJjb250ZXh0IjoiV2ViIiwiY2hhbm5lbCI6bnVsbCwidXNlclR5cGUiOm51bGwsImNsaWVudE51bWJlciI6IjEwMDA1ODU1NTcifSwiaGVhZGVyU2ludHJhIjp7ImVtcFV0aWwiOiIzMSIsImNvZEJhbGNhb09yaWdlbSI6IjY5MzYiLCJuaXZlbEF1dG9yaXpDZW50cmFsIjoiMCIsImNvZEJhbGNhb09wZXJhbnRlIjoiNjkzNiIsImdlc3RvckNvbnRhIjoiTiIsIm51bUVtcHJlZ2FkbyI6IjExMTExMTExMSIsInRlcm1pbmFsIjoiMDA4MiIsImVtcHJlc2FPcGVyYW50ZSI6IiAgIiwiY29kQmFsY2FvIjoiNjkzNiIsImNvZEFtYmllbnRlIjoiTkIiLCJwZXJmaWwiOiJORVQwMDEiLCJpbmRTdGFmZiI6IlMiLCJnZXN0b3JDbGllbnRlIjoiTiJ9fSwiaWF0IjoxNTk5MTMxNzgwLCJqdGkiOiJkZTk3NDViZi01YTYzLTRhNDYtYTk2OC04ZTUzYThjNTRkM2IiLCJjbGllbnRfaWQiOiI0ODUzNzcxYy03MGI0LTRjOWUtYTU3NS0xYWI3MDE2NzgzMTEifQ.yIVB9icbfm7d-QM1Lyg1gCj7Hoq27aMRQntWpB-TvIxN0uB8fPKfo7v6UKDq_6CGHIPuyO_m77U842WjHVAiL3hbqvfGyqujkNOkdH1kjG1NDnycRhilPHwEsSWzDaMdt3Num7n95BYrm49aLved7wqXiv69LxgMI0VK1XPRPKEIjngz13ZH7NpH-LbZTcsHijwDsE8plI8PDQ3WA7KwF-P6MR2A1xWFbgWxpMyNVWeTIebzklw723S33ZRqPBBbWzcfsQKc5gUf_rxDHiCGoXJlejL_ZisI1yq7N7YZF9ivNYplf2xqQtUTDji26z2bSO1c_MeKfLibEPyFkucLPA",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientIdInternal}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"alias\":\"Some Alias\",\n\t\"payeeName\":\"Payee Name1\",\n\t\"service_type\":\"transfer\",\n\t\"contract_type\":\"account\",\n\t\"contractAccountType\":{\n\t\t\"accountIdType\":\"txt\",\n\t\t\"accountId\":\"PT5010270000000123456781\"\n\t},\n\t\n\t\"payeeAddress\":{\n\t\t\"streetName\":\"Name of the Street\",\n\t\t\"townName\":\"Town\",\n\t\t\"location\":\"Location\",\n\t\t\"country\":\"PRT\"\n\t}\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/local/payees",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"local",
+								"payees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientIdInternal}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"alias\":\"Some Alias\",\r\n\t\"payeeName\":\"Payee Name1\",\r\n\t\"service_type\":\"transfer\",\r\n\t\"contract_type\":\"phone\",\r\n\t\"contractMobileType\":{\r\n\t\t\r\n\t\t\"number\":\"45678642\"\r\n\t},\r\n\t\"payeeAddress\":{\r\n\t\t\"streetName\":\"Name of the Street\",\r\n\t\t\"townName\":\"Town\",\r\n\t\t\"location\":\"Location\",\r\n\t\t\"country\":\"PRT\"\r\n\t}\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/local/payees/131",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"local",
+								"payees",
+								"131"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientIdInternal}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/local/payees/79",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"local",
+								"payees",
+								"79"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientIdInternal}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/local/payees/131",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"local",
+								"payees",
+								"131"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "COMMON",
+			"item": [
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client-id",
+								"type": "text",
+								"value": "{{clientId}}"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/payees?_limit=500",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payees"
+							],
+							"query": [
+								{
+									"key": "_offset",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "alias",
+									"value": "Som",
+									"disabled": true
+								},
+								{
+									"key": "payee_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "mobile_number",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "card_id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "from_payee_creation_date",
+									"value": "20160229T105858000-0100",
+									"disabled": true
+								},
+								{
+									"key": "to_payee_creation_date",
+									"value": "20160229T105858000%2B0100",
+									"disabled": true
+								},
+								{
+									"key": "payee_Status",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "service_type",
+									"value": "transfer",
+									"disabled": true
+								},
+								{
+									"key": "contract_type",
+									"value": "account",
+									"disabled": true
+								},
+								{
+									"key": "channelAccessAgreementId",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "_sort",
+									"value": "-payeeCreationDate",
+									"disabled": true
+								},
+								{
+									"key": "_limit",
+									"value": "500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n\t\"alias\":\"Some Alias\",\n\t\"payeeName\":\"Payee Name1\",\n\t\"serviceType\":\"transfer\",\n\t\"contractType\":\"phone\",\n\t\"contractMobileType\": {\n               \n                \"number\": \"91122211\"\n            },\n\t\n\t\"payeeAddress\":{\n\t\t\"streetName\":\"Name of the Street\",\n\t\t\"townName\":\"Town\",\n\t\t\"location\":\"Location\",\n\t\t\"country\":\"PRT\"\n\t}\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/payees",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"payeeName\":\"Payee Name1\",\r\n\r\n\t\"contractType\":\"phone\",\r\n\t\"contractMobileType\": {\r\n               \r\n                \"number\": \"91122211\"\r\n            },\r\n\t\"payeeAddress\":{\r\n\t\t\"streetName\":\"Name of the Street\",\r\n\t\t\"townName\":\"Town\",\r\n\t\t\"location\":\"Location\",\r\n\t\t\"country\":\"PRT\"\r\n\t}\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/payees/218",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payees",
+								"218"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/payees/0219",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payees",
+								"0219"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{clientId}}",
+								"type": "text"
+							},
+							{
+								"key": "Access-Channel",
+								"value": "web",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dmzUrl}}/payees/132",
+							"host": [
+								"{{dmzUrl}}"
+							],
+							"path": [
+								"payees",
+								"132"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let config = {",
+					"    \"env\":\"dev\",",
+					"//\"host\":\"localhost:8080\",",
+					"  // \"tokenClientId\":\"e061b6de-eda8-4b5a-a03c-e7496319b1af\",",
+					"  //  \"tokenClientSecret\":\"N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6\",",
+					"    //\"gateway\":\"internal\",",
+					"    \"clientIdHeaderPRE\":\"c75146f7-2566-4364-b5b7-581a8a6f75c2\",",
+					"    \"clientIdHeaderDEV\":\"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\"",
+					"};",
+					"",
+					"pm.sendRequest(\"https://github.alm.europe.cloudcenter.corp/raw/tot-pt-apis/postman-lib/feature/authentication_with_config_object/modules/authorizationV2/authLib.js\", function (error, response) {",
+					"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+					"",
+					"//authDefaultBranch(config);",
+					"  //auth9002565390(config);",
+					"//auth1000586687(config);",
+					"auth1000585557(config);",
+					"//auth1000606186(config);",
+					"",
+					"",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "lib",
+			"value": "var\n//==================//\n//  PHYSICAL USERS  //\n//==================//\n/*\n * All purpose user for testing\n * Has a plethora of different products\n */\nauth1000585557 = function () {\n    let customerNumber = \"1000585557\";\n    let customerUsername = \"1000585557\";\n    let customerPassword = \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauth1000596831 = function () {\n    let customerNumber = \"1000596831\";\n    let customerUsername = \"1000596831\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User with only 1 account\n */\nauth2321006585 = function () {\n    let customerNumber = \"2321006585\";\n    let customerUsername = \"2321006585\";\n    let customerPassword = \"4bac44e306347a6d42a4efc4e229584ecae152ba896c1f6113f1bf3d53e0b5f4aad2d12850069986483d310bf07db50923aed4f7df47885c99ddeefeb532d02c743c20b3a91dc4bf710bde14d7e7883f0e183c3206cb9eee9c74ea5cb1f37dd49d6e48df4574bc229b49cf64a93a4197f2d4df749f7536a2ed5629a1098b3365f42fbdb6ddfc113c8f08cf0d14b4ed9dcb5f2f09bc6462c136713f6d8b283fc94060626039c964fdf5006384c32f90e9cd73fbaebc8a178bbffaab4794cff46744ef182d71e783b4fd7beb3821137809fc81b65ea983219d5b196d1dc226d81299922139dc8fd65a1c8d6a99fe4df80928987aecb2e632a6a112d5a5c93718cb\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User without deposits, pensions, cards\n */\nauth9002565390 = function () {\n    let customerNumber = \"9002565390\";\n    let customerUsername = \"9002565390\";\n    let customerPassword = \"7aee03310d32538c168952868bd60e0dc40fa2541a18cd6edb2d4b6d564d52a27889459e32b114d79a9798acd20c42773f7aac48ce6322a86817373600af0cb2e86aca33f1091b2a5fe041ad282d09efcbe88347f4f0de797593f246c9ef4c66bc7676eba104d91e29158eb3fa5b8854c2755b64aa5650077f9dc03510dcd1aafd16c1dba15778564e3ee5093afc1ef265e3a60f92942c07ee01c967c64b0346d314e3ccee2eced111e32134ae196a1c324d6a62483d5611ba0dd90b95752b306392cea58d06e70c6acc4ca61695451bac86cb8bc945f9c43a906581b235dec8832ee56d33bb34f6ff50c02e6590bb875731968fc59b18509068eaa94aedef01\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User whose accounts are all in EUR.\n * Recommended for testing Global Position\n */\nauthUser157789 = function () {\n    let customerNumber = \"157789\";\n    let customerUsername = \"User157789\";\n    let customerPassword = \"12ce4647945644cc739c3dbdc70693f5e03ecea5a332c8f018d1cdd815887be718aeb30b2af2fbd80767db80dc48d666cac6d4781f483db3addc38c0d9af3e896c393207c719b4aa9ba596bd6fafd0b22379b0ceaf7e310a032f02d1d2f7aa53a350638e791100896d835696f3d50b5fd7d99b9089ec333b339e98be334bec58764afb5a7c79a685c46078edeb6a641ec59a176013a914c705ad47b795a0b2bfc254aea635df9c040506b98dab67de0fe28c55948b958f08afc2409c3aa161832cfc19300673b28ef93e54219b33ae62be3fca04e9936c9c10c93887b1b5be1875b291317b27c7e6ae505518691f8329c269ba61e6ab9e4b1d4fafc23ef29734\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile5100011467 = function () {\n    let customerNumber = \"5100011467\";\n    let customerUsername = \"Globile5100011467\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nautGlobile9000796656 = function () {\n    let customerNumber = \"9000796656\";\n    let customerUsername = \"Globile9000796656\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile9001905564 = function () {\n    let customerNumber = \"9001905564\";\n    let customerUsername = \"Globile9001905564\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n//===================//\n//  CORPORATE USERS  //\n//===================//\nauthMagneto = function () {\n    let username = \"magneto\";\n    let password = \"Santander1\";\n    createCorpToken(username, password);\n},\n//==========================//\n// PHYSICAL TOKEN CREATION  //\n//==========================//\ncreateToken = function (customerNumber, customerUsername, customerPassword) {\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    console.log(\"CHECKING TOKEN\");\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/check_token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"token\",\n                    value: pm.globals.get(\"accessToken\"),\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        if (res.json().user_name == customerUsername) {\n            console.log(\"TOKEN ALREADY CREATED\");\n        } else {\n            console.log(\"CREATING NEW TOKEN\");\n            pm.sendRequest({\n                url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                method: \"POST\",\n                header: {\n                    \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                    \"Content-Type\": \"application/x-www-form-urlencoded\"\n                },\n                body: {\n                    mode: 'urlencoded',\n                    urlencoded: [{\n                            key: \"client_id\",\n                            value: pm.environment.get(\"tokenClientId\"),\n                            disabled: false\n                        }, {\n                            key: \"client_secret\",\n                            value: pm.environment.get(\"tokenClientSecret\"),\n                            disabled: false\n                        }, {\n                            key: \"grant_type\",\n                            value: \"password\",\n                            disabled: false\n                        }, {\n                            key: \"username\",\n                            value: customerUsername,\n                            disabled: false\n                        }, {\n                            key: \"password\",\n                            value: customerPassword,\n                            disabled: false\n                        }, {\n                            key: \"role\",\n                            value: \"Web\",\n                            disabled: false\n                        }, {\n                            key: \"captcha\",\n                            value: true,\n                            disabled: false\n                        }, {\n                            key: \"channel\",\n                            value: \"WEB\",\n                            disabled: false\n                        }, {\n                            key: \"fraudData\",\n                            value: getFraudData(false, customerNumber),\n                            disabled: false\n                        }\n                    ]\n                }\n            },\n                function (err, res) {\n                if (res.json().error == \"fraud_sca\") {\n                    console.log(\"SECOND FACTOR AUTHENTICATION\");\n                    pm.sendRequest({\n                        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                        method: \"POST\",\n                        header: {\n                            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                            \"Content-Type\": \"application/x-www-form-urlencoded\"\n                        },\n                        body: {\n                            mode: 'urlencoded',\n                            urlencoded: [{\n                                    key: \"client_id\",\n                                    value: pm.environment.get(\"tokenClientId\"),\n                                    disabled: false\n                                }, {\n                                    key: \"client_secret\",\n                                    value: pm.environment.get(\"tokenClientSecret\"),\n                                    disabled: false\n                                }, {\n                                    key: \"grant_type\",\n                                    value: \"multi_factor\",\n                                    disabled: false\n                                }, {\n                                    key: \"mfa_code\",\n                                    value: res.json().additional_info.mfa_code,\n                                    disabled: false\n                                }, {\n                                    key: \"fraudData\",\n                                    value: getFraudData(true, customerNumber),\n                                    disabled: false\n                                }\n                            ]\n                        }\n                    },\n                        function (err, response) {\n                        pm.globals.set(\"accessToken\", response.json().access_token);\n                    });\n                } else {\n                    pm.globals.set(\"accessToken\", res.json().access_token);\n                }\n            });\n        }\n    });\n},\ngetFraudData = function (isSCA, customerNumber) {\n    if (isSCA) {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"OP01\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"ACCP\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"1\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    } else {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"0\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    }\n},\n//===========================//\n// CORPORATE TOKEN CREATION  //\n//===========================//\ncreateCorpToken = function (username, password) {\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + pm.environment.get(\"env\") + \".corp/oauth/token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: pm.environment.get(\"tokenClientId\"),\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: pm.environment.get(\"tokenClientSecret\"),\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"password\",\n                    disabled: false\n                }, {\n                    key: \"username\",\n                    value: username,\n                    disabled: false\n                }, {\n                    key: \"password\",\n                    value: password,\n                    disabled: false\n                }, {\n                    key: \"role\",\n                    value: \"CorporateWeb\",\n                    disabled: false\n                }, {\n                    key: \"userLanguage\",\n                    value: \"pt\",\n                    disabled: false\n                }, {\n                    key: \"ip\",\n                    value: \"192.100.0.1\",\n                    disabled: false\n                }, {\n                    key: \"userAgent\",\n                    value: \"Nokia 3310 android\",\n                    disabled: false\n                }, {\n                    key: \"isRooted\",\n                    value: false,\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        pm.globals.set(\"accessToken\", res.json().access_token);\n    });\n},\ncreateTokenEstruturais = function (user, password, clientId) {\n    if (!clientId) {\n        clientId = pm.environment.get(\"tokenClientId\");\n    }\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    pm.sendRequest({\n        url: \"http://estructurais.totta.pre.corp/SSOTottaTokenAS/ws/SECMR_Def_Listener/ws/SECMR_Def_Listener\",\n        method: \"POST\",\n        header: {\n            'Content-Type': 'text/xml',\n            'SOAPAction': '\"\"'\n        },\n        body: {\n            mode: 'raw',\n            raw: \"<soapenv:Envelope xmlns:soapenv=\\\"http://schemas.xmlsoap.org/soap/envelope/\\\" xmlns:v1=\\\"http://www.isban.es/webservices/TECHNICAL_FACADES/Security/F_facseg_security/intranet/ACFACSEGSecurity/v1\\\"><soapenv:Header> <wsse:Security soapenv:mustUnderstand=\\\"1\\\" xmlns:wsse=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\\\"><wsse:UsernameToken><wsse:Username>\" + user + \"</wsse:Username><wsse:Password Type=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\\\">\" + password + \"</wsse:Password></wsse:UsernameToken></wsse:Security></soapenv:Header><soapenv:Body><v1:authenticateCredential facade=\\\"ACFACSEGSecurity\\\"><CB_AuthenticationData><!--Optional:--><user>\" + user + \"</user><!--Optional:--><password>\" + password + \"</password></CB_AuthenticationData><userAddress>127.0.0.1</userAddress></v1:authenticateCredential></soapenv:Body></soapenv:Envelope>\"\n        }\n    },\n        function (err, res) {\n        function arrayBufferToString(buffer) {\n            var arr = new Uint8Array(buffer);\n            var str = String.fromCharCode.apply(String, arr);\n            return str;\n        }\n        var jsonResponse = xml2Json(arrayBufferToString(res.stream));\n        var token = jsonResponse['soap-env:Envelope']['soap-env:Body']['prefixRigel0:authenticateCredentialResponse'].methodResult.tokenCredential;\n        pm.globals.set(\"accessToken\", token);\n        pm.sendRequest({\n            url: \"https://security-service.totta.\" + environment + \".corp/oauth/token\",\n            method: \"POST\",\n            header: {\n                \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                \"Content-Type\": \"application/x-www-form-urlencoded\"\n            },\n            body: {\n                mode: 'urlencoded',\n                urlencoded: [{\n                        key: \"client_id\",\n                        value: clientId,\n                        disabled: false\n                    }, {\n                        key: \"grant_type\",\n                        value: \"bks_token\",\n                        disabled: false\n                    }, {\n                        key: \"token\",\n                        value: pm.globals.get(\"accessToken\"),\n                        disabled: false\n                    }\n                ]\n            }\n        },\n            function (err, res) {\n            pm.globals.set(\"accessToken\", res.json().access_token);\n        });\n    });\n}"
+		},
+		{
+			"key": "env",
+			"value": "dev"
+		},
+		{
+			"key": "env",
+			"value": "localhost",
+			"disabled": true
+		},
+		{
+			"key": "env",
+			"value": "pre",
+			"disabled": true
+		}
+	]
+}

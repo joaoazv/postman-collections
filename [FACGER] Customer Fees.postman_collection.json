@@ -1,0 +1,1415 @@
+{
+	"info": {
+		"_postman_id": "2a6a2d99-80e0-4694-8d8c-076029ed0aac",
+		"name": "[FACGER] Customer Fees",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Success",
+			"item": [
+				{
+					"name": "list moves by customer id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"  pm.collectionVariables.set(\"sessionId\", pm.response.json().sessionDetails.sessionId);",
+									"  pm.collectionVariables.set(\"requesterId\", pm.response.json().sessionDetails.requesterId);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{defaultUrl}}/customer_fees?customerId=1000617642&minDate=12-08-2021&maxDate=26-08-2021",
+							"host": [
+								"{{defaultUrl}}"
+							],
+							"path": [
+								"customer_fees"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD",
+									"disabled": true
+								},
+								{
+									"key": "debtDate",
+									"value": "2021-04-27",
+									"disabled": true
+								},
+								{
+									"key": "processNumber",
+									"value": "010105",
+									"disabled": true
+								},
+								{
+									"key": "processYear",
+									"value": "2011",
+									"disabled": true
+								},
+								{
+									"key": "customerId",
+									"value": "1000617642"
+								},
+								{
+									"key": "minDate",
+									"value": "12-08-2021"
+								},
+								{
+									"key": "maxDate",
+									"value": "26-08-2021"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list moves by do account",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"  pm.collectionVariables.set(\"sessionId\", pm.response.json().sessionDetails.sessionId);",
+									"  pm.collectionVariables.set(\"requesterId\", pm.response.json().sessionDetails.requesterId);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{defaultUrl}}/customer_fees?customerId=1000617642&minDate=12-08-2021&maxDate=26-08-2021&branchAccount=0003&accountId=54565601020",
+							"host": [
+								"{{defaultUrl}}"
+							],
+							"path": [
+								"customer_fees"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD",
+									"disabled": true
+								},
+								{
+									"key": "debtDate",
+									"value": "2021-04-27",
+									"disabled": true
+								},
+								{
+									"key": "processNumber",
+									"value": "010105",
+									"disabled": true
+								},
+								{
+									"key": "processYear",
+									"value": "2011",
+									"disabled": true
+								},
+								{
+									"key": "customerId",
+									"value": "1000617642"
+								},
+								{
+									"key": "minDate",
+									"value": "12-08-2021"
+								},
+								{
+									"key": "maxDate",
+									"value": "26-08-2021"
+								},
+								{
+									"key": "branchAccount",
+									"value": "0003"
+								},
+								{
+									"key": "accountId",
+									"value": "54565601020"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list moves by document",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"  pm.collectionVariables.set(\"sessionId\", pm.response.json().sessionDetails.sessionId);",
+									"  pm.collectionVariables.set(\"requesterId\", pm.response.json().sessionDetails.requesterId);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{defaultUrl}}/customer_fees?documentId=2021AA34748",
+							"host": [
+								"{{defaultUrl}}"
+							],
+							"path": [
+								"customer_fees"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD",
+									"disabled": true
+								},
+								{
+									"key": "debtDate",
+									"value": "2021-04-27",
+									"disabled": true
+								},
+								{
+									"key": "processNumber",
+									"value": "010105",
+									"disabled": true
+								},
+								{
+									"key": "processYear",
+									"value": "2011",
+									"disabled": true
+								},
+								{
+									"key": "documentId",
+									"value": "2021AA34748"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "move details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"  pm.collectionVariables.set(\"sessionId\", pm.response.json().sessionDetails.sessionId);",
+									"  pm.collectionVariables.set(\"requesterId\", pm.response.json().sessionDetails.requesterId);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{defaultUrl}}/customer_fees/23491?operationId=1&movementId=1",
+							"host": [
+								"{{defaultUrl}}"
+							],
+							"path": [
+								"customer_fees",
+								"23491"
+							],
+							"query": [
+								{
+									"key": "currency",
+									"value": "USD",
+									"disabled": true
+								},
+								{
+									"key": "debtDate",
+									"value": "2021-04-27",
+									"disabled": true
+								},
+								{
+									"key": "processNumber",
+									"value": "010105",
+									"disabled": true
+								},
+								{
+									"key": "processYear",
+									"value": "2011",
+									"disabled": true
+								},
+								{
+									"key": "operationId",
+									"value": "1"
+								},
+								{
+									"key": "movementId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "token",
+					"item": [
+						{
+							"name": "Access Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "e061b6de-eda8-4b5a-a03c-e7496319b1af",
+											"description": "dev",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6",
+											"description": "dev",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "7c14fb64-698c-471f-bfc2-cb1016040937",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "https://security-service.totta.dev.corp/oauth/token",
+									"protocol": "https",
+									"host": [
+										"security-service",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Simulation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customer_fees/simulation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer_fees",
+								"simulation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Executin with list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\",\r\n    \"emissionIndicator\" : \"S\",\r\n    \"executionDateTime\" : \"2022-03-25T16:56:55.000+00:00\", \r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n        \r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         }\r\n    ]   \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customer_fees/execution",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Executin with NO list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\",\r\n    \"emissionIndicator\" : \"S\",\r\n    \"executionDateTime\" : \"2022-05-05-18.29.20.893558\"   \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customer_fees/execution",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentData\": {\r\n        \"documentTypeCode\": \"FR\",\r\n        \"atcudCode\": \"123\",\r\n        \"qrCode\": \"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \",\r\n        \"qrCodeSize\": 0,\r\n        \"documentTypeDescription\": \"teste\",\r\n        \"documentId\": \"123\",\r\n        \"vatRate\": 10.0,\r\n        \"taxableBaseAmount\": 10.0,\r\n        \"vatAmount\": 10.0,\r\n        \"netTotal\": 10.0,\r\n        \"vatPayable\": 10.0,\r\n        \"taxPayable\": 10.0,\r\n        \"grossTotal\": 10.0,\r\n        \"secretKey\": \"987\",\r\n        \"notice\": \"teste\",\r\n        \"issueDate\" : \"2022-03-25T16:56:55.000+00:00\",\r\n        \"expirationDate\" : \"2022-03-25T16:56:55.000+00:00\"\r\n    },\r\n    \"agencyData\": {\r\n        \"phoneNumber\": \"999999999\",\r\n        \"agency\": \"testes\"\r\n    },\r\n    \"operationData\": {\r\n        \"operationDate\": \"2022/03/23\",\r\n        \"valueDate\": \"2022/03/23\",\r\n        \"currency\": \"euro\"\r\n    },\r\n    \"customerData\": {\r\n        \"customerId\": 102827,\r\n        \"taxpayerId\": \"500595313\",\r\n        \"accountId\": \"000100200578118\",\r\n        \"label\": \"teste\",\r\n        \"fullName\": \"testes testes\",\r\n        \"foreignTaxpayerId\": \"testes testes\"\r\n    },\r\n    \"addressData\": {\r\n        \"addressId\": \"rua testes\",\r\n        \"zipCode\": \"6000\",\r\n        \"province\": \"testes\",\r\n        \"countryCode\": \"060\"\r\n    },\r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"08Z\",\r\n            \"chargeDescription\": \"COMISSAO DE HABILITACAO DE HER\",\r\n            \"amount\": 0.0,\r\n            \"typeCode\": \"IVA\",\r\n            \"taxTableCode\": \"          \",\r\n            \"rate\": 23.0,\r\n            \"taxAmount\": 10.0,\r\n            \"chargeGross\": 10.0,\r\n            \"operationDescription\": \"testes\",\r\n            \"comment\": \"testes\",\r\n            \"quantity\": 3,\r\n            \"chargeNet\": 10.0,\r\n            \"taxDescription\": \"testes\",\r\n            \"taxTableDescription\": \"testes\",\r\n            \"vatExemptionCode\": \"123\",\r\n            \"vatExemptionDescription\": \"testes\",\r\n            \"taxExemptionCode\": \"123\",\r\n            \"taxExemptionDescription\": \"testes\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customer_fees/invoices",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer_fees",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customer_fees/invoices/433cb676-30c7-44b3-940b-f81090d1fb87",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customer_fees",
+								"invoices",
+								"433cb676-30c7-44b3-940b-f81090d1fb87"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://facger-cust-fees-services.totta.dev.corp/customer_fees?customerId=1000617642&minDate=12-08-2021&maxDate=26-08-2021",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees?customerId=1000617642&minDate=12-08-2021&maxDate=26-08-2021",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1000617642"
+								},
+								{
+									"key": "minDate",
+									"value": "12-08-2021"
+								},
+								{
+									"key": "maxDate",
+									"value": "26-08-2021"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SGenD",
+			"item": [
+				{
+					"name": "token",
+					"item": [
+						{
+							"name": "token (client_credentials)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "e061b6de-eda8-4b5a-a03c-e7496319b1af",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://security-service.totta.dev.corp/oauth/token",
+									"protocol": "https",
+									"host": [
+										"security-service",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/templates/compositions/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "db1cf437-89d4-49fa-82fe-4c2a3e2b824a",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apigw.intracore.totta.dev.corp/sanpt/internal-core/sgendcomposition/templates/compositions/be1969ba-ea4f-441e-9b87-e2c7e34aed3f",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intracore",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal-core",
+								"sgendcomposition",
+								"templates",
+								"compositions",
+								"be1969ba-ea4f-441e-9b87-e2c7e34aed3f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dev",
+			"item": [
+				{
+					"name": "token Copy",
+					"item": [
+						{
+							"name": "Access Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);\r",
+											"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "e061b6de-eda8-4b5a-a03c-e7496319b1af",
+											"description": "dev",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6",
+											"description": "dev",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "7c14fb64-698c-471f-bfc2-cb1016040937",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "https://security-service.totta.dev.corp/oauth/token",
+									"protocol": "https",
+									"host": [
+										"security-service",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Simulation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees/simulation",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees",
+								"simulation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Execution with list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\": \"FR\",\r\n    \"accountId\": \"000100200578118\",\r\n    \"customerId\": 102827,\r\n    \"taxpayerId\": \"500595313\",\r\n    \"product\": \"DC0\",\r\n    \"emissionIndicator\": \"S\",\r\n    \"executionDateTime\": \"2022-05-05-18.28.25.575175\",\r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"08Z\",\r\n            \"amount\": 3.0,\r\n            \"chargeSequential\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees/execution",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Execution with NO list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\",\r\n    \"emissionIndicator\" : \"S\",\r\n    \"executionDateTime\" : \"2022-05-06-10.38.56.106238\"   \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees/execution",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"uuid\", jsonData.uuid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentData\": {\r\n        \"documentTypeCode\": \"FR\",\r\n        \"atcudCode\": \"88888888-0000088691 \",\r\n        \"qrCode\": \"A:500844321*B:500595313*C:PT*D:FR*E:N*F:20220505*G:FR 2022/AA/0000088691*H:88888888-0000088691*I1:PT*I2:0.00*I3:0.00*I4:0.00*I5:0.00*I6:0.00*I7:3.00*I8:0.69*L:0.00*M:0.00*N:0.69*O:3.69*P:0.00*Q:J0LQ*R:2378                                                                                                                                                                                                                                                                                                       \",\r\n        \"qrCodeSize\": 140,\r\n        \"documentTypeDescription\": \"Factura Recibo                \",\r\n        \"documentId\": \"2022-AA/0000088691\",\r\n        \"issueDate\": \"2022-05-05T00:00:00.000+00:00\",\r\n        \"expirationDate\": \"2022-05-05T00:00:00.000+00:00\",\r\n        \"vatRate\": 23.0,\r\n        \"taxableBaseAmount\": 3.0,\r\n        \"vatAmount\": 0.69,\r\n        \"netTotal\": 3.0,\r\n        \"vatPayable\": 0.69,\r\n        \"taxPayable\": 0.0,\r\n        \"grossTotal\": 3.69,\r\n        \"secretKey\": \"J0LQ\",\r\n        \"notice\": \"GFA0PTPT\"\r\n    },\r\n    \"agencyData\": {\r\n        \"phoneNumber\": \"         \",\r\n        \"agency\": \"EMPRESAS LISBOA ESTE          \"\r\n    },\r\n    \"operationData\": {\r\n        \"operationDate\": \"2022/05/05\",\r\n        \"valueDate\": \"2022/05/05\",\r\n        \"currency\": \"EUR\"\r\n    },\r\n    \"customerData\": {\r\n        \"customerId\": 102827,\r\n        \"taxpayerId\": \"500595313\",\r\n        \"accountId\": \"000100200578118\",\r\n        \"label\": \"Cliente nº\",\r\n        \"fullName\": \"MULTILAFOES- AVIARIO DE LAFOES S.A.                         \",\r\n        \"foreignTaxpayerId\": \"                    \"\r\n    },\r\n    \"addressData\": {\r\n        \"addressId\": \"R JUNQUEIRA 54                                              \",\r\n        \"zipCode\": \"4490\",\r\n        \"province\": \"POVOA DE VARZIM               \",\r\n        \"countryCode\": \"PRT\"\r\n    },\r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"08Z\",\r\n            \"chargeDescription\": \"COMISSAO DE HABILITACAO DE HER\",\r\n            \"amount\": 3.0,\r\n            \"typeCode\": \"IVA\",\r\n            \"taxTableCode\": \"          \",\r\n            \"rate\": 23.0,\r\n            \"taxAmount\": 0.69,\r\n            \"chargeGross\": 3.69,\r\n            \"operationDescription\": \"COMISSAO DE HABILITACAO DE HERDEIROS                                            \",\r\n            \"comment\": \"CONTA : 0001.00200578118                                                                            \",\r\n            \"quantity\": 1,\r\n            \"chargeNet\": 3.0,\r\n            \"taxDescription\": \"IVA                           \",\r\n            \"taxTableDescription\": \"    \",\r\n            \"vatExemptionCode\": \"    \",\r\n            \"vatExemptionDescription\": \"                            \",\r\n            \"taxExemptionCode\": \"    \",\r\n            \"taxExemptionDescription\": \"                                \"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees/invoices",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoice Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://facger-cust-fees-services.totta.dev.corp/customer_fees/invoices/{{uuid}}",
+							"protocol": "https",
+							"host": [
+								"facger-cust-fees-services",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"customer_fees",
+								"invoices",
+								"{{uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gtw",
+			"item": [
+				{
+					"name": "token",
+					"item": [
+						{
+							"name": "token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "onepayfx123",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "e27f3117-dd46-4a02-a6e3-f0a7aa48c809",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "https://security-service.totta.dev.corp/oauth/token",
+									"protocol": "https",
+									"host": [
+										"security-service",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"oauth",
+										"token"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Simulation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/customer_fees/simulation",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intraclient",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal",
+								"customer_fees",
+								"simulation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Executin with list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\",\r\n    \"emissionIndicator\" : \"S\",\r\n    \"executionDateTime\" : \"2012-04-23T18:25:43.511Z\", \r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         },\r\n        \r\n         {\r\n            \"chargeCode\": \"0\",\r\n            \"amount\": 0.0,\r\n            \"chargeSequential\": 0\r\n         }\r\n    ]   \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/customer_fees/execution",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intraclient",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal",
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Executin with NO list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentTypeCode\" : \"FR\",\r\n    \"accountId\" : \"000100200578118\",\r\n    \"customerId\" : 102827,\r\n    \"taxpayerId\" : \"500595313\",\r\n    \"product\" : \"DC0\",\r\n    \"emissionIndicator\" : \"S\",\r\n    \"executionDateTime\" : \"2012-04-23T18:25:43.511Z\"   \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/customer_fees/execution",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intraclient",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal",
+								"customer_fees",
+								"execution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"uuid\", jsonData.uuid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentData\": {\r\n        \"documentTypeCode\": \"FR\",\r\n        \"atcudCode\": \"123\",\r\n        \"qrCode\": \"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \",\r\n        \"qrCodeSize\": 0,\r\n        \"documentTypeDescription\": \"teste\",\r\n        \"documentId\": \"123\",\r\n        \"vatRate\": 10.0,\r\n        \"taxableBaseAmount\": 10.0,\r\n        \"vatAmount\": 10.0,\r\n        \"netTotal\": 10.0,\r\n        \"vatPayable\": 10.0,\r\n        \"taxPayable\": 10.0,\r\n        \"grossTotal\": 10.0,\r\n        \"secretKey\": \"987\",\r\n        \"notice\": \"teste\",\r\n        \"issueDate\" : \"2012-04-23T18:25:43.511Z\",\r\n        \"expirationDate\" : \"2012-04-23T18:25:43.511Z\"\r\n    },\r\n    \"agencyData\": {\r\n        \"phoneNumber\": \"999999999\",\r\n        \"agency\": \"testes\"\r\n    },\r\n    \"operationData\": {\r\n        \"operationDate\": \"2022/03/23\",\r\n        \"valueDate\": \"2022/03/23\",\r\n        \"currency\": \"euro\"\r\n    },\r\n    \"customerData\": {\r\n        \"customerId\": 102827,\r\n        \"taxpayerId\": \"500595313\",\r\n        \"accountId\": \"000100200578118\",\r\n        \"label\": \"teste\",\r\n        \"fullName\": \"testes testes\",\r\n        \"foreignTaxpayerId\": \"testes testes\"\r\n    },\r\n    \"addressData\": {\r\n        \"addressId\": \"rua testes\",\r\n        \"zipCode\": \"6000\",\r\n        \"province\": \"testes\",\r\n        \"countryCode\": \"060\"\r\n    },\r\n    \"movementList\": [\r\n        {\r\n            \"chargeCode\": \"08Z\",\r\n            \"chargeDescription\": \"COMISSAO DE HABILITACAO DE HER\",\r\n            \"amount\": 0.0,\r\n            \"typeCode\": \"IVA\",\r\n            \"taxTableCode\": \"          \",\r\n            \"rate\": 23.0,\r\n            \"taxAmount\": 10.0,\r\n            \"chargeGross\": 10.0,\r\n            \"operationDescription\": \"testes\",\r\n            \"comment\": \"testes\",\r\n            \"quantity\": 3,\r\n            \"chargeNet\": 10.0,\r\n            \"taxDescription\": \"testes\",\r\n            \"taxTableDescription\": \"testes\",\r\n            \"vatExemptionCode\": \"123\",\r\n            \"vatExemptionDescription\": \"testes\",\r\n            \"taxExemptionCode\": \"123\",\r\n            \"taxExemptionDescription\": \"testes\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/customer_fees/invoices",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intraclient",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal",
+								"customer_fees",
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invoices Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-IBM-Client-Id",
+								"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/customer_fees/invoices/{{uuid}}",
+							"protocol": "https",
+							"host": [
+								"apigw",
+								"intraclient",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"sanpt",
+								"internal",
+								"customer_fees",
+								"invoices",
+								"{{uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}

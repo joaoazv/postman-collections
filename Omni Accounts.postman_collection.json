@@ -1,0 +1,629 @@
+{
+	"info": {
+		"_postman_id": "b29104ec-b0a9-4d61-893e-5ff15f7039b1",
+		"name": "Omni Accounts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Only for DEV - Token Step 2",
+			"item": [
+				{
+					"name": "MFA - AccessToken (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccessToken (1) - 1000585557",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.access_token != null) {\r",
+							"    console.info(\"Set collection variable - accessToken\");\r",
+							"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+							"} else {\r",
+							"    console.info(\"Set collection variable - mfaCode\");\r",
+							"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "1000585557",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Web",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "WEB",
+							"type": "text"
+						},
+						{
+							"key": "fraudData",
+							"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccounts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/accounts",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "AVAILABLE_BALANCE",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "OPEN",
+							"description": "Values: OPEN, CLOSED, PENDING_CLOSURE",
+							"disabled": true
+						},
+						{
+							"key": "accountIds",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "productIds",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "productType",
+							"value": "",
+							"description": "Values: ACQUIREMENT, LOAN, ASSURANCE",
+							"disabled": true
+						},
+						{
+							"key": "accountIdType",
+							"value": "IBA",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "50",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/accounts/:accountId",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"accounts",
+						":accountId"
+					],
+					"query": [
+						{
+							"key": "includeLastTransactions",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "expand",
+							"value": "DEBIT_CARD",
+							"description": "Values: DEBIT_CARD",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "accountId",
+							"value": "000321091691028"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountTransactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/accounts/:account_id/transactions",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"accounts",
+						":account_id",
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0",
+							"description": "Number of rows to be omitted from the beginning of the query response. If this value is omitted, all rows are returned.",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "20",
+							"description": "Maximum number of rows to be included in the query response. Fewer rows can be returned, if the query does not yield that many. The default value is 20.",
+							"disabled": true
+						},
+						{
+							"key": "fromDate",
+							"value": "",
+							"description": "Start date for the time period from which transactions are to be retrieved, based on the date when the transactions have been originally created. \\n\\n The date format is ISO 8061 Date and Time.",
+							"disabled": true
+						},
+						{
+							"key": "toDate",
+							"value": "",
+							"description": "End date for the time period from which transactions are to be retrieved, based on the date when the transactions have been originally created. \\n\\nThe date format is ISO 8061 Date and Time",
+							"disabled": true
+						},
+						{
+							"key": "fromProcessedDate",
+							"value": "",
+							"description": "Start date for the time period from which transactions are to be retrieved, based on the date when the transactions have been processed in the system. \\n\\n The date format is ISO 8061 Date and Time",
+							"disabled": true
+						},
+						{
+							"key": "toProcessedDate",
+							"value": "",
+							"description": "End date for the time period from which transactions are to be retrieved, based on the date when the transactions have been processed in the system. \\n\\nThe date format is ISO 8061 Date and Time",
+							"disabled": true
+						},
+						{
+							"key": "fromAccountingDate",
+							"value": "",
+							"description": "Start date for the time period from which transactions are to be retrieved, based on the accounting date of the transactions (the date used to calculate the profit and loss).\\n\\n The date format is ISO 8061 Date and Time.",
+							"disabled": true
+						},
+						{
+							"key": "toAccountingDate",
+							"value": "",
+							"description": "End date for the time period from which transactions are to be retrieved, based on the accounting date of the transactions (the date used to calculate the profit and loss).\\n\\n The date format is ISO 8061 Date and Time.",
+							"disabled": true
+						},
+						{
+							"key": "fromAmount",
+							"value": "",
+							"description": "Minimum monetary transaction value required for the transaction to be included in the response.\\n\\n Both negative and positive values are allowed.",
+							"disabled": true
+						},
+						{
+							"key": "toAmount",
+							"value": "",
+							"description": "Maximum monetary transaction value required for the transaction to be included in the response. \\n\\n Both negative and positive values are allowed.",
+							"disabled": true
+						},
+						{
+							"key": "_sort",
+							"value": "-date",
+							"description": "Sorting order for the retrieved transactions, based on the transaction date type defined in the 'dateMovements' parameter. \n\n The possible values are:\n\n - +date = ascending \n- -date = descending",
+							"disabled": true
+						},
+						{
+							"key": "transactionType",
+							"value": "",
+							"description": "Types of transaction to be included in the response, based on how the transaction affects the account balance. \\n\\nThe possible values are: \\n\\n- credit or C = balance increased \\n- debit or D = balance decreased \\n- reverse credit or RC = balance decreased - reverse debit or RD = balance increased. \\n\\nIf this value is empty, all transaction types are included. This parameter is not compatible with the 'fromAmount' and 'toAmount' parameters. If you have defined values for those, leave this parameter empty",
+							"disabled": true
+						},
+						{
+							"key": "dateMovements",
+							"value": "",
+							"description": "Date type used to sort the transactions in the response. \\n\\nThe possible values are: \\n\\n- CREATION = creation dates are used \\n- PROCESSED = processing dates are used \\n- ACCOUNTING = accounting dates are used. \\n\\nIf the value is omitted, the default value is 'creation'.",
+							"disabled": true
+						},
+						{
+							"key": "accountIdType",
+							"value": "BBA",
+							"description": "Format used for the account number in the 'account_id' parameter.\\n\\nThe possible values are: \\n\\n- IBA = IBAN code \\n- BBA = Basic Bank Account Number (BBAN) that represents a country-specific bank account number. Each country has its own standards for the format and length of the BBAN. The value is at most 31 char or 35 bytes long. \\n\\nFor example: \\n\\n- In UK, the BBAN is: Shortcode(6) + Account(8) \\n- In Spain, it is: Banco(4) + Sucursal(4) + CD(2) + CTA(10)  The default value is BBA.",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "account_id",
+							"value": "000321426826024"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountTransactionDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/accounts/:account_id/transactions/:transactionId?accountIdType=IBA",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"accounts",
+						":account_id",
+						"transactions",
+						":transactionId"
+					],
+					"query": [
+						{
+							"key": "accountIdType",
+							"value": "IBA",
+							"description": "Values: IBA, BBA"
+						}
+					],
+					"variable": [
+						{
+							"key": "account_id",
+							"value": "000321426826024"
+						},
+						{
+							"key": "transactionId",
+							"value": "TEMP-MjAyMjExMDctLS1DSEYtLS1udWxsLS0tRGVzcGVzYXMgU3dpZnQgMDAxODAyMzM2OTYwNTA0MzE5LS0tLTE5LjcyLS0tNDg4MDYuMTEtLS0wMjMzNjk2MDUwNDMxOQ",
+							"description": "Previous: 2022072200002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postIbanProof",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"notificationType\": \"EMAIL\",\r\n    \"recipientAddress\": \"joaofi.pereira@servexternos.santander.pt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/accounts/:account_id/iban_proof",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"accounts",
+						":account_id",
+						"iban_proof"
+					],
+					"variable": [
+						{
+							"key": "account_id",
+							"value": "000321091691028"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-accounts.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.dev.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    ",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-accounts.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://eeic9.apis.santander.pt/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\"); // Testes API's Locais Internal",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "dev",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "eeicUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "8b8c182e-cc8b-4db3-97ae-9dd514bbfc67",
+		"name": "[PEXPRT] Penhoras",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "LOCAL MCS Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "3fbdf1f5-ae9a-40b0-93a2-65b87b376ca4",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "SoapAction",
+						"value": "http://camarapenhoras/servicos/v1/IServicoAderentesPenhoras/GerarNotificacao",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>e061b6de-eda8-4b5a-a03c-e7496319b1af</Username>\r\n\t\t\t\t<Password>N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ServicoAderentesPenhoras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV MCS Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "3fbdf1f5-ae9a-40b0-93a2-65b87b376ca4",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "SoapAction",
+						"value": "http://camarapenhoras/servicos/v1/IServicoAderentesPenhoras/GerarNotificacao",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>e061b6de-eda8-4b5a-a03c-e7496319b1af</Username>\r\n\t\t\t\t<Password>N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://penhoras-helper.totta.dev.corp/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"penhoras-helper",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV API (internal) Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "edc91ff5-7975-413e-9040-4bb31cb6637b",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>e061b6de-eda8-4b5a-a03c-e7496319b1af</Username>\r\n\t\t\t\t<Password>N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.intraclient.totta.dev.corp/sanpt/internal/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"intraclient",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal",
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEV API (internal-partner) Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "55157cf1-a126-4a43-9997-492c353f1808",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>e061b6de-eda8-4b5a-a03c-e7496319b1af</Username>\r\n\t\t\t\t<Password>N4uA8qB0kS8sO1iJ3oO5bP1wF3jP6qL1jT4iN0fD5bR0uR6yI6</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.partnerclient.totta.dev.corp/sanpt/internal-partner/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"partnerclient",
+						"totta",
+						"dev",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal-partner",
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRE MCS Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "3fbdf1f5-ae9a-40b0-93a2-65b87b376ca4",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "SoapAction",
+						"value": "http://camarapenhoras/servicos/v1/IServicoAderentesPenhoras/GerarNotificacao",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>b36db52f-a20f-48d6-909e-e6624af85c3e</Username>\r\n\t\t\t\t<Password>pW8lJ5oP1bL3kO7nK5vL7xP7uY8aK4mT2sS6uS4mV7iM8eB0jG</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://penhoras-helper.totta.pre.corp/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"penhoras-helper",
+						"totta",
+						"pre",
+						"corp"
+					],
+					"path": [
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRE API (partner) Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "b36db52f-a20f-48d6-909e-e6624af85c3e",
+						"type": "text",
+						"description": "PRE b36db52f-a20f-48d6-909e-e6624af85c3e"
+					},
+					{
+						"key": "SoapAction",
+						"value": "GerarNotificacao",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>b36db52f-a20f-48d6-909e-e6624af85c3e</Username>\r\n\t\t\t\t<Password>pW8lJ5oP1bL3kO7nK5vL7xP7uY8aK4mT2sS6uS4mV7iM8eB0jG</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.partnerclient.totta.pre.corp/sanpt/internal-partner/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"partnerclient",
+						"totta",
+						"pre",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal-partner",
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRE API (internal) Penhoras",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "5c66785a-5531-4d52-8bba-9ca0a96181c5",
+						"type": "text"
+					},
+					{
+						"key": "SoapAction",
+						"value": "http://camarapenhoras/servicos/v1/IServicoAderentesPenhoras/GerarNotificacao",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <s:Header>\r\n\t\t<Security xmlns=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\">\r\n\t\t\t<UsernameToken xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t<Username>b36db52f-a20f-48d6-909e-e6624af85c3e</Username>\r\n\t\t\t\t<Password>pW8lJ5oP1bL3kO7nK5vL7xP7uY8aK4mT2sS6uS4mV7iM8eB0jG</Password>\r\n\t\t\t</UsernameToken>\r\n\t\t</Security>\r\n\t</s:Header>\r\n    <s:Body>\r\n\t\t<GerarNotificacaoRequest xmlns=\"http://camarapenhoras/servicos/v1\">\r\n\t\t\t<HeaderData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDOperacao>221290000B_0_0</IDOperacao>\r\n\t\t\t\t<DataHoraOperacao>2022-05-09T06:55:31.173</DataHoraOperacao>\r\n\t\t\t\t<Ambito>PB</Ambito>\r\n\t\t\t\t<IDExecutado>242548580</IDExecutado>\r\n\t\t\t\t<CategoriaProcesso>C</CategoriaProcesso>\r\n\t\t\t\t<NumeroProcesso>0505720220505071</NumeroProcesso>\r\n\t\t\t\t<NumeroPedido>050572022050500001</NumeroPedido>\r\n\t\t\t\t<NumeroOficio>50570001</NumeroOficio>\r\n\t\t\t\t<DataPedido>2022-05-05T11:50:52</DataPedido>\r\n\t\t\t</HeaderData>\r\n\t\t\t<GerarNotificacaoRequestData xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n\t\t\t\t<IDAplicacao>SIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3</IDAplicacao>\r\n\t\t\t\t<IDTemplate>TP11</IDTemplate>\r\n\t\t\t\t<TipoAccao>C</TipoAccao>\r\n\t\t\t\t<DadosCliente>\r\n\t\t\t\t\t<IDCliente>0</IDCliente>\r\n\t\t\t\t\t<Nome>Cliente  CS</Nome>\r\n\t\t\t\t\t<Tipo>U</Tipo>\r\n\t\t\t\t</DadosCliente>\r\n\t\t\t\t<DadosGestorCliente>\r\n\t\t\t\t\t<Codigo>0000</Codigo>\r\n\t\t\t\t\t<Email i:nil=\"true\"/>\r\n\t\t\t\t\t<Pais>PT</Pais>\r\n\t\t\t\t\t<Empresa i:nil=\"true\"/>\r\n\t\t\t\t</DadosGestorCliente>\r\n\t\t\t\t<Referencia>175280522</Referencia>\r\n\t\t\t\t<Observacoes i:nil=\"true\"/>\r\n\t\t\t\t<DataInicio>2022-05-09T06:55:31.4107973+01:00</DataInicio>\r\n\t\t\t\t<DataFim i:nil=\"true\"/>\r\n\t\t\t\t<URLConsultaPedido>https%3a%2f%2fqaddoc3.tservices.sibspteste%2fQADDOC%2fPages%2fConsulta%2fPenhoras%2fDetalhesProcessoFilaTrabalho.aspx%3fID%3dL16316190%26IDN%3dSIBSCP52d89d24-4e81-4d49-b2dc-2e4535c04ff3%26PE%3d175280522</URLConsultaPedido>\r\n\t\t\t</GerarNotificacaoRequestData>\r\n\t\t</GerarNotificacaoRequest>\r\n\t</s:Body>\r\n</s:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apigw.intraclient.totta.pre.corp/sanpt/internal/ServicoAderentesPenhoras",
+					"protocol": "https",
+					"host": [
+						"apigw",
+						"intraclient",
+						"totta",
+						"pre",
+						"corp"
+					],
+					"path": [
+						"sanpt",
+						"internal",
+						"ServicoAderentesPenhoras"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

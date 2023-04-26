@@ -1,0 +1,334 @@
+{
+	"info": {
+		"_postman_id": "f6893d0e-91b9-4ae9-883e-6ff9bf43fe9e",
+		"name": "Omni Loans",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Only for DEV - Token Step 2",
+			"item": [
+				{
+					"name": "MFA - AccessToken (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccessToken (1) - 1006",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.access_token != null) {\r",
+							"    console.info(\"Set collection variable - accessToken\");\r",
+							"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+							"} else {\r",
+							"    console.info(\"Set collection variable - mfaCode\");\r",
+							"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "1006",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Web",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "WEB",
+							"type": "text"
+						},
+						{
+							"key": "fraudData",
+							"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLoans",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/loans",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"loans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLoanDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/loans/:loan_id",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"loans",
+						":loan_id"
+					],
+					"variable": [
+						{
+							"key": "loan_id",
+							"value": "000320836275096",
+							"description": "000310749256096, 000320836275096, 000320836416096"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-loans.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.dev.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    ",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-loans.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.pre.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\"); // Testes API's Locais Internal",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "eeicUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		}
+	]
+}

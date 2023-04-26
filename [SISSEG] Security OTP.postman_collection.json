@@ -1,0 +1,736 @@
+{
+	"info": {
+		"_postman_id": "f59e3004-9621-4549-93fa-8542faa705b1",
+		"name": "[SISSEG] Security OTP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Only for DEV - Token Step 2",
+			"item": [
+				{
+					"name": "MFA - AccessToken (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccessToken (1) - 1006",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.access_token != null) {\r",
+							"    console.info(\"Set collection variable - accessToken\");\r",
+							"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+							"} else {\r",
+							"    console.info(\"Set collection variable - mfaCode\");\r",
+							"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "1006",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Web",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "WEB",
+							"type": "text"
+						},
+						{
+							"key": "fraudData",
+							"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "V4 Generate - Dummy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData != null && jsonData.id != null) {\r",
+							"    console.info(\"Set collection variable - id\");\r",
+							"    pm.collectionVariables.set(\"id\", jsonData.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientNumber\": \"3407\",\r\n    \"deliveryMethod\": \"PUSH\",\r\n    \"deliveryMessage\": \"O código OTP gerado é _OTP_.\",\r\n    \"contactData\": \"961627803\",\r\n    \"operationData\": {\r\n        \"teste\": \"teste\"\r\n    },\r\n    \"customerDeviceData\": {\r\n        \"scaCreatedPush\": \"true\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/vDummy/v4/generate",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"vDummy",
+						"v4",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "segment",
+							"value": "PR",
+							"disabled": true
+						},
+						{
+							"key": "subsegment",
+							"value": "64",
+							"disabled": true
+						},
+						{
+							"key": "identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "identity_country",
+							"value": "PT",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_country",
+							"value": "PT",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate - Dummy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData != null && jsonData.id != null) {\r",
+							"    console.info(\"Set collection variable - id\");\r",
+							"    pm.collectionVariables.set(\"id\", jsonData.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientNumber\": \"3407\",\r\n    \"deliveryMethod\": \"PUSH\",\r\n    \"deliveryMessage\": \"O código OTP gerado é _OTP_.\",\r\n    \"contactData\": \"961627803\",\r\n    \"operationData\": {\r\n        \"teste\": \"teste\"\r\n    },\r\n    \"customerDeviceData\": {\r\n        \"scaCreatedPush\": \"true\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/vDummy/generate",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"vDummy",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "segment",
+							"value": "PR",
+							"disabled": true
+						},
+						{
+							"key": "subsegment",
+							"value": "64",
+							"disabled": true
+						},
+						{
+							"key": "identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "identity_country",
+							"value": "PT",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_country",
+							"value": "PT",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate - Dummy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": \"{{id}}\",\r\n\t\"otp\": \"654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/vDummy/validate",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"vDummy",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "V4 Generate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData != null && jsonData.id != null) {\r",
+							"    console.info(\"Set collection variable - id\");\r",
+							"    pm.collectionVariables.set(\"id\", jsonData.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientNumber\": \"3407\",\r\n    \"deliveryMethod\": \"PUSH\",\r\n    \"deliveryMessage\": \"O código OTP gerado é _OTP_.\",\r\n    \"contactData\": \"961627803\",\r\n    \"operationData\": {\r\n        \"teste\": \"teste\"\r\n    },\r\n    \"customerDeviceData\": {\r\n        \"scaCreatedPush\": \"true\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/v4/generate",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"v4",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "segment",
+							"value": "PR",
+							"disabled": true
+						},
+						{
+							"key": "subsegment",
+							"value": "64",
+							"disabled": true
+						},
+						{
+							"key": "identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "identity_country",
+							"value": "PT",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_number",
+							"value": "1111111111",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_type",
+							"value": "102",
+							"disabled": true
+						},
+						{
+							"key": "fiscal_identity_country",
+							"value": "PT",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "V4 Validate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": \"{{id}}\",\r\n\t\"otp\": \"009397\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/v4/validate",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"v4",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8090\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8090\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://security-otp.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://security-otp.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"};",
+					"",
+					"/*let config = {",
+					"    \"env\": \"dev\",",
+					"    //\"env\": \"localhost\",",
+					"    \"gateway\": \"intracore\",",
+					"    \"tokenClientId\": \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\",",
+					"    \"clientIdHeaderDEV\": \"6026c1d6-f2fa-412e-b9dc-0e620c9b2291\",",
+					"    \"clientIdHeaderPRE\": \"b3886577-0341-41e3-8fba-17dfd99df673\"",
+					"};",
+					"",
+					"pm.sendRequest(\"https://github.alm.europe.cloudcenter.corp/raw/tot-pt-apis/postman-lib/feature/authentication_with_config_object/modules/authorizationV2/authLib.js\", function (error, response) {",
+					"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+					"",
+					"    authV000105(config);",
+					"    //auth8043607161(config);",
+					"});*/"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}

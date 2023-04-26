@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "1c4688f8-9a80-4416-9c89-e33a897deaea",
+		"name": "[CTCART] Cards BIlling Common",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-IBM-Client-Id",
+						"value": "{{clientIdInternal}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"trxAmount\": {\n        \"amount\": \"0.01\",\n        \"currencyCode\": \"EUR\"\n    },\n    \"paymentType\": \"card\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraCoreUrl}}/cards/:card_id/early_payment",
+					"host": [
+						"{{intraCoreUrl}}"
+					],
+					"path": [
+						"cards",
+						":card_id",
+						"early_payment"
+					],
+					"variable": [
+						{
+							"key": "card_id",
+							"value": "{{cardId}}",
+							"description": "JIDZR9wSefHoVHw32SF3Gw | 4779210861753107"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.variables.get(\"env\");",
+					"pm.collectionVariables.set(\"env\", environment);",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"7c14fb64-698c-471f-bfc2-cb1016040937\");",
+					"",
+					"    // 4779210861753107",
+					"    pm.collectionVariables.set(\"cardId\", \"JIDZR9wSefHoVHw32SF3Gw\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://cards-billing-common-ms.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"https://apigw.intracore.totta.dev.corp/sanpt/internal-core\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"7c14fb64-698c-471f-bfc2-cb1016040937\");",
+					"    ",
+					"    // 4779210861753107",
+					"    pm.collectionVariables.set(\"cardId\", \"JIDZR9wSefHoVHw32SF3Gw\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-service.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"fR1fS3rY0gB0bX7oM4qJ8hK5wS3jB2yA1cE5gU8kS6yX6fC0vQ\");",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://cards-billing-common-ms.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"    pm.collectionVariables.set(\"intraCoreUrl\", \"https://apigw.intracore.totta.pre.corp/sanpt/internal-core\");",
+					"    pm.collectionVariables.set(\"clientIdInternal\", \"b3886577-0341-41e3-8fba-17dfd99df673\");",
+					"    ",
+					"    pm.collectionVariables.set(\"cardId\", \"HsJZWssp6KVXpQfPOTlQVw\");",
+					"};",
+					"",
+					"pm.collectionVariables.set(\"clientId\", pm.collectionVariables.get(\"tokenClientId\"));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "dev",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "clientIdInternal",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "intraCoreUrl",
+			"value": ""
+		},
+		{
+			"key": "cardId",
+			"value": ""
+		}
+	]
+}

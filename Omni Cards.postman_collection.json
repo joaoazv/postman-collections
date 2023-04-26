@@ -1,0 +1,1126 @@
+{
+	"info": {
+		"_postman_id": "f0e15fb1-ad95-433f-afac-f46d47b8c39b",
+		"name": "Omni Cards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Only for DEV - Token Step 2",
+			"item": [
+				{
+					"name": "MFA - AccessToken (2)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"if (jsonData != null && jsonData.access_token != null) {\r",
+									"    console.info(\"Set collection variable - accessToken\");\r",
+									"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "multi_factor",
+									"type": "text"
+								},
+								{
+									"key": "mfa_code",
+									"value": "{{mfaToken}}",
+									"type": "text"
+								},
+								{
+									"key": "fraudData",
+									"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\": null,\n            \"personalInformation\":{\n               \"id\": null\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"reasonCode\":\"OP01\",\n            \"authenticationAttempts\":\"1\",\n            \"balance\": null,\n            \"statusCode\":\"ACCP\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"originalTransactionToken\":\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"1\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\": null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{securityUrl}}/oauth/token",
+							"host": [
+								"{{securityUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccessToken (1) - 1000585449",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.access_token != null) {\r",
+							"    console.info(\"Set collection variable - accessToken\");\r",
+							"    pm.collectionVariables.set(\"accessToken\", jsonData.access_token);\r",
+							"} else {\r",
+							"    console.info(\"Set collection variable - mfaCode\");\r",
+							"    pm.collectionVariables.set(\"mfaToken\", jsonData.additional_info.mfa_code);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{tokenClientId}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{tokenClientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "1000585449",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "Web",
+							"type": "text"
+						},
+						{
+							"key": "captcha",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "channel",
+							"value": "WEB",
+							"type": "text"
+						},
+						{
+							"key": "fraudData",
+							"value": "{\n   \"channel\":\"KIN\",\n   \"fraud\":{\n      \"event\":{\n         \"originator\":{\n            \"alias\":null,\n            \"personalInformation\":{\n               \"id\":\"null\"\n            },\n            \"user\":{\n               \"authenticationMethod\":\"P\",\n               \"name\": null\n            }\n         },\n         \"beneficiary\":{\n            \"alias\":null,\n            \"personalInformation\": null,\n            \"user\": null\n         },\n         \"paymentEntity\": null\n      },\n      \"result\":{\n         \"externalResult\": null\n      },\n      \"transaction\":{\n         \"trxResponse\":{\n            \"authenticationAttempts\":\"1\"\n         },\n         \"transactionId\":{\n            \"localDatetime\":\"2019-05-14 18:58:55\",\n            \"datetime\":\"2019-05-14 18:58:55\",\n            \"operationCode\":\"LOGIN\",\n            \"transactionToken\":\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\"\n         },\n         \"transactionDetails\":{\n            \"strongAuthIndicator\":\"0\",\n            \"clientType\":\"C\",\n            \"fraudOperationCode\":\"Lg\"\n         }\n      },\n      \"context\":{\n         \"originatorData\": {\n            \"account\": null,\n            \"transactionDescription\": null,\n            \"card\": null\n         },\n         \"sessionId\":\"G77rKInuIoARX9mnr5sYOlHnsPk=\",\n         \"channelSelectedType\":\"10\",\n         \"beneficiaryData\":{\n            \"device\":null,\n            \"application\": null,\n            \"account\": null\n         },\n         \"institutionalEntity\":{\n            \"institutionalId\":{\n               \"id\":\"0018\"\n            }\n         }\n      }\n   }\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{securityUrl}}/oauth/token",
+					"host": [
+						"{{securityUrl}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCards",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardPan (1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.scaId != null) {\r",
+							"    console.info(\"Set collection variable - scaId\");\r",
+							"    pm.collectionVariables.set(\"scaId\", jsonData.scaId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/pan",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"pan"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "CVV",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardPan (2)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "scaId",
+						"value": "{{scaId}}",
+						"type": "text"
+					},
+					{
+						"key": "otpCode",
+						"value": "654321",
+						"type": "text"
+					},
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/pan",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"pan"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "CVV",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardCvv (1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.scaId != null) {\r",
+							"    console.info(\"Set collection variable - scaId\");\r",
+							"    pm.collectionVariables.set(\"scaId\", jsonData.scaId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "scaId",
+						"value": "f54095fd-0822-4ec3-86c9-9270955bbf87",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "otpCode",
+						"value": "654321",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/cvv",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"cvv"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "CVV",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardCvv (2)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.scaId != null) {\r",
+							"    console.info(\"Set collection variable - scaId\");\r",
+							"    pm.collectionVariables.set(\"scaId\", jsonData.scaId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "scaId",
+						"value": "{{scaId}}",
+						"type": "text"
+					},
+					{
+						"key": "otpCode",
+						"value": "654321",
+						"type": "text"
+					},
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/cvv",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"cvv"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "CVV",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardStatements",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/statements",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"statements"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "JV25ounEFnPts6YgceRQsA",
+							"description": "DEV: JV25ounEFnPts6YgceRQsA | PRE: ezfj2z4AGiknDMX7aQguiw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardStatementDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/statements/:statementId?expand=TRANSACTIONS",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"statements",
+						":statementId"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "TRANSACTIONS"
+						}
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "JV25ounEFnPts6YgceRQsA",
+							"description": "DEV: JV25ounEFnPts6YgceRQsA | PRE: ezfj2z4AGiknDMX7aQguiw"
+						},
+						{
+							"key": "statementId",
+							"value": "22"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardTransactions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/transactions",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"transactions"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardTransactionDetails",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/transactions/:transactionId",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"transactions",
+						":transactionId"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						},
+						{
+							"key": "transactionId",
+							"value": "024211030001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usabilityLimits\": [\r\n        {\r\n            \"usabilityLimitCode\": \"DA\",\r\n            \"usabilityLimitDescription\": \"Daily Limit at ATM\",\r\n            \"usabilityLimit\": {\r\n                \"amount\": \"500\",\r\n                \"currency\": \"EUR\"\r\n            }\r\n        },\r\n        {\r\n            \"usabilityLimitCode\": \"DP\",\r\n            \"usabilityLimitDescription\": \"Daily Limit at POS\",\r\n            \"usabilityLimit\": {\r\n                \"amount\": \"5000\",\r\n                \"currency\": \"EUR\"\r\n            }\r\n        }\r\n    ],\r\n    \"operations\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerContact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"_.each(pm.response.json().customerContactsListResponse.phoneDataList, (item) => {\r",
+							"    if(item.preferredPhone) {\r",
+							"        console.info(\"Set collection variable - contactId\");\r",
+							"        pm.collectionVariables.set(\"contactId\", item.uuid);\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraGtwClientId}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraGtwUrl}}/customers/1000585449/contacts",
+					"host": [
+						"{{intraGtwUrl}}"
+					],
+					"path": [
+						"customers",
+						"1000585449",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardPin (1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (jsonData.sessionId != null) {\r",
+							"    console.info(\"Set collection variable - sessionId\");\r",
+							"    pm.collectionVariables.set(\"sessionId\", jsonData.sessionId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "contact_id",
+						"value": "{{contactId}}",
+						"type": "text"
+					},
+					{
+						"key": "session_id",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "otp_code",
+						"value": "654321",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/pin",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"pin"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCardPin (2)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "contact_id",
+						"value": "af6dcfa7-2d13-460b-be76-4b13a83b6e14",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "session_id",
+						"value": "{{sessionId}}",
+						"type": "text"
+					},
+					{
+						"key": "otp_code",
+						"value": "654321",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/pin",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"pin"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: 8JhVTW4WnX3qvwYY05DyjQ | PRE: pwIq142Zxrl2AEr9sKbrBg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "replaceCard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-ibm-client-id",
+						"value": "{{intraClientId}}",
+						"type": "text"
+					},
+					{
+						"key": "isTest",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cancellationReasonCode\": \"End of relationship\",\r\n    \"deliveryOptions\": {\r\n        \"center\": {\r\n            \"centerId\": \"0018\"\r\n        }\r\n    },\r\n    \"cardholder\": {\r\n        \"partyId\": \"1000585449\"\r\n    },\r\n    \"isNewCardRequested\": \"true\",\r\n    \"replacementCode\": \"lost\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{intraUrl}}/cards/:cardId/replace_card",
+					"host": [
+						"{{intraUrl}}"
+					],
+					"path": [
+						"cards",
+						":cardId",
+						"replace_card"
+					],
+					"variable": [
+						{
+							"key": "cardId",
+							"value": "ezfj2z4AGiknDMX7aQguiw",
+							"description": "DEV: yEaVdB5Xx-P5MUwOTUop_w PRE: _3DHjZe3Ns6PFNOFyP0uUw"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.collectionVariables.get(\"env\");",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"localhost:8080\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"",
+					"    pm.collectionVariables.set(\"intraGtwUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    pm.collectionVariables.set(\"intraGtwClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"};",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-cards.totta.dev.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.dev.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"7c14fb64-698c-471f-bfc2-cb1016040937\"); // Testes Locais",
+					"",
+					"    pm.collectionVariables.set(\"intraGtwUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    pm.collectionVariables.set(\"intraGtwClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.collectionVariables.set(\"securityUrl\", \"https://security-internet.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.collectionVariables.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    ",
+					"    pm.collectionVariables.set(\"mcsUrl\", \"https://digitalchannels-cards.totta.pre.corp\");",
+					"    pm.collectionVariables.set(\"intraUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz/omni\");",
+					"    pm.collectionVariables.set(\"eeicUrl\", \"https://apigw.extexpintcons.totta.pre.corp/sanpt/external-intcons/omni\");",
+					"    pm.collectionVariables.set(\"intraClientId\", \"b3886577-0341-41e3-8fba-17dfd99df673\"); // Testes API's Locais Internal",
+					"",
+					"    pm.collectionVariables.set(\"intraGtwUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"    pm.collectionVariables.set(\"intraGtwClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "pre",
+			"type": "string"
+		},
+		{
+			"key": "securityUrl",
+			"value": ""
+		},
+		{
+			"key": "tokenClientId",
+			"value": ""
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "mcsUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "eeicUrl",
+			"value": ""
+		},
+		{
+			"key": "intraClientId",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "scaId",
+			"value": ""
+		},
+		{
+			"key": "mfaToken",
+			"value": ""
+		},
+		{
+			"key": "sessionId",
+			"value": ""
+		},
+		{
+			"key": "intraGtwUrl",
+			"value": ""
+		},
+		{
+			"key": "intraGtwClientId",
+			"value": ""
+		},
+		{
+			"key": "contactId",
+			"value": ""
+		}
+	]
+}

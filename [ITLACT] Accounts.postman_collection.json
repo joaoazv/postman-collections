@@ -1,0 +1,4353 @@
+{
+	"info": {
+		"_postman_id": "f5eb0a6e-ed90-45e0-a99b-292ed0dd315a",
+		"name": "[ITLACT] Accounts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Access Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"accessToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tokenClientId}}",
+									"description": "dev",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tokenClientSecret}}",
+									"description": "dev",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://security-service.totta.dev.corp/oauth/token",
+							"protocol": "https",
+							"host": [
+								"security-service",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Account List",
+					"item": [
+						{
+							"name": "Token with clientNumber",
+							"item": [
+								{
+									"name": "Customer Id Empty",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to token customerId\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('9002640906');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/accounts",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Id Empty Copy",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to token customerId\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('9002640906');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/accounts",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Id Populated",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to token customerId\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('9002640906');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/accounts?customer_id=1000585557",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "customer_id",
+													"value": "1000585557"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.sendRequest(\"https://github.alm.europe.cloudcenter.corp/raw/tot-pt-apis/postman-lib/master/modules/authorization/authLib.js\", function (error, response) {",
+											"    var environment = pm.variables.get(\"env1\");",
+											"    pm.environment.set(\"env\", environment);",
+											"",
+											"    pm.environment.set(\"commonLayer\", \"/common\");",
+											"    if(environment==\"dev\"){",
+											"        pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+											"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+											"        pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+											"        pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\"); ",
+											"        pm.globals.set(\"clientId\", pm.environment.get(\"tokenClientId\"));",
+											"    };",
+											"",
+											"    if(environment==\"pre\"){",
+											"        pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+											"        pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+											"        pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+											"        pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+											"        pm.globals.set(\"clientId\", pm.environment.get(\"tokenClientId\"));",
+											"",
+											"    };",
+											"",
+											"    if(environment==\"localhost\"){",
+											"       pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+											"        pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+											"        pm.environment.set(\"env\", \"dev\");",
+											"        pm.environment.set(\"dmzUrl\", \"localhost:8080\");",
+											"        pm.environment.set(\"intraUrl\", \"localhost:8080\");",
+											"    };  ",
+											"",
+											"",
+											"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+											"  createToken (\"9002640906\",\"9002640906\",\"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\");",
+											"    ",
+											"",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Token without clientNumber (Branch)",
+							"item": [
+								{
+									"name": "Customer Id Empty",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/accounts",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Id Populated",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to customer_id parameter\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('1000585557');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{commonLayer}}/accounts?customer_id=1000585557",
+											"host": [
+												"{{dmzUrl}}{{commonLayer}}"
+											],
+											"path": [
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "customer_id",
+													"value": "1000585557"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "PP - No Expand",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142682602453\",\r",
+											"            \"accountId\": \"000321426826024\",\r",
+											"            \"alias\": \"hncg5\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426826024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426826024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142683402412\",\r",
+											"            \"accountId\": \"000321426834024\",\r",
+											"            \"alias\": \"000321426834024\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"7296.67\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"7272.57\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426834024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426834024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142740202411\",\r",
+											"            \"accountId\": \"000321427402024\",\r",
+											"            \"alias\": \"OpenBanking3\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321427402024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321427402024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035432930502036\",\r",
+											"            \"accountId\": \"000354329305020\",\r",
+											"            \"alias\": \"Conta eur1\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"566336.02\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"564444.09\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354329305020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354329305020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433037802078\",\r",
+											"            \"accountId\": \"000354330378020\",\r",
+											"            \"alias\": \"000354330378020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330378020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330378020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=5\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=600",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "600"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Empty Expand",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142682602453\",\r",
+											"            \"accountId\": \"000321426826024\",\r",
+											"            \"alias\": \"hncg5\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426826024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426826024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142683402412\",\r",
+											"            \"accountId\": \"000321426834024\",\r",
+											"            \"alias\": \"000321426834024\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"7296.67\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"7272.57\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426834024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426834024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142740202411\",\r",
+											"            \"accountId\": \"000321427402024\",\r",
+											"            \"alias\": \"OpenBanking3\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321427402024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321427402024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035432930502036\",\r",
+											"            \"accountId\": \"000354329305020\",\r",
+											"            \"alias\": \"Conta eur1\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"566336.02\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"564444.09\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354329305020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354329305020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433037802078\",\r",
+											"            \"accountId\": \"000354330378020\",\r",
+											"            \"alias\": \"000354330378020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330378020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330378020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=5\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_expand=",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_expand",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - No Limit - First Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142682602453\",\r",
+											"            \"accountId\": \"000321426826024\",\r",
+											"            \"alias\": \"hncg5\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426826024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426826024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142683402412\",\r",
+											"            \"accountId\": \"000321426834024\",\r",
+											"            \"alias\": \"000321426834024\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"7296.67\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"7272.57\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426834024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426834024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142740202411\",\r",
+											"            \"accountId\": \"000321427402024\",\r",
+											"            \"alias\": \"OpenBanking3\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321427402024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321427402024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035432930502036\",\r",
+											"            \"accountId\": \"000354329305020\",\r",
+											"            \"alias\": \"Conta eur1\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"566336.02\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"564444.09\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354329305020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354329305020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433037802078\",\r",
+											"            \"accountId\": \"000354330378020\",\r",
+											"            \"alias\": \"000354330378020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330378020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330378020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=5\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_expand=balances",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_expand",
+											"value": "balances"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - No Limit - Second Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433056802050\",\r",
+											"            \"accountId\": \"000354330568020\",\r",
+											"            \"alias\": \"000354330568020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"654520074.97\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"654520028.37\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330568020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330568020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433837102060\",\r",
+											"            \"accountId\": \"000354338371020\",\r",
+											"            \"alias\": \"Conta Aberta123\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"652471.42\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"652433.65\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338371020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354338371020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433870202049\",\r",
+											"            \"accountId\": \"000354338702020\",\r",
+											"            \"alias\": \"Conta do David\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"6321872.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"6321872.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338702020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354338702020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433921302037\",\r",
+											"            \"accountId\": \"000354339213020\",\r",
+											"            \"alias\": \"Mais confiança\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"37939.74\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"37939.74\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339213020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354339213020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433942902094\",\r",
+											"            \"accountId\": \"000354339429020\",\r",
+											"            \"alias\": \"Nova\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"88.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"88.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339429020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354339429020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=10\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_expand=balances&_offset=5",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_expand",
+											"value": "balances"
+										},
+										{
+											"key": "_offset",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - No Limit - Third Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035437863302012\",\r",
+											"            \"accountId\": \"000354378633020\",\r",
+											"            \"alias\": \"Teste procurador\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"106331.32\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"106331.32\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354378633020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354378633020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438371602091\",\r",
+											"            \"accountId\": \"000354383716020\",\r",
+											"            \"alias\": \"teste\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"97113.25\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"97113.25\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383716020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383716020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438378102061\",\r",
+											"            \"accountId\": \"000354383781020\",\r",
+											"            \"alias\": \"000354383781020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"251508.48\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"251508.48\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383781020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383781020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438379902090\",\r",
+											"            \"accountId\": \"000354383799020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"550148.34\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"550148.34\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383799020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383799020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438380702049\",\r",
+											"            \"accountId\": \"000354383807020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"702106.70\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"702106.70\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383807020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383807020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=15\",\r",
+											"        \"_prev\": \"/me/accounts?_limit=5&_offset=5\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_expand=balances&_offset=10",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_expand",
+											"value": "balances"
+										},
+										{
+											"key": "_offset",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - No Limit - Fourth Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438381502008\",\r",
+											"            \"accountId\": \"000354383815020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER RENDA MENSAL\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"11668.06\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"11668.06\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383815020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383815020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438382302064\",\r",
+											"            \"accountId\": \"000354383823020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER RENDA MENSAL\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383823020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383823020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438383102023\",\r",
+											"            \"accountId\": \"000354383831020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383831020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383831020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438384902052\",\r",
+											"            \"accountId\": \"000354383849020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"92.50\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"92.50\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383849020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383849020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438420102091\",\r",
+											"            \"accountId\": \"000354384201020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"74011.97\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"availableBalance\": {\r",
+											"                \"amount\": \"74011.97\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354384201020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354384201020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=5\",\r",
+											"        \"_next\": \"/me/accounts?_limit=5&_offset=20\",\r",
+											"        \"_prev\": \"/me/accounts?_limit=5&_offset=10\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_expand=balances&_offset=15",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_expand",
+											"value": "balances"
+										},
+										{
+											"key": "_offset",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 10 - First Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {",
+											"    \"accountsDataList\": [",
+											"        {",
+											"            \"displayNumber\": \"PT50001800032142682602453\",",
+											"            \"accountId\": \"000321426826024\",",
+											"            \"alias\": \"hncg5\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"DEP.ORDEM M.E.\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"1831.75\",",
+											"                \"currencyCode\": \"CHF\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426826024\",",
+											"                \"transactionsListLink\": \"/me/accounts/000321426826024/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800032142683402412\",",
+											"            \"accountId\": \"000321426834024\",",
+											"            \"alias\": \"000321426834024\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"DEP.ORDEM M.E.\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"7296.67\",",
+											"                \"currencyCode\": \"GBP\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426834024\",",
+											"                \"transactionsListLink\": \"/me/accounts/000321426834024/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800032142740202411\",",
+											"            \"accountId\": \"000321427402024\",",
+											"            \"alias\": \"OpenBanking3\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"DEP.ORDEM M.E.\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"12740.33\",",
+											"                \"currencyCode\": \"CHF\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000321427402024\",",
+											"                \"transactionsListLink\": \"/me/accounts/000321427402024/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035432930502036\",",
+											"            \"accountId\": \"000354329305020\",",
+											"            \"alias\": \"Conta eur1\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"566336.02\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354329305020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354329305020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433037802078\",",
+											"            \"accountId\": \"000354330378020\",",
+											"            \"alias\": \"000354330378020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"79716.10\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330378020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354330378020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433056802050\",",
+											"            \"accountId\": \"000354330568020\",",
+											"            \"alias\": \"000354330568020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"654520074.97\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330568020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354330568020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433837102060\",",
+											"            \"accountId\": \"000354338371020\",",
+											"            \"alias\": \"Conta Aberta123\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"652471.42\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338371020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354338371020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433870202049\",",
+											"            \"accountId\": \"000354338702020\",",
+											"            \"alias\": \"Conta do David\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"6321872.40\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338702020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354338702020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433921302037\",",
+											"            \"accountId\": \"000354339213020\",",
+											"            \"alias\": \"Mais confiança\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"37956.74\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339213020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354339213020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035433942902094\",",
+											"            \"accountId\": \"000354339429020\",",
+											"            \"alias\": \"Nova\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"88.40\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339429020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354339429020/transactions\"",
+											"            }",
+											"        }",
+											"    ],",
+											"    \"_links\": {",
+											"        \"_first\": \"/me/accounts?_limit=10\",",
+											"        \"_next\": \"/me/accounts?_limit=10&_offset=10\"",
+											"    }",
+											"};",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=10",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 10 - Second Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {",
+											"    \"accountsDataList\": [",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035437863302012\",",
+											"            \"accountId\": \"000354378633020\",",
+											"            \"alias\": \"Teste procurador\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"106331.32\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354378633020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354378633020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438371602091\",",
+											"            \"accountId\": \"000354383716020\",",
+											"            \"alias\": \"teste\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"97113.25\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383716020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383716020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438378102061\",",
+											"            \"accountId\": \"000354383781020\",",
+											"            \"alias\": \"000354383781020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"AFORRO. PREMIUM\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"251508.48\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383781020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383781020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438379902090\",",
+											"            \"accountId\": \"000354383799020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"AFORRO. PREMIUM\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"550148.34\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383799020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383799020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438380702049\",",
+											"            \"accountId\": \"000354383807020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"AFORRO. PREMIUM\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"702106.70\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383807020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383807020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438381502008\",",
+											"            \"accountId\": \"000354383815020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"SUPER RENDA MENSAL\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"11668.06\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383815020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383815020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438382302064\",",
+											"            \"accountId\": \"000354383823020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"SUPER RENDA MENSAL\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"0.00\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383823020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383823020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438383102023\",",
+											"            \"accountId\": \"000354383831020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"0.00\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383831020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383831020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438384902052\",",
+											"            \"accountId\": \"000354383849020\",",
+											"            \"type\": \"Saving Account\",",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"92.50\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383849020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354383849020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035438420102091\",",
+											"            \"accountId\": \"000354384201020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": \"74011.97\",",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354384201020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354384201020/transactions\"",
+											"            }",
+											"        }",
+											"    ],",
+											"    \"_links\": {",
+											"        \"_first\": \"/me/accounts?_limit=10\",",
+											"        \"_next\": \"/me/accounts?_limit=10&_offset=20\"",
+											"    }",
+											"};",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=10&_offset=10",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "10"
+										},
+										{
+											"key": "_offset",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 10 - Second to Last Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {",
+											"    \"accountsDataList\": [",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035445393102097\",",
+											"            \"accountId\": \"000354453931020\",",
+											"            \"alias\": \"000354453931020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354453931020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354453931020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035445574602095\",",
+											"            \"accountId\": \"000354455746020\",",
+											"            \"alias\": \"000354455746020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354455746020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354455746020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035445712202027\",",
+											"            \"accountId\": \"000354457122020\",",
+											"            \"alias\": \"000354457122020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354457122020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354457122020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446021702061\",",
+											"            \"accountId\": \"000354460217020\",",
+											"            \"alias\": \"testepre\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 987.52,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354460217020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354460217020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446023302076\",",
+											"            \"accountId\": \"000354460233020\",",
+											"            \"alias\": \"000354460233020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 591.88,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354460233020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354460233020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446033202090\",",
+											"            \"accountId\": \"000354460332020\",",
+											"            \"alias\": \"000354460332020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 944.75,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354460332020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354460332020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446065402016\",",
+											"            \"accountId\": \"000354460654020\",",
+											"            \"alias\": \"000354460654020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354460654020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354460654020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446463102016\",",
+											"            \"accountId\": \"000354464631020\",",
+											"            \"alias\": \"000354464631020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354464631020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354464631020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446464902045\",",
+											"            \"accountId\": \"000354464649020\",",
+											"            \"alias\": \"000354464649020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 484.4,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354464649020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354464649020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035446913502019\",",
+											"            \"accountId\": \"000354469135020\",",
+											"            \"alias\": \"000354469135020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 1453,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354469135020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354469135020/transactions\"",
+											"            }",
+											"        }",
+											"    ],",
+											"    \"_links\": {",
+											"        \"_first\": \"/me/accounts?_limit=10\",",
+											"        \"_next\": \"/me/accounts?_limit=10&_offset=60\",",
+											"        \"_prev\": \"/me/accounts?_limit=10&_offset=40\"",
+											"    }",
+											"};",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=10&_offset=50",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "10"
+										},
+										{
+											"key": "_offset",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 10 - Last Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {",
+											"    \"accountsDataList\": [",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035449626002065\",",
+											"            \"accountId\": \"000354496260020\",",
+											"            \"alias\": \"000354496260020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354496260020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354496260020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035449703702072\",",
+											"            \"accountId\": \"000354497037020\",",
+											"            \"alias\": \"000354497037020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 2967.2,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354497037020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354497037020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800080619674402079\",",
+											"            \"accountId\": \"000806196744020\",",
+											"            \"alias\": \"OpenBanking4\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"CTA ORDENADO SELECT MUNDO 123\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 74532.17,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000806196744020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000806196744020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800080624188802061\",",
+											"            \"accountId\": \"000806241888020\",",
+											"            \"alias\": \"000806241888020x\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"CONTA STREAM\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": -182.79,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000806241888020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000806241888020/transactions\"",
+											"            }",
+											"        }",
+											"    ],",
+											"    \"_links\": {",
+											"        \"_first\": \"/me/accounts?_limit=10\",",
+											"        \"_prev\": \"/me/accounts?_limit=10&_offset=50\"",
+											"    }",
+											"};",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=10&_offset=60",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "10"
+										},
+										{
+											"key": "_offset",
+											"value": "60"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 20 - First Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {\r",
+											"    \"accountsDataList\": [\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142682602453\",\r",
+											"            \"accountId\": \"000321426826024\",\r",
+											"            \"alias\": \"hncg5\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"1831.75\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426826024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426826024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142683402412\",\r",
+											"            \"accountId\": \"000321426834024\",\r",
+											"            \"alias\": \"000321426834024\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"7296.67\",\r",
+											"                \"currencyCode\": \"GBP\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321426834024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321426834024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800032142740202411\",\r",
+											"            \"accountId\": \"000321427402024\",\r",
+											"            \"alias\": \"OpenBanking3\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"DEP.ORDEM M.E.\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"12740.33\",\r",
+											"                \"currencyCode\": \"CHF\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000321427402024\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000321427402024/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035432930502036\",\r",
+											"            \"accountId\": \"000354329305020\",\r",
+											"            \"alias\": \"Conta eur1\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"566336.02\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354329305020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354329305020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433037802078\",\r",
+											"            \"accountId\": \"000354330378020\",\r",
+											"            \"alias\": \"000354330378020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"79716.10\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330378020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330378020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433056802050\",\r",
+											"            \"accountId\": \"000354330568020\",\r",
+											"            \"alias\": \"000354330568020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"654520074.97\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354330568020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354330568020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433837102060\",\r",
+											"            \"accountId\": \"000354338371020\",\r",
+											"            \"alias\": \"Conta Aberta123\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"652471.42\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338371020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354338371020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433870202049\",\r",
+											"            \"accountId\": \"000354338702020\",\r",
+											"            \"alias\": \"Conta do David\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"6321872.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354338702020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354338702020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433921302037\",\r",
+											"            \"accountId\": \"000354339213020\",\r",
+											"            \"alias\": \"Mais confiança\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"37956.74\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339213020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354339213020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035433942902094\",\r",
+											"            \"accountId\": \"000354339429020\",\r",
+											"            \"alias\": \"Nova\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"DEPOSITO MAIS CONFIANCA 18M\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"88.40\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354339429020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354339429020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035437863302012\",\r",
+											"            \"accountId\": \"000354378633020\",\r",
+											"            \"alias\": \"Teste procurador\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"106331.32\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354378633020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354378633020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438371602091\",\r",
+											"            \"accountId\": \"000354383716020\",\r",
+											"            \"alias\": \"teste\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"97113.25\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383716020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383716020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438378102061\",\r",
+											"            \"accountId\": \"000354383781020\",\r",
+											"            \"alias\": \"000354383781020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"251508.48\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383781020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383781020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438379902090\",\r",
+											"            \"accountId\": \"000354383799020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"550148.34\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383799020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383799020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438380702049\",\r",
+											"            \"accountId\": \"000354383807020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"AFORRO. PREMIUM\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"702106.70\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383807020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383807020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438381502008\",\r",
+											"            \"accountId\": \"000354383815020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER RENDA MENSAL\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"11668.06\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383815020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383815020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438382302064\",\r",
+											"            \"accountId\": \"000354383823020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER RENDA MENSAL\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383823020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383823020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438383102023\",\r",
+											"            \"accountId\": \"000354383831020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"0.00\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383831020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383831020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438384902052\",\r",
+											"            \"accountId\": \"000354383849020\",\r",
+											"            \"type\": \"Saving Account\",\r",
+											"            \"description\": \"SUPER AFORRO PRIVATE XI\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"92.50\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354383849020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354383849020/transactions\"\r",
+											"            }\r",
+											"        },\r",
+											"        {\r",
+											"            \"displayNumber\": \"PT50001800035438420102091\",\r",
+											"            \"accountId\": \"000354384201020\",\r",
+											"            \"type\": \"Current Account\",\r",
+											"            \"description\": \"D.O. - PARTICULARES\",\r",
+											"            \"status\": \"Open\",\r",
+											"            \"customerId\": \"1000585557\",\r",
+											"            \"mainBalance\": {\r",
+											"                \"amount\": \"74011.97\",\r",
+											"                \"currencyCode\": \"EUR\"\r",
+											"            },\r",
+											"            \"_links\": {\r",
+											"                \"accountDetailsLink\": \"/me/accounts/000354384201020\",\r",
+											"                \"transactionsListLink\": \"/me/accounts/000354384201020/transactions\"\r",
+											"            }\r",
+											"        }\r",
+											"    ],\r",
+											"    \"_links\": {\r",
+											"        \"_first\": \"/me/accounts?_limit=20\",\r",
+											"        \"_next\": \"/me/accounts?_limit=20&_offset=20\"\r",
+											"    }\r",
+											"};\r",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=20",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Limit 20 - Last Page",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const expectedResponse = {",
+											"    \"accountsDataList\": [",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035449626002065\",",
+											"            \"accountId\": \"000354496260020\",",
+											"            \"alias\": \"000354496260020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 0,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354496260020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354496260020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800035449703702072\",",
+											"            \"accountId\": \"000354497037020\",",
+											"            \"alias\": \"000354497037020\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"D.O. - PARTICULARES\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 2967.2,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000354497037020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000354497037020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800080619674402079\",",
+											"            \"accountId\": \"000806196744020\",",
+											"            \"alias\": \"OpenBanking4\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"CTA ORDENADO SELECT MUNDO 123\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": 74532.17,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000806196744020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000806196744020/transactions\"",
+											"            }",
+											"        },",
+											"        {",
+											"            \"displayNumber\": \"PT50001800080624188802061\",",
+											"            \"accountId\": \"000806241888020\",",
+											"            \"alias\": \"000806241888020x\",",
+											"            \"type\": \"Current Account\",",
+											"            \"description\": \"CONTA STREAM\",",
+											"            \"status\": \"Open\",",
+											"            \"customerId\": \"1000585557\",",
+											"            \"mainBalance\": {",
+											"                \"amount\": -182.79,",
+											"                \"currencyCode\": \"EUR\"",
+											"            },",
+											"            \"_links\": {",
+											"                \"accountDetailsLink\": \"/me/accounts/000806241888020\",",
+											"                \"transactionsListLink\": \"/me/accounts/000806241888020/transactions\"",
+											"            }",
+											"        }",
+											"    ],",
+											"    \"_links\": {",
+											"        \"_first\": \"/me/accounts?_limit=20\",",
+											"        \"_prev\": \"/me/accounts?_limit=20&_offset=40\"",
+											"    }",
+											"};",
+											"pm.globals.set(\"expectedResponse\", expectedResponse); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts?_limit=20&_offset=60",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "20"
+										},
+										{
+											"key": "_offset",
+											"value": "60"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Account Detail",
+					"item": [
+						{
+							"name": "PP - Account Details",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imp3dC1rZXkifQ.eyJzdWIiOiJ1aWQ6UERBMDEiLCJuYmYiOjE2NTc2MzcxODksImlzc3VlZF90b2tlbl90eXBlIjoidXJuOmlldGY6cGFyYW1zOm9hdXRoOnRva2VuLXR5cGU6and0LWludGVybmFsIiwidXNlcl9uYW1lIjoiMTAwMDU4NTU1NyIsInNjb3BlIjpbImVjdGMuY3JlYXRlIiwiZG9jcmVjLnJlYWQiLCJkb2NzZXJ2aWNlcy5nZXQiLCJhY2N0cmFuLnJlYWQiLCJtYm5ldF9yZXRhaWwubGlzdCIsImN1c2Nsc19pbmNpZGVudHMucmVhZCIsImNhcmRsaXN0LnJlYWQiLCJlY3RzLmxpc3QiLCJhY2NkZXQucmVhZCIsImNhcmR0cmFuLnJlYWQiLCJlY3R0LnVwZGF0ZSIsIm5vdGFwaWNmLnJlYWQiLCJhY2NvdW50cHJvY2Vzc19ieXByb2R1Y3QubW9kaWZ5IiwibWJuZXRfcmV0YWlsLmJhbGFuY2UiLCJ3cml0ZSIsImVjcmptcy5jcmVhdGUiLCJtYm5ldF9yZXRhaWwucmVnaXN0ZXIiLCJhY2NsaXN0LnJlYWROT1QiLCJvbWRtLndyaXRlIiwiYWNjZGV0Y2lkLnJlYWQiLCJjYXJkc19ob2xkZXJzLmNyZWF0ZSIsImFjY3ZhbCIsImNhcmRzX2hvbGRlcnMuZ2V0IiwidGVybS5zZWFyY2giLCJzZWxmYmFua2luZy5nZXQiLCJkb2NyZWQucmVhZCIsImVjdGMuZ2V0IiwibWJ3YXkubm90aWZpY2F0aW9ucyIsImVjcnJlc3QudXBkYXRlIiwibm90aXB1c2gucG9zdCIsIm5vdGFwaWNmYS53cml0ZSIsInNhZnN0YXR1cy5nZXQiLCJlY3JqbXMudXBkYXRlIiwicXJjb2RlZ2VuLmNyZWF0ZSIsIm1ibmV0X3JldGFpbC5jaGFuZ2UiLCJzY2hlZHVsZWQuY2FuY2VsIiwiZWNycmVzdC5nZXQiLCJlY3JyZXN0LmdldC5pZCIsImVjdHQuY3JlYXRlIiwiZXhlY3V0ZXNjYS53cml0ZSIsIm1id2F5LnNka0NvZGUiLCJvcnVubWcucmVhZCIsInRvcHVwcy5zaW11bGF0ZSIsImFjY3Byb2NfYWNjX3ZhbGlkYXRlX2luZm8ucG9zdCIsImNhcmRjdnYucmVhZCIsImRvY3JlYy53cml0ZSIsImluc3QuaW52b2ljZS5yZWFkIiwicXJjb2RlZ2VuLmRlbGV0ZSIsImVjdHQuZ2V0IiwiZWNhYXAuZ2V0IiwiaW52ZXN0cHJvZC5yZWFkIiwicHJvY2Vzc19mZWVzLndyaXRlIiwiY29udHJjdXN0b21lci5yZWFkIiwiY2FyZHNfaG9sZGVycy5jYW5jZWwiLCJlY3RjLmRlbGV0ZS50eXBlIiwiYWNjbGlzdGNpZC5yZWFkIiwiY2FyZHJlcGxhY2UiLCJtYndheS5zaW11bGF0ZSIsImFjY3Byb2NfYWNjLmNyZWF0ZSIsImNsaWNrY2FsbC5wb3N0Iiwibm90aXB1c2hpZC5nZXQiLCJrcGlTY2hlZHVsZS53cml0ZSIsImVjdGMudXBkYXRlIiwibGVhc2luZ19jb250cmFjdHNfaW5zdGFsbG1lbnQucmVhZCIsImFjY3Byb2NfYWNjX3NldHVwLmNyZWF0ZSIsIm1ibmV0Lm9wZXJhdGlvbnMiLCJjYXJkc19vZmZlci5yZWFkIiwic2VsZmJhbmtpbmcuZGVsZXRlIiwiZWN0cy5nZXRpZCIsIm1ibmV0Lmxpc3QiLCJnZHByLmNvbnJlYWQiLCJjdXN0b21lci53cml0ZSIsImxlYXNpbmdfY29udHJhY3RzX2d1YXJhbnRlZXMucmVhZCIsImVudGl0eXBheS5zdGF0ZXBheSIsInNhZnN0YXR1cy5wYXRjaCIsInRvcHVwcy5saXN0UHJvdmlkZXJzIiwiYmFua2JyYW5jaC5yZWFkIiwibWJ3YXkuc2RrQ2FyZFRva2VuIiwiYWNjcHJvY19hY2NfdmFsaWRhdGUuY3JlYXRlIiwibW92ZXNfZGV0YWlscy5nZXQiLCJlY3R0LmFjdGl2ZSIsInNlbGZiYW5raW5nLmNyZWF0ZU9wZXJWYWwiLCJmYWN0b3JpbmdfcmVwb3J0cy5yZWFkIiwibWJ3YXltYW4uY2hhbmdlcmVnIiwiZWNhYXAudXBkYXRlIiwic2NhdmFsaWRhdGUud3JpdGUiLCJjYXJkcGluLnJlYWQiLCJ0b3B1cHMuZXhlY3V0ZSIsInByb3ZpZGVycy53cml0ZSIsIm1id2F5Lm5vdGlmaWNhdGlvbkFjdGlvbiIsIm1id2F5LmNhbmNlbFRyYW5zYWN0aW9uIiwibm90YXBpY2Yud3JpdGUiLCJldmVudC5jcmVhdGUiLCJtYm5ldC5yZWdpc3RlciIsImN1c2Nsc19ub3Jrb21fcmlzay5yZWFkIiwicXJjb2RlZ2VuLmdldCIsImdkcHIuY29ud3JpdGUiLCJtYndheS5kZXRhaWxUcmFuc2FjdGlvbiIsIm5vdGlwdXNoaWQucHV0IiwiZWN0dC5kZWxldGUiLCJtYm5ldC5jaGFuZ2UiLCJkb2NzZXJ2aWNlcy5saXN0Iiwibm90aXB1c2hpZC5kZWwiLCJlY3R0LmdldC5pZCIsImV2ZXRjb250cS5yZWFkIiwiY29udi53cml0ZSIsImVjcmptcy5nZXQiLCJrcGlTY2hlZHVsZS5yZWFkIiwibWJuZXQuZGV0YWlsIiwiZWNhYXAuZ2V0LmlkIiwibWJuZXQuYmFsYW5jZSIsImV2ZXRjb250cS5saXN0Iiwibm90ZUFwaXB1c2gud3JpdGUiLCJwZXhwcnQucmVhZCIsImV4dGNsaWFzc2V0cy51cGRhdGUiLCJwYXltZW50LndyaXRlIiwicmVhZCIsImFjY291bnRwcm9jZXNzX2NyZWRpdGFjY291bnQud3JpdGUiLCJzZWxmYmFua2luZy51cGRhdGUiLCJjYXJkcGFuLnJlYWQiLCJtYndheS5yZWNlbnRDb250YWN0cyIsIm1id2F5bWFuLmNhbmNlbHJlZyIsImVjcmptcy5nZXQuaWQiLCJjb250cmlkZW50aWYucmVhZCIsImVjYWFwLmRlbGV0ZSIsIm1ibmV0X3JldGFpbC5kZWxldGUiLCJtYm5ldC5zZWN1cml0eUluZm8iLCJhY2Nwcm9jX2FjY192YWxpZGF0ZV9pbmZvLmdldCIsImVjdGMuZ2V0LnR5cGUiLCJtYm5ldF9yZXRhaWwuc2VjdXJpdHlJbmZvIiwiY29udHJwYXJ0aWMucmVhZCIsIm1id2F5Lmxpc3RUcmFuc2FjdGlvbnMiLCJtYm5ldF9yZXRhaWwub3BlcmF0aW9ucyIsInBleHBydC53cml0ZSIsInNlbGZiYW5raW5nLnVwZGF0ZU9wZXJWYWwiLCJxcmNvZGVnZW4udXBkYXRlIiwiaW52ZXN0bWVudGZ1bmQucmVhZCIsInNlbGZiYW5raW5nLmNyZWF0ZSIsImluc3RwYXlwYWNrcy5yZWFkIiwibWJ3YXltYW4ucmVnaXN0ZXIiLCJtYndheS5leGVjdXRlIiwiZXZlbnQudXBkYXRlIiwiY2FyZHN0YXQucmVhZCIsIm5vdGVBcGlzbXMud3JpdGUiLCJzY2FnZW5lcmF0ZWludGVybmFsLnJlYWQiLCJlY2FhcC5hY3RpdmUiLCJub3RhcGlzcGNmLnJlYWQiLCJub3RhcGlzcGlkY2YucmVhZCIsIm5vdGlwdXNoLmdldCIsIm5vdGVBcGlzbXNwYXJzZS53cml0ZSIsImRhdGFnYXRoZXJpbmcud3JpdGUiLCJtYm5ldF9yZXRhaWwuZGV0YWlsIiwiZWNycmVzdC5jcmVhdGUiLCJzY2hlZHVsZWQubGlzdCIsIm5vdGFwaXNwY2Yud3JpdGUiLCJjYXJkZGV0LnJlYWQiLCJlY2FhcC5jcmVhdGUiLCJpbnN0Y2FyZC5yZWFkIiwicGF5dG9waWMuY3JlYXRlIiwibm90ZUFwaWVtYWlsLndyaXRlIiwiZW50aXR5cGF5LnNlcnZpY2VwYXkiLCJwcm9jZXNzX2ZlZXMucmVhZCIsImFjY3RyYW5jaWQucmVhZCIsImNvY2twaXQubW5ndC5yZWFkIiwibWJuZXQuZGVsZXRlIiwibWJ3YXkubGlzdENhcmRzIiwic2NhdmFsaWRhdGVpbnRlcm5hbC53cml0ZSJdLCJpc3MiOiIwMDE4U2VjdXJpdHlNaWNyb3NlcnZpY2UiLCJleHAiOjE2NTc2NDA3ODksInNlY0N0eCI6eyJzZXNzaW9uRGV0YWlscyI6eyJzZXNzaW9uVXNlcklkIjoiMDAwMjI3OTQ4NCIsImlzU2FmRW5hYmxlZCI6dHJ1ZSwiY3VzdG9tZXJQYXJ0ZW5vbiI6eyJjdXN0b21lclR5cGUiOiJGIiwiY3VzdG9tZXJJZCI6Ijg1MDU0MTMifSwic2Vzc2lvblVzZXJuYW1lIjoiMTAwMDU4NTU1NyIsImNvbnRleHQiOiJXZWIiLCJjaGFubmVsIjoiR0xCIiwiZGV2aWNlRGF0YSI6eyJkZXZpY2VJZCI6IjAwMDAwMDAwMDAwMDAwMCIsImNlcnRpZmllZCI6ZmFsc2V9LCJ1c2VyVHlwZSI6bnVsbCwiY2xpZW50TnVtYmVyIjoiMTAwMDU4NTU1NyJ9LCJoZWFkZXJTaW50cmEiOnsiZW1wVXRpbCI6IjMxIiwiY29kQmFsY2FvT3JpZ2VtIjoiNjkzNiIsIm5pdmVsQXV0b3JpekNlbnRyYWwiOiIwIiwiY29kQmFsY2FvT3BlcmFudGUiOiI2OTM2IiwiZ2VzdG9yQ29udGEiOiJOIiwibnVtRW1wcmVnYWRvIjoiMTExMTExMTExIiwidGVybWluYWwiOiIwMDgyIiwiZW1wcmVzYU9wZXJhbnRlIjoiICAiLCJ0ZXJtaW5hbHMiOlsiMDA4MiJdLCJjb2RCYWxjYW8iOiI2OTM2IiwiY29kQW1iaWVudGUiOiJOQiIsInBlcmZpbCI6Ik5FVDAwMSIsImluZFN0YWZmIjoiUyIsImdlc3RvckNsaWVudGUiOiJOIn19LCJpYXQiOjE2NTc2MzcxODksImp0aSI6ImQ4ZWUwNTkwLWM4MzMtNDFhOS05NTI3LWJkZDE4MGI5OWI5NCIsImNsaWVudF9pZCI6ImUwNjFiNmRlLWVkYTgtNGI1YS1hMDNjLWU3NDk2MzE5YjFhZiJ9.HquQVzCVwIPKl7fQfMtvsGmSzGwDBthvKGgvA6c_sjIxt4E1qvafMYbzs39wFKv1jNiLuKeANGmbSuAf7Fp59MUZboaV-3V7jT0RArpE-DhqL8sb_V1cL3vI2v7SBg4gMwR8KkCJfFLGyAATg6w2GnoyG6AeFdAQ1StDW031Y1ITp1As4Dgqmms1hZ9MwHsco8D4NfKXvGNcitd5CPqoTRW9UVoIAwBhzYJelrnomMbrsePye5x_a8bt3IHjw9wFMpRgzpKtjd4lpJIhUOg-Z1sp4OE6ufEnkpvvZEt8Ib_07fdiVJ0ips1MDs-YPvAixCWoYO5dMSm-Lkwmc_FqQA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "Document-Type",
+										"value": "tax_id",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Document-Number",
+										"value": "500225559",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000321091691028?include_last_transactions=true&expand=cards",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000321091691028"
+									],
+									"query": [
+										{
+											"key": "include_last_transactions",
+											"value": "true"
+										},
+										{
+											"key": "expand",
+											"value": "cards"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PP - Details - Transactions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020?include_last_transactions=true",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020"
+									],
+									"query": [
+										{
+											"key": "include_last_transactions",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Transactions List",
+					"item": [
+						{
+							"name": "0.A - PP - TransactionList (No SCA Token Header)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"pm.globals.set('accountTransactionsScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#{}\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"accountTransactionsRequestToken\", pm.response.headers.get(\"Token-Request\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020/transactions",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "0.B - PP - TransactionList - Limit, FromDate, ToDate (No SCA Token Header)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"pm.globals.set('accountTransactionsScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#{}\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"accountTransactionsRequestToken\", pm.response.headers.get(\"Token-Request\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020/transactions?from_date=20200815T000000000-0000&to_date=20210105T000000000-0000",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "25",
+											"disabled": true
+										},
+										{
+											"key": "from_date",
+											"value": "20200815T000000000-0000"
+										},
+										{
+											"key": "to_date",
+											"value": "20210105T000000000-0000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1 - SCA Required: Execute SCA",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"  pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"var Ajv = require('ajv'),\r",
+											"  ajv = new Ajv({ logger: console }),\r",
+											"  schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"scaId\": {\r",
+											"      \"type\": \"string\"\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"scaId\"\r",
+											"  ]\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function () {\r",
+											"  var data = pm.response.json();\r",
+											"  var valid = ajv.validate(schema, data);\r",
+											"  if (!valid) {\r",
+											"    console.error(pm.info.requestName + \" Errors:\", ajv.errors);\r",
+											"  }\r",
+											"  pm.expect(valid).to.be.true;\r",
+											"});\r",
+											"\r",
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"accountTransactionsScaId\", responseJson.scaId);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Santander-Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "Request-Token",
+										"type": "text",
+										"value": "{{accountTransactionsRequestToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"serviceId\": \"accounts\",\n    \"payLoadOperationRequesting\":\"{{accountTransactionsScaEncryptedPayload}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}/sca_authentication",
+									"host": [
+										"{{dmzUrl}}"
+									],
+									"path": [
+										"sca_authentication"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - SCA Required: Validate OTP",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"var Ajv = require('ajv'),\r",
+											"  ajv = new Ajv({ logger: console }),\r",
+											"  schema = {\r",
+											"  \"type\": \"object\",\r",
+											"  \"properties\": {\r",
+											"    \"scaId\": {\r",
+											"      \"type\": \"string\"\r",
+											"    },\r",
+											"    \"status\": {\r",
+											"      \"type\": \"string\"\r",
+											"    }\r",
+											"  },\r",
+											"  \"required\": [\r",
+											"    \"scaId\",\r",
+											"    \"status\"\r",
+											"  ]\r",
+											"};\r",
+											"\r",
+											"pm.test('Schema is valid', function () {\r",
+											"  var data = pm.response.json();\r",
+											"  var valid = ajv.validate(schema, data);\r",
+											"  if (!valid) {\r",
+											"    console.error(pm.info.requestName + \" Errors:\", ajv.errors);\r",
+											"  }\r",
+											"  pm.expect(valid).to.be.true;\r",
+											"});\r",
+											"\r",
+											"pm.globals.set(\"accountTransactionsSCAValidatedOTPToken\", pm.response.headers.get(\"Sca-Token\"));\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Santander-Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "Request-Token",
+										"type": "text",
+										"value": "{{accountTransactionsRequestToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"embeddedSystem\":\"otp\",\n    \"serviceId\":\"accounts\",\n    \"metaData\":\"{ \\\"otp\\\" : \\\"654321\\\"}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{dmzUrl}}/sca_authentication/{{accountTransactionsScaId}}/validate",
+									"host": [
+										"{{dmzUrl}}"
+									],
+									"path": [
+										"sca_authentication",
+										"{{accountTransactionsScaId}}",
+										"validate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3.A - PP - TransactionList (Has SCA Token Header)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "Sca-Token",
+										"value": "{{accountTransactionsSCAValidatedOTPToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020/transactions",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3.B - PP - TransactionList - Limit, FromDate, ToDate (No SCA Token Header)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const basePath = pm.collectionVariables.get(\"commonLayer\") + pm.request.url.getPath();\r",
+											"const queryParams = pm.request.url.getQueryString({ignoreDisabled: true});\r",
+											"\r",
+											"pm.globals.set('accountTransactionsScaEncryptedPayload', CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(\"{\" + basePath + \"}#{\" + queryParams + \"}#{}\")));"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const responseJson = pm.response.json();\r",
+											"pm.globals.set(\"accountTransactionsRequestToken\", pm.response.headers.get(\"Token-Request\"));"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									},
+									{
+										"key": "Sca-Token",
+										"value": "{{accountTransactionsSCAValidatedOTPToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020/transactions?from_date=20200815T000000000-0000&to_date=20210105T000000000-0000",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "25",
+											"disabled": true
+										},
+										{
+											"key": "from_date",
+											"value": "20200815T000000000-0000"
+										},
+										{
+											"key": "to_date",
+											"value": "20210105T000000000-0000"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Transaction Detail",
+					"item": [
+						{
+							"name": "PP - Transaction Details",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{commonLayer}}/accounts/000354456439020/transactions/TEMP-MjAyMjAzMTQtLS1FVVItLS1VWjItLS1CYW5rIFN0YXRlbWVudC0wMjIyMDEzMC0tLTIuNTctLS00MjYwNTIuNTYtLS1udWxs",
+									"host": [
+										"{{dmzUrl}}{{commonLayer}}"
+									],
+									"path": [
+										"accounts",
+										"000354456439020",
+										"transactions",
+										"TEMP-MjAyMjAzMTQtLS1FVVItLS1VWjItLS1CYW5rIFN0YXRlbWVudC0wMjIyMDEzMC0tLTIuNTctLS00MjYwNTIuNTYtLS1udWxs"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"    pm.environment.set(\"commonLayer\", \"/common\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Channel",
+			"item": [
+				{
+					"name": "Account List",
+					"item": [
+						{
+							"name": "Token with clientNumber",
+							"item": [
+								{
+									"name": "Customer Id Empty",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to token customerId\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('9002640906');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts",
+											"host": [
+												"{{dmzUrl}}{{channelLayer}}"
+											],
+											"path": [
+												"me",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Id Populated",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to token customerId\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('9002640906');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts?customer_id=1000545781",
+											"host": [
+												"{{dmzUrl}}{{channelLayer}}"
+											],
+											"path": [
+												"me",
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "customer_id",
+													"value": "1000545781"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Token without clientNumber (Branch)",
+							"item": [
+								{
+									"name": "Customer Id Empty",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(400);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts",
+											"host": [
+												"{{dmzUrl}}{{channelLayer}}"
+											],
+											"path": [
+												"me",
+												"accounts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Customer Id Populated",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", () => {\r",
+													"  pm.expect(pm.response.code).to.eql(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"CustomerId is equal to customer_id parameter\", () => {\r",
+													"  const responseJson = pm.response.json();\r",
+													"  pm.expect(responseJson.accountsDataList[0].customerId).to.eql('1000585557');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Client-Id",
+												"type": "text",
+												"value": "{{clientId}}"
+											}
+										],
+										"url": {
+											"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts?customer_id=1000585557",
+											"host": [
+												"{{dmzUrl}}{{channelLayer}}"
+											],
+											"path": [
+												"me",
+												"accounts"
+											],
+											"query": [
+												{
+													"key": "customer_id",
+													"value": "1000585557"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"let config = {",
+											"    \"env\":\"pre\",",
+											"    \"layer\":\"channel\",",
+											"    \"gateway\":\"internal-dmz\",",
+											"    \"clientIdHeaderDEV\":\"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\",",
+											"    \"clientIdHeaderPRE\":\"c75146f7-2566-4364-b5b7-581a8a6f75c2\"",
+											"};",
+											"",
+											"pm.sendRequest(\"https://github.alm.europe.cloudcenter.corp/raw/tot-pt-apis/postman-lib/feature/authentication_with_config_object/modules/authorizationV2/authLib.js\", function (error, response) {",
+											"    eval(String.fromCharCode.apply(String, new Uint8Array(response.stream)));",
+											"",
+											"    authDefaultBranch(config);",
+											"    //authUser157789(config);",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Account list",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"  pm.expect(pm.response.code).to.eql(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts",
+									"host": [
+										"{{dmzUrl}}{{channelLayer}}"
+									],
+									"path": [
+										"me",
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account list - Filter by family",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"  pm.expect(pm.response.code).to.eql(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Account family equal to family query parameter\", () => {\r",
+											"  const responseJson = pm.response.json();\r",
+											"  pm.expect(responseJson.accountsDataList[0].family).to.eql(pm.request.url.query.get(\"family\"));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"type": "text",
+										"value": "{{clientId}}"
+									}
+								],
+								"url": {
+									"raw": "{{dmzUrl}}{{channelLayer}}/me/accounts?family=MN",
+									"host": [
+										"{{dmzUrl}}{{channelLayer}}"
+									],
+									"path": [
+										"me",
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "_limit",
+											"value": "20",
+											"disabled": true
+										},
+										{
+											"key": "family",
+											"value": "MN"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Success",
+					"item": [
+						{
+							"name": "Accounts List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"  pm.collectionVariables.set(\"accountId\", pm.response.json().accountId);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientIdInternal}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{intraUrl}}/local/accounts?customer_id=1000585557",
+									"host": [
+										"{{intraUrl}}"
+									],
+									"path": [
+										"local",
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "customer_id",
+											"value": "1000585557"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Account Detail",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"  pm.collectionVariables.set(\"accountId\", pm.response.json().accountId);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientIdInternal}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://contas-pesquisa.totta.dev.corp/local/accounts/000321426826024?customer_id=1000585557",
+									"protocol": "https",
+									"host": [
+										"contas-pesquisa",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"local",
+										"accounts",
+										"000321426826024"
+									],
+									"query": [
+										{
+											"key": "customer_id",
+											"value": "1000585557"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transactions List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"  pm.collectionVariables.set(\"accountId\", pm.response.json().accountId);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientIdInternal}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://contas-pesquisa.totta.dev.corp/local/accounts/000321426826024/transactions?customer_id=1000585557",
+									"protocol": "https",
+									"host": [
+										"contas-pesquisa",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"local",
+										"accounts",
+										"000321426826024",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "customer_id",
+											"value": "1000585557"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction Detail",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"  pm.collectionVariables.set(\"accountId\", pm.response.json().accountId);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientIdInternal}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://contas-pesquisa.totta.dev.corp/local/accounts/000354330378020/transactions/2019052399999?customer_id=1000585557&include_last_transactions=true",
+									"protocol": "https",
+									"host": [
+										"contas-pesquisa",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"local",
+										"accounts",
+										"000354330378020",
+										"transactions",
+										"2019052399999"
+									],
+									"query": [
+										{
+											"key": "customer_id",
+											"value": "1000585557"
+										},
+										{
+											"key": "include_last_transactions",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "IBAN",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"  pm.collectionVariables.set(\"accountId\", pm.response.json().accountId);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Client-Id",
+										"value": "{{clientIdInternal}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://contas-pesquisa.totta.dev.corp/local/accounts/000321426826024/iban",
+									"protocol": "https",
+									"host": [
+										"contas-pesquisa",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"local",
+										"accounts",
+										"000321426826024",
+										"iban"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "{{accessToken}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var environment = pm.variables.get(\"env1\");",
+					"pm.environment.set(\"env\", environment);",
+					"",
+					"if(environment==\"dev\"){",
+					"    pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.environment.set(\"tokenClientSecret\", \"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.dev.corp/sanpt/internal-dmz\");",
+					"    pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.dev.corp/sanpt/internal\");",
+					"    pm.environment.set(\"clientIdInternal\", \"edc91ff5-7975-413e-9040-4bb31cb6637b\");",
+					"};",
+					"",
+					"if(environment==\"pre\"){",
+					"    pm.environment.set(\"tokenClientId\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"    pm.environment.set(\"tokenClientSecret\", \"T1tK7iA7rG8oW0uP3kD7oF1eM4iC1wJ2yL2eQ6wH0aY4wN6uY2\");",
+					"    pm.environment.set(\"dmzUrl\", \"https://apigw.dmzbackclient.totta.pre.corp/sanpt/internal-dmz\");",
+					"    pm.environment.set(\"intraUrl\", \"https://apigw.intraclient.totta.pre.corp/sanpt/internal\");",
+					"    pm.environment.set(\"clientIdInternal\", \"4853771c-70b4-4c9e-a575-1ab701678311\");",
+					"};",
+					"",
+					"if(environment==\"localhost\"){",
+					"    pm.environment.set(\"env\", \"dev\");",
+					"    pm.environment.set(\"tokenClientId\", \"b5f69d0d-b1a4-4a22-81d8-fda6d98708f2\");",
+					"    pm.environment.set(\"tokenClientSecret\",\"uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA\");",
+					"    pm.environment.set(\"dmzUrl\", \"localhost:8080\");",
+					"    pm.environment.set(\"intraUrl\", \"localhost:8080\");",
+					"    pm.environment.set(\"clientIdInternal\", \"edc91ff5-7975-413e-9040-4bb31cb6637b\");",
+					"};",
+					"pm.environment.set(\"clientId\", pm.environment.get(\"tokenClientId\"));",
+					"",
+					"eval(pm.variables.get(\"lib\"));",
+					"auth1000596831();"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "env",
+			"value": "dev"
+		},
+		{
+			"key": "env1",
+			"value": "dev"
+		},
+		{
+			"key": "channelLayer",
+			"value": "/channel"
+		},
+		{
+			"key": "commonLayer",
+			"value": "/common"
+		},
+		{
+			"key": "localLayer",
+			"value": "/"
+		},
+		{
+			"key": "tokenClientId",
+			"value": "b5f69d0d-b1a4-4a22-81d8-fda6d98708f2"
+		},
+		{
+			"key": "tokenClientSecret",
+			"value": "uD0eR6jY8lQ3lC0tW8bQ7fN4vW7fG7eN6qJ3cX3cT0tX0gI6iA"
+		},
+		{
+			"key": "accountId",
+			"value": "000354330378020"
+		},
+		{
+			"key": "dmzUrl",
+			"value": ""
+		},
+		{
+			"key": "intraUrl",
+			"value": ""
+		},
+		{
+			"key": "clientIdInternal",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": ""
+		},
+		{
+			"key": "lib",
+			"value": "var\n//==================//\n//  PHYSICAL USERS  //\n//==================//\n/*\n * All purpose user for testing\n * Has a plethora of different products\n */\nauth1000585557 = function () {\n    let customerNumber = \"1000585557\";\n    let customerUsername = \"1000585557\";\n    let customerPassword = \"7a44b720c93a4478257c42fa892a0032a8556af42ad0361e0d7afc72d2960063d9117924845610e0ec788648a48a36eab910403a436e982691fcf42870dd76ce6bbcc7cc00ed452ec35321975b41c6121f8b3c58f1d4f794a0ed98b8d62f1f10d4af6f5f4e929d969224a942031442d4c03803012676baeee4bccb50ca0646f538642c5c13b07f9e64e64d4177df058dabd5ad338690fe00be9e66bcc6c6b25eea85deb292ae7f7ed4f6a0d56e4cac6324a4a10ceedf415e8d8e69f982f98815f1df20e84e49f58cda4b81e56abe429d4f8a15a23edd406164a926c511c29e36c057806a86fc9dfaf852c1219bc58632df4d4f5e85cffb62d1d89998bf7e49cd\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauth1000596831 = function () {\n    let customerNumber = \"1000596831\";\n    let customerUsername = \"1000596831\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User with only 1 account\n */\nauth2321006585 = function () {\n    let customerNumber = \"2321006585\";\n    let customerUsername = \"2321006585\";\n    let customerPassword = \"4bac44e306347a6d42a4efc4e229584ecae152ba896c1f6113f1bf3d53e0b5f4aad2d12850069986483d310bf07db50923aed4f7df47885c99ddeefeb532d02c743c20b3a91dc4bf710bde14d7e7883f0e183c3206cb9eee9c74ea5cb1f37dd49d6e48df4574bc229b49cf64a93a4197f2d4df749f7536a2ed5629a1098b3365f42fbdb6ddfc113c8f08cf0d14b4ed9dcb5f2f09bc6462c136713f6d8b283fc94060626039c964fdf5006384c32f90e9cd73fbaebc8a178bbffaab4794cff46744ef182d71e783b4fd7beb3821137809fc81b65ea983219d5b196d1dc226d81299922139dc8fd65a1c8d6a99fe4df80928987aecb2e632a6a112d5a5c93718cb\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User without deposits, pensions, cards\n */\nauth9002565390 = function () {\n    let customerNumber = \"9002565390\";\n    let customerUsername = \"9002565390\";\n    let customerPassword = \"7aee03310d32538c168952868bd60e0dc40fa2541a18cd6edb2d4b6d564d52a27889459e32b114d79a9798acd20c42773f7aac48ce6322a86817373600af0cb2e86aca33f1091b2a5fe041ad282d09efcbe88347f4f0de797593f246c9ef4c66bc7676eba104d91e29158eb3fa5b8854c2755b64aa5650077f9dc03510dcd1aafd16c1dba15778564e3ee5093afc1ef265e3a60f92942c07ee01c967c64b0346d314e3ccee2eced111e32134ae196a1c324d6a62483d5611ba0dd90b95752b306392cea58d06e70c6acc4ca61695451bac86cb8bc945f9c43a906581b235dec8832ee56d33bb34f6ff50c02e6590bb875731968fc59b18509068eaa94aedef01\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n/*\n * User whose accounts are all in EUR.\n * Recommended for testing Global Position\n */\nauthUser157789 = function () {\n    let customerNumber = \"157789\";\n    let customerUsername = \"User157789\";\n    let customerPassword = \"12ce4647945644cc739c3dbdc70693f5e03ecea5a332c8f018d1cdd815887be718aeb30b2af2fbd80767db80dc48d666cac6d4781f483db3addc38c0d9af3e896c393207c719b4aa9ba596bd6fafd0b22379b0ceaf7e310a032f02d1d2f7aa53a350638e791100896d835696f3d50b5fd7d99b9089ec333b339e98be334bec58764afb5a7c79a685c46078edeb6a641ec59a176013a914c705ad47b795a0b2bfc254aea635df9c040506b98dab67de0fe28c55948b958f08afc2409c3aa161832cfc19300673b28ef93e54219b33ae62be3fca04e9936c9c10c93887b1b5be1875b291317b27c7e6ae505518691f8329c269ba61e6ab9e4b1d4fafc23ef29734\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile5100011467 = function () {\n    let customerNumber = \"5100011467\";\n    let customerUsername = \"Globile5100011467\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nautGlobile9000796656 = function () {\n    let customerNumber = \"9000796656\";\n    let customerUsername = \"Globile9000796656\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\nauthGlobile9001905564 = function () {\n    let customerNumber = \"9001905564\";\n    let customerUsername = \"Globile9001905564\";\n    let customerPassword = \"8f43e7e76d50bc529817f5ad284a7563d41f502b52b5eeadc5c1fe426488dffee5b78f221afecace8cb64aed6cd1ce48cd9783de86e4cb3b4281f0f4573d5691d6e2725fb812e3744156d2cd84abdd65d36af38a15977193021740b8909b9f20a6aed4f34d0a0ab829bc8ee48fdef32247975971f91689f76b9e66e2fd0e77941e4994f97e980ed0f121e97f6b495144cb9f65bbc64def461a884647e974ffc687271275efd29544d3891cd9ecbb1a1c8076e2a0ce3efd2a78c82369c5595a9c5e431f527314b017869564efcea5309d22d8eb4834a1df9e2c6325d6e14bfa15f10167a61c21b1343e9d787b71025f1f700331da9500126a6969d7f4267ffdd0\";\n    createToken(customerNumber, customerUsername, customerPassword);\n},\n//===================//\n//  CORPORATE USERS  //\n//===================//\nauthMagneto = function () {\n    let username = \"magneto\";\n    let password = \"Santander1\";\n    createCorpToken(username, password);\n},\n//==========================//\n// PHYSICAL TOKEN CREATION  //\n//==========================//\ncreateToken = function (customerNumber, customerUsername, customerPassword) {\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    console.log(\"CHECKING TOKEN\");\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/check_token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"token\",\n                    value: pm.globals.get(\"accessToken\"),\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        if (res.json().user_name == customerUsername) {\n            console.log(\"TOKEN ALREADY CREATED\");\n        } else {\n            console.log(\"CREATING NEW TOKEN\");\n            pm.sendRequest({\n                url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                method: \"POST\",\n                header: {\n                    \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                    \"Content-Type\": \"application/x-www-form-urlencoded\"\n                },\n                body: {\n                    mode: 'urlencoded',\n                    urlencoded: [{\n                            key: \"client_id\",\n                            value: pm.environment.get(\"tokenClientId\"),\n                            disabled: false\n                        }, {\n                            key: \"client_secret\",\n                            value: pm.environment.get(\"tokenClientSecret\"),\n                            disabled: false\n                        }, {\n                            key: \"grant_type\",\n                            value: \"password\",\n                            disabled: false\n                        }, {\n                            key: \"username\",\n                            value: customerUsername,\n                            disabled: false\n                        }, {\n                            key: \"password\",\n                            value: customerPassword,\n                            disabled: false\n                        }, {\n                            key: \"role\",\n                            value: \"Web\",\n                            disabled: false\n                        }, {\n                            key: \"captcha\",\n                            value: true,\n                            disabled: false\n                        }, {\n                            key: \"channel\",\n                            value: \"WEB\",\n                            disabled: false\n                        }, {\n                            key: \"fraudData\",\n                            value: getFraudData(false, customerNumber),\n                            disabled: false\n                        }\n                    ]\n                }\n            },\n                function (err, res) {\n                if (res.json().error == \"fraud_sca\") {\n                    console.log(\"SECOND FACTOR AUTHENTICATION\");\n                    pm.sendRequest({\n                        url: \"https://security-internet.totta.\" + environment + \".corp/oauth/token\",\n                        method: \"POST\",\n                        header: {\n                            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                            \"Content-Type\": \"application/x-www-form-urlencoded\"\n                        },\n                        body: {\n                            mode: 'urlencoded',\n                            urlencoded: [{\n                                    key: \"client_id\",\n                                    value: pm.environment.get(\"tokenClientId\"),\n                                    disabled: false\n                                }, {\n                                    key: \"client_secret\",\n                                    value: pm.environment.get(\"tokenClientSecret\"),\n                                    disabled: false\n                                }, {\n                                    key: \"grant_type\",\n                                    value: \"multi_factor\",\n                                    disabled: false\n                                }, {\n                                    key: \"mfa_code\",\n                                    value: res.json().additional_info.mfa_code,\n                                    disabled: false\n                                }, {\n                                    key: \"fraudData\",\n                                    value: getFraudData(true, customerNumber),\n                                    disabled: false\n                                }\n                            ]\n                        }\n                    },\n                        function (err, response) {\n                        pm.globals.set(\"accessToken\", response.json().access_token);\n                    });\n                } else {\n                    pm.globals.set(\"accessToken\", res.json().access_token);\n                }\n            });\n        }\n    });\n},\ngetFraudData = function (isSCA, customerNumber) {\n    if (isSCA) {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"OP01\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"ACCP\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"Lg20190622155800oEso1yQqfo2v+7nLMXVURJNgIkk=\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"1\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    } else {\n        return \"{\\\"channel\\\":\\\"KIN\\\",\\\"refOperation\\\":\\\"\\\",\\\"codeError\\\":\\\"\\\",\\\"messageError\\\":\\\"\\\",\\\"fraud\\\":{\\\"event\\\":{\\\"originator\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\" + customerNumber + \"\\\"},\\\"user\\\":{\\\"authenticationMethod\\\":\\\"P\\\",\\\"certificatePresenceInd\\\":\\\"\\\",\\\"name\\\":\\\"\" + customerNumber + \"\\\",\\\"type\\\":\\\"\\\",\\\"preparationUserName\\\":\\\"\\\",\\\"signatureRequiredCounter\\\":\\\"\\\"},\\\"corporateClientId\\\":\\\"\\\"},\\\"beneficiary\\\":{\\\"alias\\\":{\\\"name\\\":\\\"\\\"},\\\"personalInformation\\\":{\\\"name\\\":\\\"\\\",\\\"birthCountry\\\":\\\"\\\",\\\"clientToken\\\":\\\"\\\",\\\"birthDate\\\":\\\"\\\",\\\"adressDetails\\\":{\\\"address\\\":\\\"\\\",\\\"country\\\":\\\"\\\"},\\\"id\\\":\\\"\\\"},\\\"trustedIndicator\\\":\\\"\\\",\\\"user\\\":{\\\"name\\\":\\\"\\\"}},\\\"paymentEntity\\\":{\\\"reference\\\":\\\"\\\",\\\"institutionalId\\\":{\\\"id\\\":\\\"\\\"}}},\\\"result\\\":{\\\"externalResult\\\":{\\\"transactionScore\\\":\\\"\\\",\\\"ruleName\\\":\\\"\\\",\\\"refusedIndicator\\\":\\\"\\\"}},\\\"transaction\\\":{\\\"trxResponse\\\":{\\\"reasonCode\\\":\\\"\\\",\\\"authenticationAttempts\\\":\\\"1\\\",\\\"balance\\\":{\\\"currentAccountBalance\\\":\\\"\\\"},\\\"statusCode\\\":\\\"\\\"},\\\"transactionId\\\":{\\\"localDatetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"datetime\\\":\\\"2019-05-14 18:58:55\\\",\\\"originalTransactionToken\\\":\\\"\\\",\\\"operationCode\\\":\\\"LOGIN\\\",\\\"transactionToken\\\":\\\"Lg20190514185855G77rKInuIoARX9mnr5sYOlHnsPk=\\\"},\\\"transactionDetails\\\":{\\\"localCurrencyAmount\\\":\\\"\\\",\\\"operationIndicator\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"amount\\\":\\\"\\\",\\\"recurringIndicator\\\":\\\"\\\",\\\"strongAuthIndicator\\\":\\\"0\\\",\\\"clientType\\\":\\\"C\\\",\\\"fraudOperationCode\\\":\\\"Lg\\\",\\\"localCurrency\\\":\\\"\\\"}},\\\"context\\\":{\\\"originatorData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"currency\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"},\\\"transactionDescription\\\":{\\\"toBeneficiary\\\":\\\"\\\",\\\"toOriginator\\\":\\\"\\\"},\\\"card\\\":{\\\"pan\\\":\\\"\\\",\\\"panExpiryDate\\\":\\\"\\\",\\\"tokenPanExpiryDate\\\":\\\"\\\",\\\"tokenPan\\\":\\\"\\\"}},\\\"sessionId\\\":\\\"G77rKInuIoARX9mnr5sYOlHnsPk=\\\",\\\"channelSelectedType\\\":\\\"10\\\",\\\"beneficiaryData\\\":{\\\"device\\\":null,\\\"application\\\":{\\\"language\\\":\\\"\\\"},\\\"account\\\":{\\\"bic\\\":\\\"\\\",\\\"iban\\\":\\\"\\\"}},\\\"institutionalEntity\\\":{\\\"institutionalId\\\":{\\\"id\\\":\\\"0018\\\"}}}}}\";\n    }\n},\n//===========================//\n// CORPORATE TOKEN CREATION  //\n//===========================//\ncreateCorpToken = function (username, password) {\n    pm.sendRequest({\n        url: \"https://security-internet.totta.\" + pm.environment.get(\"env\") + \".corp/oauth/token\",\n        method: \"POST\",\n        header: {\n            \"User-Agent\": \"PostmanRuntime/7.17.1\",\n            \"Content-Type\": \"application/x-www-form-urlencoded\"\n        },\n        body: {\n            mode: 'urlencoded',\n            urlencoded: [{\n                    key: \"client_id\",\n                    value: pm.environment.get(\"tokenClientId\"),\n                    disabled: false\n                }, {\n                    key: \"client_secret\",\n                    value: pm.environment.get(\"tokenClientSecret\"),\n                    disabled: false\n                }, {\n                    key: \"grant_type\",\n                    value: \"password\",\n                    disabled: false\n                }, {\n                    key: \"username\",\n                    value: username,\n                    disabled: false\n                }, {\n                    key: \"password\",\n                    value: password,\n                    disabled: false\n                }, {\n                    key: \"role\",\n                    value: \"CorporateWeb\",\n                    disabled: false\n                }, {\n                    key: \"userLanguage\",\n                    value: \"pt\",\n                    disabled: false\n                }, {\n                    key: \"ip\",\n                    value: \"192.100.0.1\",\n                    disabled: false\n                }, {\n                    key: \"userAgent\",\n                    value: \"Nokia 3310 android\",\n                    disabled: false\n                }, {\n                    key: \"isRooted\",\n                    value: false,\n                    disabled: false\n                }\n            ]\n        }\n    },\n        function (err, res) {\n        pm.globals.set(\"accessToken\", res.json().access_token);\n    });\n},\ncreateTokenEstruturais = function (user, password, clientId) {\n    if (!clientId) {\n        clientId = pm.environment.get(\"tokenClientId\");\n    }\n    let environment = pm.environment.get(\"env\");\n    if (environment === \"local\") {\n        environment = \"dev\";\n    }\n    pm.sendRequest({\n        url: \"http://estructurais.totta.pre.corp/SSOTottaTokenAS/ws/SECMR_Def_Listener/ws/SECMR_Def_Listener\",\n        method: \"POST\",\n        header: {\n            'Content-Type': 'text/xml',\n            'SOAPAction': '\"\"'\n        },\n        body: {\n            mode: 'raw',\n            raw: \"<soapenv:Envelope xmlns:soapenv=\\\"http://schemas.xmlsoap.org/soap/envelope/\\\" xmlns:v1=\\\"http://www.isban.es/webservices/TECHNICAL_FACADES/Security/F_facseg_security/intranet/ACFACSEGSecurity/v1\\\"><soapenv:Header> <wsse:Security soapenv:mustUnderstand=\\\"1\\\" xmlns:wsse=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\\\"><wsse:UsernameToken><wsse:Username>\" + user + \"</wsse:Username><wsse:Password Type=\\\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText\\\">\" + password + \"</wsse:Password></wsse:UsernameToken></wsse:Security></soapenv:Header><soapenv:Body><v1:authenticateCredential facade=\\\"ACFACSEGSecurity\\\"><CB_AuthenticationData><!--Optional:--><user>\" + user + \"</user><!--Optional:--><password>\" + password + \"</password></CB_AuthenticationData><userAddress>127.0.0.1</userAddress></v1:authenticateCredential></soapenv:Body></soapenv:Envelope>\"\n        }\n    },\n        function (err, res) {\n        function arrayBufferToString(buffer) {\n            var arr = new Uint8Array(buffer);\n            var str = String.fromCharCode.apply(String, arr);\n            return str;\n        }\n        var jsonResponse = xml2Json(arrayBufferToString(res.stream));\n        var token = jsonResponse['soap-env:Envelope']['soap-env:Body']['prefixRigel0:authenticateCredentialResponse'].methodResult.tokenCredential;\n        pm.globals.set(\"accessToken\", token);\n        pm.sendRequest({\n            url: \"https://security-service.totta.\" + environment + \".corp/oauth/token\",\n            method: \"POST\",\n            header: {\n                \"User-Agent\": \"PostmanRuntime/7.17.1\",\n                \"Content-Type\": \"application/x-www-form-urlencoded\"\n            },\n            body: {\n                mode: 'urlencoded',\n                urlencoded: [{\n                        key: \"client_id\",\n                        value: clientId,\n                        disabled: false\n                    }, {\n                        key: \"grant_type\",\n                        value: \"bks_token\",\n                        disabled: false\n                    }, {\n                        key: \"token\",\n                        value: pm.globals.get(\"accessToken\"),\n                        disabled: false\n                    }\n                ]\n            }\n        },\n            function (err, res) {\n            pm.globals.set(\"accessToken\", res.json().access_token);\n        });\n    });\n}"
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}

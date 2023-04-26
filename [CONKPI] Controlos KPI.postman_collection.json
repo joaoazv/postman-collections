@@ -1,0 +1,1539 @@
+{
+	"info": {
+		"_postman_id": "dab85714-cd03-41c3-b1aa-956de4ed482f",
+		"name": "[CONKPI] Controlos KPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3409554"
+	},
+	"item": [
+		{
+			"name": "token",
+			"item": [
+				{
+					"name": "token (client_credentials)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.collectionVariables.set(\"token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "onepayfx123",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "e27f3117-dd46-4a02-a6e3-f0a7aa48c809",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://security-service.totta.dev.corp/oauth/token",
+							"protocol": "https",
+							"host": [
+								"security-service",
+								"totta",
+								"dev",
+								"corp"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "local",
+			"item": [
+				{
+					"name": "Control M",
+					"item": [
+						{
+							"name": "DEV MCS Control M",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"AAPI-PDLKKT00114F.OK\",\r\n    \"date\": \"STAT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://controlm-api.totta.dev.corp/controlm/conditions",
+									"protocol": "http",
+									"host": [
+										"controlm-api",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"controlm",
+										"conditions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DEV GTW Control M",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "c1beb683-b190-43f3-ac5b-09f9e0f80e29",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"AAPI-PDLKKT00114F.OK\",\r\n    \"date\": \"STAT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apigw.intracore.totta.dev.corp/sanpt/internal-core/controlm/conditions",
+									"protocol": "https",
+									"host": [
+										"apigw",
+										"intracore",
+										"totta",
+										"dev",
+										"corp"
+									],
+									"path": [
+										"sanpt",
+										"internal-core",
+										"controlm",
+										"conditions"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UseCase1 - Schedule (code)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"userId\": \"E801422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/schedule",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase2 - Schedule (table)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/schedule",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase3 - Schedule (group)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/schedule",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"schedule"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase4 - Controls (table)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpi_list?tableKpi=teste",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpi_list"
+							],
+							"query": [
+								{
+									"key": "tableKpi",
+									"value": "teste"
+								},
+								{
+									"key": "referenceDate",
+									"value": "2010-01-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase4 - Controls (table) body",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableKpi\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpi_list",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpi_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase5 - Controls (group)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpi_list?groupKpi=CERTIFICA_LDN_T",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpi_list"
+							],
+							"query": [
+								{
+									"key": "groupKpi",
+									"value": "CERTIFICA_LDN_T"
+								},
+								{
+									"key": "referenceDate",
+									"value": "2010-01-01",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase5 - Controls (group) body",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpi_list",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpi_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase6 - Execute (code)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"userId\": \"E801422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase7 - Execute (table)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase8 - Execute (group)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-ibm-client-id",
+								"value": "{{tokenClientId}}",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase9 - Execution results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis_result?executionId=20210713174300029_105916&referenceDate=2021-08-04",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis_result"
+							],
+							"query": [
+								{
+									"key": "executionId",
+									"value": "20210713174300029_105916"
+								},
+								{
+									"key": "referenceDate",
+									"value": "2021-08-04"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase9 - Execution results body",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"executionId\": \"20210713174300029_105916\",\r\n    \"referenceDate\": \"2021-08-04\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis_result",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis_result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase10 - Control results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis_result?codeKpi=prio&referenceDate=2021-08-20",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis_result"
+							],
+							"query": [
+								{
+									"key": "codeKpi",
+									"value": "prio"
+								},
+								{
+									"key": "referenceDate",
+									"value": "2021-08-20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UseCase10 - Control results body",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codeKpi\":\"prio\",\r\n    \"referenceDate\": \"2021-08-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/controlos_kpi/kpis_result",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"controlos_kpi",
+								"kpis_result"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "dev",
+			"item": [
+				{
+					"name": "mcs",
+					"item": [
+						{
+							"name": "UseCase1 - Schedule (code)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase2 - Schedule (table)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase3 - Schedule (group)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase4 - Controls (table)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpi_list?tableKpi=teste",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "tableKpi",
+											"value": "teste"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase4 - Controls (table) body",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tableKpi\": \"teste\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpi_list",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase5 - Controls (group)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpi_list?groupKpi=CERTIFICA_LDN_T",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "groupKpi",
+											"value": "CERTIFICA_LDN_T"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase5 - Controls (group) body",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpi_list",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase6 - Execute (code)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase7 - Execute (table)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase8 - Execute (group)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-ibm-client-id",
+										"value": "{{tokenClientId}}",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase9 - Execution results",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis_result?executionId=20210713174300029_105916&referenceDate=2021-08-04",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									],
+									"query": [
+										{
+											"key": "executionId",
+											"value": "20210713174300029_105916"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2021-08-04"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase9 - Execution results body",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"executionId\": \"20210713174300029_105916\",\r\n    \"referenceDate\": \"2021-08-04\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis_result",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase10 - Control results",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis_result?codeKpi=prio&referenceDate=2021-08-20",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									],
+									"query": [
+										{
+											"key": "codeKpi",
+											"value": "prio"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2021-08-20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase10 - Control results body",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"codeKpi\":\"prio\",\r\n    \"referenceDate\": \"2021-08-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_dns}}/controlos_kpi/kpis_result",
+									"host": [
+										"{{host_dev_dns}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1aWQ6UERBMDEiLCJuYmYiOjE2NTA1MzY0MTcsImlzc3VlZF90b2tlbl90eXBlIjoidXJuOmlldGY6cGFyYW1zOm9hdXRoOnRva2VuLXR5cGU6and0LWludGVybmFsIiwic2NvcGUiOlsiZWN0Yy5jcmVhdGUiLCJkb2NyZWMucmVhZCIsImRvY3NlcnZpY2VzLmdldCIsImFjY3RyYW4ucmVhZCIsIm1ibmV0X3JldGFpbC5saXN0IiwiY2FyZGxpc3QucmVhZCIsImVjdHMubGlzdCIsImFjY2RldC5yZWFkIiwiY2FyZHRyYW4ucmVhZCIsImVjdHQudXBkYXRlIiwibm90YXBpY2YucmVhZCIsImFjY291bnRwcm9jZXNzX2J5cHJvZHVjdC5tb2RpZnkiLCJtYm5ldF9yZXRhaWwuYmFsYW5jZSIsIndyaXRlIiwiZWNyam1zLmNyZWF0ZSIsIm1ibmV0X3JldGFpbC5yZWdpc3RlciIsImFjY2xpc3QucmVhZE5PVCIsIm9tZG0ud3JpdGUiLCJhY2NkZXRjaWQucmVhZCIsImNhcmRzX2hvbGRlcnMuY3JlYXRlIiwiYWNjdmFsIiwiY2FyZHNfaG9sZGVycy5nZXQiLCJ0ZXJtLnNlYXJjaCIsInNlbGZiYW5raW5nLmdldCIsImRvY3JlZC5yZWFkIiwiZWN0Yy5nZXQiLCJtYndheS5ub3RpZmljYXRpb25zIiwiZWNycmVzdC51cGRhdGUiLCJub3RpcHVzaC5wb3N0Iiwibm90YXBpY2ZhLndyaXRlIiwic2Fmc3RhdHVzLmdldCIsImVjcmptcy51cGRhdGUiLCJxcmNvZGVnZW4uY3JlYXRlIiwibWJuZXRfcmV0YWlsLmNoYW5nZSIsInNjaGVkdWxlZC5jYW5jZWwiLCJlY3JyZXN0LmdldCIsImVjcnJlc3QuZ2V0LmlkIiwiZWN0dC5jcmVhdGUiLCJleGVjdXRlc2NhLndyaXRlIiwibWJ3YXkuc2RrQ29kZSIsIm9ydW5tZy5yZWFkIiwidG9wdXBzLnNpbXVsYXRlIiwiYWNjcHJvY19hY2NfdmFsaWRhdGVfaW5mby5wb3N0IiwiY2FyZGN2di5yZWFkIiwiZG9jcmVjLndyaXRlIiwiaW5zdC5pbnZvaWNlLnJlYWQiLCJxcmNvZGVnZW4uZGVsZXRlIiwiZWN0dC5nZXQiLCJlY2FhcC5nZXQiLCJpbnZlc3Rwcm9kLnJlYWQiLCJwcm9jZXNzX2ZlZXMud3JpdGUiLCJjb250cmN1c3RvbWVyLnJlYWQiLCJjYXJkc19ob2xkZXJzLmNhbmNlbCIsImVjdGMuZGVsZXRlLnR5cGUiLCJhY2NsaXN0Y2lkLnJlYWQiLCJjYXJkcmVwbGFjZSIsIm1id2F5LnNpbXVsYXRlIiwiYWNjcHJvY19hY2MuY3JlYXRlIiwiY2xpY2tjYWxsLnBvc3QiLCJub3RpcHVzaGlkLmdldCIsImtwaVNjaGVkdWxlLndyaXRlIiwiZWN0Yy51cGRhdGUiLCJsZWFzaW5nX2NvbnRyYWN0c19pbnN0YWxsbWVudC5yZWFkIiwiYWNjcHJvY19hY2Nfc2V0dXAuY3JlYXRlIiwibWJuZXQub3BlcmF0aW9ucyIsImNhcmRzX29mZmVyLnJlYWQiLCJzZWxmYmFua2luZy5kZWxldGUiLCJlY3RzLmdldGlkIiwibWJuZXQubGlzdCIsImdkcHIuY29ucmVhZCIsImN1c3RvbWVyLndyaXRlIiwibGVhc2luZ19jb250cmFjdHNfZ3VhcmFudGVlcy5yZWFkIiwiZW50aXR5cGF5LnN0YXRlcGF5Iiwic2Fmc3RhdHVzLnBhdGNoIiwidG9wdXBzLmxpc3RQcm92aWRlcnMiLCJiYW5rYnJhbmNoLnJlYWQiLCJtYndheS5zZGtDYXJkVG9rZW4iLCJhY2Nwcm9jX2FjY192YWxpZGF0ZS5jcmVhdGUiLCJtb3Zlc19kZXRhaWxzLmdldCIsImVjdHQuYWN0aXZlIiwic2VsZmJhbmtpbmcuY3JlYXRlT3BlclZhbCIsIm1id2F5bWFuLmNoYW5nZXJlZyIsImVjYWFwLnVwZGF0ZSIsInNjYXZhbGlkYXRlLndyaXRlIiwiY2FyZHBpbi5yZWFkIiwidG9wdXBzLmV4ZWN1dGUiLCJwcm92aWRlcnMud3JpdGUiLCJtYndheS5ub3RpZmljYXRpb25BY3Rpb24iLCJtYndheS5jYW5jZWxUcmFuc2FjdGlvbiIsIm5vdGFwaWNmLndyaXRlIiwiZXZlbnQuY3JlYXRlIiwibWJuZXQucmVnaXN0ZXIiLCJjdXNjbHNfbm9ya29tX3Jpc2sucmVhZCIsInFyY29kZWdlbi5nZXQiLCJnZHByLmNvbndyaXRlIiwibWJ3YXkuZGV0YWlsVHJhbnNhY3Rpb24iLCJub3RpcHVzaGlkLnB1dCIsImVjdHQuZGVsZXRlIiwibWJuZXQuY2hhbmdlIiwiZG9jc2VydmljZXMubGlzdCIsIm5vdGlwdXNoaWQuZGVsIiwiZWN0dC5nZXQuaWQiLCJldmV0Y29udHEucmVhZCIsImNvbnYud3JpdGUiLCJlY3JqbXMuZ2V0Iiwia3BpU2NoZWR1bGUucmVhZCIsIm1ibmV0LmRldGFpbCIsImVjYWFwLmdldC5pZCIsIm1ibmV0LmJhbGFuY2UiLCJldmV0Y29udHEubGlzdCIsIm5vdGVBcGlwdXNoLndyaXRlIiwicGV4cHJ0LnJlYWQiLCJleHRjbGlhc3NldHMudXBkYXRlIiwicmVhZCIsImFjY291bnRwcm9jZXNzX2NyZWRpdGFjY291bnQud3JpdGUiLCJzZWxmYmFua2luZy51cGRhdGUiLCJjYXJkcGFuLnJlYWQiLCJtYndheS5yZWNlbnRDb250YWN0cyIsIm1id2F5bWFuLmNhbmNlbHJlZyIsImVjcmptcy5nZXQuaWQiLCJjb250cmlkZW50aWYucmVhZCIsImVjYWFwLmRlbGV0ZSIsIm1ibmV0X3JldGFpbC5kZWxldGUiLCJtYm5ldC5zZWN1cml0eUluZm8iLCJhY2Nwcm9jX2FjY192YWxpZGF0ZV9pbmZvLmdldCIsImVjdGMuZ2V0LnR5cGUiLCJtYm5ldF9yZXRhaWwuc2VjdXJpdHlJbmZvIiwiY29udHJwYXJ0aWMucmVhZCIsIm1id2F5Lmxpc3RUcmFuc2FjdGlvbnMiLCJtYm5ldF9yZXRhaWwub3BlcmF0aW9ucyIsInBleHBydC53cml0ZSIsInNlbGZiYW5raW5nLnVwZGF0ZU9wZXJWYWwiLCJxcmNvZGVnZW4udXBkYXRlIiwiaW52ZXN0bWVudGZ1bmQucmVhZCIsInNlbGZiYW5raW5nLmNyZWF0ZSIsImluc3RwYXlwYWNrcy5yZWFkIiwibWJ3YXltYW4ucmVnaXN0ZXIiLCJtYndheS5leGVjdXRlIiwiZXZlbnQudXBkYXRlIiwiY2FyZHN0YXQucmVhZCIsIm5vdGVBcGlzbXMud3JpdGUiLCJzY2FnZW5lcmF0ZWludGVybmFsLnJlYWQiLCJlY2FhcC5hY3RpdmUiLCJub3RhcGlzcGNmLnJlYWQiLCJub3RhcGlzcGlkY2YucmVhZCIsIm5vdGlwdXNoLmdldCIsIm5vdGVBcGlzbXNwYXJzZS53cml0ZSIsImRhdGFnYXRoZXJpbmcud3JpdGUiLCJtYm5ldF9yZXRhaWwuZGV0YWlsIiwiZWNycmVzdC5jcmVhdGUiLCJzY2hlZHVsZWQubGlzdCIsIm5vdGFwaXNwY2Yud3JpdGUiLCJjYXJkZGV0LnJlYWQiLCJlY2FhcC5jcmVhdGUiLCJpbnN0Y2FyZC5yZWFkIiwibm90ZUFwaWVtYWlsLndyaXRlIiwiZW50aXR5cGF5LnNlcnZpY2VwYXkiLCJwcm9jZXNzX2ZlZXMucmVhZCIsImFjY3RyYW5jaWQucmVhZCIsImNvY2twaXQubW5ndC5yZWFkIiwibWJuZXQuZGVsZXRlIiwibWJ3YXkubGlzdENhcmRzIiwic2NhdmFsaWRhdGVpbnRlcm5hbC53cml0ZSJdLCJpc3MiOiIwMDE4U2VjdXJpdHlNaWNyb3NlcnZpY2UiLCJleHAiOjE2NTA1NDAwMTcsInNlY0N0eCI6eyJzZXNzaW9uRGV0YWlscyI6eyJzZXNzaW9uVXNlcklkIjoiUERBMDEiLCJpc1NhZkVuYWJsZWQiOmZhbHNlLCJjdXN0b21lclBhcnRlbm9uIjp7ImN1c3RvbWVyVHlwZSI6bnVsbCwiY3VzdG9tZXJJZCI6bnVsbH0sInNlc3Npb25Vc2VybmFtZSI6IlBEQTAxIiwiY29udGV4dCI6IkFub255bW91cyIsImNoYW5uZWwiOiJHTEIiLCJkZXZpY2VEYXRhIjp7ImRldmljZUlkIjpudWxsLCJjZXJ0aWZpZWQiOmZhbHNlfSwidXNlclR5cGUiOm51bGwsImNsaWVudE51bWJlciI6bnVsbH0sImhlYWRlclNpbnRyYSI6eyJlbXBVdGlsIjoiMzEiLCJjb2RCYWxjYW9PcmlnZW0iOiI2OTM2Iiwibml2ZWxBdXRvcml6Q2VudHJhbCI6IjAiLCJjb2RCYWxjYW9PcGVyYW50ZSI6IjY5MzYiLCJnZXN0b3JDb250YSI6Ik4iLCJudW1FbXByZWdhZG8iOiIxMTExMTExMTEiLCJ0ZXJtaW5hbCI6IjAwODIiLCJlbXByZXNhT3BlcmFudGUiOiIgICIsInRlcm1pbmFscyI6WyIwMDgyIl0sImNvZEJhbGNhbyI6IjY5MzYiLCJjb2RBbWJpZW50ZSI6Ik5CIiwicGVyZmlsIjoiTkVUMDAxIiwiaW5kU3RhZmYiOiJTIiwiZ2VzdG9yQ2xpZW50ZSI6Ik4ifX0sImlhdCI6MTY1MDUzNjQxNywiYXV0aG9yaXRpZXMiOlsiUk9MRV9UUlVTVEVEX0NMSUVOVCJdLCJqdGkiOiJhYTYxNmM1Yi1mZjc0LTQzMzctYWZmMy01Y2U1NGY4YjE3ODUiLCJjbGllbnRfaWQiOiJlMDYxYjZkZS1lZGE4LTRiNWEtYTAzYy1lNzQ5NjMxOWIxYWYifQ.ANXArBfSaVNtYuIWwb7SXbRLPtlu9Fomn7-jGnztWyMz8zwmpUwuTOCEzwwSJ6_PfaaBRcG6aolOKiYvidXZikMGp5FxsBhFWTIE2DUkGPHO_GGEuABGosk35AI9PHj5t5Z3nA4TAgBoqn_iLRyaY-UVhmStlQBAMItlr9xR9OHctP18iKZOWBlpwAaQGpyVjTs5JvZanN89Nh3uAybphNoOFsM1rxMRQy38KqVYBfn1Dcs5YSxhUhHE3REZWhLWorNYuA25dSMJ1IkKHUaTVev7YCuXzGBXBV7G1X6HWi93MWrUB9vQAk7PGnlEYvW3E8vx_2HzU6Sw9OG8KJx6JQ",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "gtw",
+					"item": [
+						{
+							"name": "UseCase1 - Schedule (code)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase2 - Schedule (table)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase3 - Schedule (group)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"referenceDate\": \"2022-02-01\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/schedule",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"schedule"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase4 - Controls (table)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpi_list?tableKpi=teste",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "tableKpi",
+											"value": "teste"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase5 - Controls (group)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpi_list?groupKpi=CERTIFICA_LDN_T",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpi_list"
+									],
+									"query": [
+										{
+											"key": "groupKpi",
+											"value": "CERTIFICA_LDN_T"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2010-01-01",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase6 - Execute (code)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"codeKpi\": \"teste2_mod\",\r\n    \"userId\": \"E801422\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase7 - Execute (table)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tableKpi\": \"teste\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase8 - Execute (group)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"groupKpi\": \"CERTIFICA_LDN_T\",\r\n    \"userId\": \"E801422\",\r\n    \"referenceDate\": \"2022-02-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpis",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase9 - Execution results",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpis_result?executionId=20210713174300029_105916&referenceDate=2021-08-04",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									],
+									"query": [
+										{
+											"key": "executionId",
+											"value": "20210713174300029_105916"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2021-08-04"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UseCase10 - Control results",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-IBM-Client-Id",
+										"value": "{{dev_gtw_client_id}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host_dev_gtw}}/controlos_kpi/kpis_result?codeKpi=prio&referenceDate=2021-08-20",
+									"host": [
+										"{{host_dev_gtw}}"
+									],
+									"path": [
+										"controlos_kpi",
+										"kpis_result"
+									],
+									"query": [
+										{
+											"key": "codeKpi",
+											"value": "prio"
+										},
+										{
+											"key": "referenceDate",
+											"value": "2021-08-20"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1aWQ6TkVUOTkiLCJuYmYiOjE2NDU1MzM5MTEsImlzc3VlZF90b2tlbl90eXBlIjoidXJuOmlldGY6cGFyYW1zOm9hdXRoOnRva2VuLXR5cGU6and0LWludGVybmFsIiwic2NvcGUiOlsiZG9jcmVjLnJlYWQiLCJtb3Zlc19saXN0LmdldCIsImFjY193YXJuaW5nLnJlYWQiLCJjdXNjbHNfcGFyaV9wZXJzaV92Mi5yZWFkIiwib21kbS5yZWFkIiwiYmFua19ndWFyYW50X2NvbnRyYWN0cy53cml0ZSIsInBydm50X29mZmVyX2NvbnRyYWN0cy5kZWxldGUiLCJ2Ml9jdXN0X2FwcF9wcmljaW5nLmdldCIsImN1c2Nsc19pbmNpZGVudHMucmVhZCIsImNvbGxhdGVyYWxfYnVpbGRfYXBwcmFpc2Fscy5yZWFkIiwiY2FyZGxpc3QucmVhZCIsInByb2R1Y3RzX29mZmVyLnByb2R1Y3RzLmdldCIsImNjZW50X2ludF9zcnYucmVhZCIsInRyZF9jcmRfbGV0dGVycy5yZWFkIiwic3Bpcml0X3Byb2ZpbGUucmVhZCIsImxpbmtfZmluYW5jaWFsX2d1YXJhbnRlZS5wb3N0IiwiY2NyaXNrX2NvbW11bmljYXRlZWxldmF0aW9uLndyaXRlIiwiYWNjb3VudHByb2Nlc3NfYnlwcm9kdWN0Lm1vZGlmeSIsImxlYXNpbmdfY29udHJhY3RzX3JlZ3VsYXJpemF0aW9uLndyaXRlIiwiY3VzY2xzX3Jpc2tfc2VnbS53cml0ZSIsInJlY292ZXJ5X3Byb2Nlc3Mud3JpdGUiLCJjaGFubmVsX29wdF9hdXRoLnVwZGF0ZSIsInVuaXZlcnNpdGllcy5kZWxldGUiLCJjYXJkX3BhcmFtZXRyaXphdGlvbnMucmVhZCIsInNlbmRfcHJvY2Vzc19sYXd5ZXJfcHJvYy51cGRhdGUiLCJjdXN0X2dyb3VwZWRfY3VzdC5nZXQiLCJvbWRtLndyaXRlIiwiY3VzdG9tZXIucmVhZCIsInNhbmRpX2NvbnRfZGV0YWlsc19sb2Fucy5yZWFkIiwibG9hbnNfcHJvY19yZWxfcHJvYy5yZWFkIiwiY2FyZHNfaG9sZGVycy5jcmVhdGUiLCJsZWFzaW5nX2NvbGxfYXNzZXRfbGljZW5zZXMud3JpdGUiLCJjYXJkc19ob2xkZXJzLmdldCIsImN1c2FkZHJlc3Nlcy5kZWxldGUiLCJjcHJpc2tfcmVxdWVzdGluZm8ud3JpdGUiLCJiYW5rX2d1YXJhbnRlZXMucmVhZCIsIm15X3NjYW5zLnJlYWQiLCJsZWFzaW5nX3Byb2Nlc3NfcHJvY2Vzcy53cml0ZSIsImxlYXNpbmdfY29udHJhY3RzX2xvZy53cml0ZSIsImxlYXNpbmdfY29udHJhY3RzX2ludm9pY2luZy53cml0ZSIsImxvYW5zX3Byb2Nlc3Mud3JpdGUiLCJjdXNjbHNfcGFyaV9wZXJzaS5yZWFkIiwicGV4X2xpbmtlZF9jb250cmFjdHMucmVhZCIsIm1lcmNoX2FxY19jb250cmFjdHMucmVhZCIsIm15X3NjYW5zLmNyZWF0ZSIsInBydm50X29mZmVyLm1vZGlmeSIsIm9ydW5tZy5yZWFkIiwiY3ByaXNrX25vdGlmeWRlY2lzaW9uLndyaXRlIiwidmlycHRfYWNjb3VudHMucmVhZCIsImFjY3Byb2NfYWNjX3ZhbGlkYXRlX2luZm8ucG9zdCIsImNwcmlza191cGRhdGVwcm9wb3NhbC53cml0ZSIsInBleF9keW5hbWljLmNyZWF0ZSIsImluc3QuaW52b2ljZS5yZWFkIiwiY2FyZHNfYWNjb3VudHMuY3JlYXRlIiwic2ltdWxhdG9yLndyaXRlIiwicHJvY2Vzc2VzX2RldGFpbHMucmVhZCIsImxlYXNpbmdfY29sbF9hc3NldF9kZXRhaWxzLndyaXRlIiwiY29udHJhY3RzLnJlYWQiLCJsb2Fuc19iYWxhbmNlcy5yZWFkIiwibGVhc2luZ19jb250cmFjdHNfYWN0aXZhdGlvbi53cml0ZSIsImNhcmRzX2hvbGRlcnMuY2FuY2VsIiwiY3VzdF9jb252ZXJ0LnJlYWQiLCJjb250cmN1c3RvbWVyLnJlYWQiLCJleHRjbGlhc3NldHMuY3JlYXRlIiwidjJfY3VzdF9hcHBfZGV0YWlsLmdldCIsImFjY3Byb2NfYWNjLmNyZWF0ZSIsInBydm50X29mZmVyX2NvbnRyYWN0cy5jcmVhdGUiLCJvaHJpc2tfY29tbXVuaWNhdGVlbGV2YXRpb24ud3JpdGUiLCJrcGlTY2hlZHVsZS53cml0ZSIsImxlYXNpbmdfY29udHJhY3RzX2luc3RhbGxtZW50LnJlYWQiLCJhY2Nwcm9jX2FjY19zZXR1cC5jcmVhdGUiLCJyZWNvdmVyeS5wcm9jZXNzLnBvc3QiLCJjYXJkc19vZmZlci5yZWFkIiwiY3VzY2xzX3N1cnZfbGV2ZWwucmVhZCIsImNvbnRyYWN0cy51cGRhdGUiLCJjdXN0bW9yX2NvbnRyYWN0cy5nZXQiLCJjdXN0b21lci53cml0ZSIsInBleF9jdXN0X2FjYy5yZWFkIiwibGVhc2luZ19jb250cmFjdHNfZ3VhcmFudGVlcy5yZWFkIiwiYmFua2JyYW5jaC5yZWFkIiwiYWNjcHJvY19hY2NfdmFsaWRhdGUuY3JlYXRlIiwib2hyaXNrX3VwZGF0ZXByb3Bvc2FsLndyaXRlIiwiZGRfbWFuZGF0ZXMucmVhZCIsInJlY292ZXJ5X3Byb2Nlc3MuZ2V0IiwibW92ZXNfZGV0YWlscy5nZXQiLCJzYW5kaV9jb250X2RldGFpbHNfYWNjLnJlYWQiLCJwZXhfZHluYW1pYy5yZWFkIiwibGlua2VkcHJvcG9zYWxzLnJlYWQiLCJvYmNtLmFjY291bnQub3Blbm5pbmciLCJsZWFzaW5nX2NvbnRyYWN0c19jcmVkaXQud3JpdGUiLCJjdXN0bW9yX2NvbnRyYWN0cy5kZWxldGUiLCJzYW5kaV9jYXJkc19pbmZvLnJlYWQiLCJwdWJsaWNfZGF0YS5yZWFkIiwiY3VzY2xzX3Jpc2tfc2VnbV92Mi5yZWFkIiwicGV4X2FjY291bnRzLnJlYWQiLCJjdXN0bW9yX2NvbnRyYWN0cy51cGRhdGUiLCJ1bml2ZXJzaXRpZXMudXBkYXRlIiwiY3VzY2xzX25vcmtvbV9yaXNrLnJlYWQiLCJsaW5rZWRfYWNjb3VudF9zdGFrZWhvbGRlci5nZXQiLCJjY2VudF9pbnRfc2Vydi5yZWFkIiwiZG9jVHlwZXMud3JpdGUiLCJjb252LndyaXRlIiwia3BpU2NoZWR1bGUucmVhZCIsImNhcmQuY2FuY2VsIiwic2FuZGlfY3VzdF9kZXRhaWxzLnJlYWQiLCJkZWNyZWQucmVhZCIsInBydm50X29mZmVyLnJlYWQiLCJjdXNhZGRyZXNzZXMuY3JlYXRlIiwiY3VzY2xzX3Jpc2tfc2VnbS5yZWFkIiwicW1pZmlkX3Byb2ZpbGUucmVhZCIsImxvYW5zX3Byb2Nlc3MuZGVsZXRlIiwicGV4cHJ0LnJlYWQiLCJleHRjbGlhc3NldHMudXBkYXRlIiwidjJfY3VzdF9hcHBfcmlzay5nZXQiLCJwZXhfZHluYW1pYy5tb2RpZnkiLCJsaXRpZ19wcm9jLnJlYWQiLCJpbnN1ci5jb3JlLmdldCIsInByb2R1Y3RzX29mZmVyX29wZXJhdGlvbnMuZ2V0IiwiYWNjb3VudHByb2Nlc3NfY3JlZGl0YWNjb3VudC53cml0ZSIsInJlY292ZXJ5X3Byb2Nlc3Muc2VhcmNoIiwibXJnYWdfcHJvcC5yZWFkIiwiY29udHJpZGVudGlmLnJlYWQiLCJwZXhfY2FyZHNfdHJhbnNhY3Rpb25zLnJlYWQiLCJvaHJpc2tfbm90aWZ5ZGVjaXNpb24ud3JpdGUiLCJsZWFzaW5nX2NvbnRyYWN0c19sZWFzaW5nLnJlYWQiLCJjdXN0bW9yX2NvbnRyYWN0cy5jcmVhdGUiLCJjcmVhdGVjYXJkLndyaXRlIiwicHJ2bnRfb2ZmZXJfY29udHJhY3RzLnJlYWQiLCJldmVudF90YXNrX3Byb2Nlc3Muc2VhcmNoIiwibGVhc2luZ19jb250cmFjdHNfaW5zdGFsbG1lbnQud3JpdGUiLCJjYXJkc19hY2NvdW50cy51cGRhdGVfbGltaXQiLCJjYXJkc19zdG10X3NpbXVsLmNyZWF0ZSIsImNhcmRzX2FjY291bnRfaG9sZGVycy5nZXQiLCJhY2Nwcm9jX2FjY192YWxpZGF0ZV9pbmZvLmdldCIsImNvbnRycGFydGljLnJlYWQiLCJsaW5rX2Fzc2V0X2d1YXJhbnRlZS5wb3N0IiwidjJfY3VzdF9hcHBfZGVjaXNvci5nZXQiLCJzZW5kX3Byb2Nlc3NfbGF3eWVyX3Byb2MuZ2V0IiwicGV4cHJ0LndyaXRlIiwiY3ByaXNrX2NvbW11bmljYXRlZWxldmF0aW9uLndyaXRlIiwicGFydHlfYXV0aGVudGljYXRpb25fYWRoZXNpb24uY3JlYXRlIiwiY29sbGF0ZXJhbF9tb3J0Z2FnZS5yZWFkIiwiaW52ZXN0bWVudGZ1bmQucmVhZCIsImNjcmlza19ub3RpZnlkZWNpc2lvbi53cml0ZSIsImxpbmtfcGVyc29uYWxfZ3VhcmFudGVlLnBvc3QiLCJsZWFzaW5nX3Byb2Nlc3NfZ3VhcmFudG9ycy53cml0ZSIsInNpbXVsYXRvci5yZWFkIiwidmlycHRfbWlmaWQucmVhZCIsImxlYXNpbmdfY29sbF9hc3NldF9ldmFsdWF0aW9ucy53cml0ZSIsInYyX2N1c3RfYXBwX2xpc3QuZ2V0IiwibGVhc2luZ19wcm9jZXNzX2RlY2lzaW9uLndyaXRlIiwiY2FyZHNfZGViaXRfaG9sZGVycy5jcmVhdGUiLCJiYW5rX2d1YXJhbnRfY29udHJhY3RzLnVwZGF0ZSIsImRhdGFnYXRoZXJpbmcud3JpdGUiLCJwcnZudF9vZmZlcl9ldmlkZW5jZXMucmVhZCIsImxlYXNpbmdfcHJvY2Vzc19wcm9jZXNzLnVwZGF0ZSIsInYyX2N1c3RfYXBwX2d1YXJhbnRlZXMuZ2V0IiwicHJ2bnRfb2ZmZXJfY29udHJhY3RzLm1vZGlmeSIsImFjY291bnQud3JpdGUiLCJjYXJkZGV0LnJlYWQiLCJsZWFzaW5nX2NvbnRyYWN0c19sZWFzaW5nLndyaXRlIiwicGV4X2FjY291bnRzX3RyYW5zYWN0aW9ucy5yZWFkIiwiaW5zdGNhcmQucmVhZCIsImN1c2FkZHJlc3Nlcy5yZWFkIiwibG9hbnNfcHJvY2Vzcy5yZWFkIiwiYWNjb3VudC5yZWFkIiwidW5pdmVyc2l0aWVzLndyaXRlIiwicmVjb3ZlcnkucHJvY2Vzcy5wdXQiLCJsaW5rZWRfYWNjb3VudF9zdGFrZWhvbGRlci5wYXRjaCIsInBleF9jb25mX2N1c3QucmVhZCIsInVuaXZlcnNpdGllcy5yZWFkIiwiY29ja3BpdC5tbmd0LnJlYWQiLCJjb250cmFjdHMud3JpdGUiLCJjdXNhZGRyZXNzZXMudXBkYXRlIiwicHJ2bnRfb2ZmZXIuY3JlYXRlIiwibGlua2VkX2FjY291bnQucG9zdCJdLCJpc3MiOiIwMDE4U2VjdXJpdHlNaWNyb3NlcnZpY2UiLCJleHAiOjE2NDU2MjAzMTEsInNlY0N0eCI6eyJzZXNzaW9uRGV0YWlscyI6eyJzZXNzaW9uVXNlcklkIjoiTkVUOTkiLCJpc1NhZkVuYWJsZWQiOmZhbHNlLCJjdXN0b21lclBhcnRlbm9uIjp7ImN1c3RvbWVyVHlwZSI6bnVsbCwiY3VzdG9tZXJJZCI6bnVsbH0sInNlc3Npb25Vc2VybmFtZSI6Ik5FVDk5IiwiY29udGV4dCI6IkFub255bW91cyIsImNoYW5uZWwiOm51bGwsImRldmljZURhdGEiOnsiZGV2aWNlSWQiOm51bGwsImNlcnRpZmllZCI6ZmFsc2V9LCJ1c2VyVHlwZSI6bnVsbCwiY2xpZW50TnVtYmVyIjpudWxsfSwiaGVhZGVyU2ludHJhIjp7ImVtcFV0aWwiOiIzMSIsImNvZEJhbGNhb09yaWdlbSI6IjY5MjIiLCJuaXZlbEF1dG9yaXpDZW50cmFsIjoiMCIsImNvZEJhbGNhb09wZXJhbnRlIjoiNjkyMiIsImdlc3RvckNvbnRhIjoiTiIsIm51bUVtcHJlZ2FkbyI6IjExMTExMTExMSIsInRlcm1pbmFsIjpudWxsLCJlbXByZXNhT3BlcmFudGUiOiIgICIsInRlcm1pbmFscyI6W10sImNvZEJhbGNhbyI6IjY5MjIiLCJjb2RBbWJpZW50ZSI6bnVsbCwicGVyZmlsIjoiTkVUMDAxIiwiaW5kU3RhZmYiOiJTIiwiZ2VzdG9yQ2xpZW50ZSI6Ik4ifX0sImlhdCI6MTY0NTUzMzkxMSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9UUlVTVEVEX0NMSUVOVCJdLCJqdGkiOiI2NzI0NTIyZi1mNDJiLTQ3ZTAtYmExNS1hNzFjZDkzN2NiZWQiLCJjbGllbnRfaWQiOiI2MDI2YzFkNi1mMmZhLTQxMmUtYjlkYy0wZTYyMGM5YjIyOTEifQ.WXZ2YlZ2iMVaPwZQKPhfh8iGtKaragdBCRU30mLIK_3Z1lPA3nsWWhaMbnoy0Xe0jda7MRPz8ElsD4PmAaCTZ0QbzECzSh5EbiS5J8lYwGDFTkGM97nGK9mSc9W7LLQTsE-_1-Ob6eWE5f_fHkRgshzIDz7hV3pj4lgLQvH8sV0YO-CNGZclD64bz4-aTkPEmkLISROmjoazSucwapv1AXpYh-pWPX1tzZ9mvcCKN3A-Ku8Rd2IeO5u4dZzDyYGbU3--e0HkgbeZBi3JZ2jMKDAuon-a6omFnRO204PKpgda9YnHoUisHbW_R4O9EMt1xLL4HJbS2yR3TjqXPi-eIA"
+		},
+		{
+			"key": "host_local",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "host_dev_dns",
+			"value": "https://controlos-kpi-ms.totta.dev.corp",
+			"type": "string"
+		},
+		{
+			"key": "host_dev_gtw",
+			"value": "https://apigw.intraclient.totta.dev.corp/sanpt/internal",
+			"type": "string"
+		},
+		{
+			"key": "dev_gtw_client_id",
+			"value": "6026c1d6-f2fa-412e-b9dc-0e620c9b2291",
+			"type": "string"
+		},
+		{
+			"key": "control_m_client_id_pre",
+			"value": "22437c22-8013-49e3-ba87-ada230f1d43d",
+			"type": "string"
+		}
+	]
+}
